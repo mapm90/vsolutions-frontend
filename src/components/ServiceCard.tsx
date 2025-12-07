@@ -65,18 +65,18 @@ const ServiceCard = ({ title, shortDescription, fullDescription, icon, features 
       {/* Expanded Modal */}
       {isExpanded && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setIsExpanded(false)}
         >
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-foreground/50 backdrop-blur-sm" />
           
           <div
-            className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto card-gradient rounded-2xl border border-border/50 glow animate-scale-in"
+            className="relative z-[101] w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-card rounded-2xl border border-border shadow-2xl animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setIsExpanded(false)}
-              className="absolute top-4 right-4 p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 rounded-lg bg-secondary hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

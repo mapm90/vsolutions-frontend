@@ -65,27 +65,27 @@ const TipCard = ({ title, description, thumbnail, videoUrl, category, date }: Ti
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal - Fixed positioning with proper z-index */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setIsModalOpen(false)}
         >
-          <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-foreground/50 backdrop-blur-sm" />
           
           <div
-            className="relative z-10 w-full max-w-4xl card-gradient rounded-2xl border border-border/50 overflow-hidden glow animate-scale-in"
+            className="relative z-[101] w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card rounded-2xl border border-border shadow-2xl animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 z-20 p-2 rounded-lg bg-background/80 hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute top-4 right-4 z-20 p-2 rounded-lg bg-secondary hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Video Embed */}
-            <div className="aspect-video bg-background">
+            <div className="aspect-video bg-muted">
               {videoId ? (
                 <iframe
                   src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}

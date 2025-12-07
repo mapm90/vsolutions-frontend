@@ -6,57 +6,57 @@
 
 @layer base {
   :root {
-    --background: 280 25% 6%;
-    --foreground: 300 20% 96%;
+    --background: 300 20% 98%;
+    --foreground: 280 30% 15%;
 
-    --card: 280 25% 10%;
-    --card-foreground: 300 20% 96%;
+    --card: 300 25% 96%;
+    --card-foreground: 280 30% 15%;
 
-    --popover: 280 25% 10%;
-    --popover-foreground: 300 20% 96%;
+    --popover: 300 25% 96%;
+    --popover-foreground: 280 30% 15%;
 
-    --primary: 320 85% 65%;
-    --primary-foreground: 280 25% 6%;
+    --primary: 320 75% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 280 30% 15%;
-    --secondary-foreground: 300 20% 96%;
+    --secondary: 280 20% 92%;
+    --secondary-foreground: 280 30% 25%;
 
-    --muted: 280 20% 18%;
-    --muted-foreground: 300 15% 65%;
+    --muted: 280 15% 90%;
+    --muted-foreground: 280 15% 45%;
 
-    --accent: 270 70% 60%;
-    --accent-foreground: 280 25% 6%;
+    --accent: 270 60% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 300 20% 96%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 280 25% 22%;
-    --input: 280 20% 18%;
-    --ring: 320 85% 65%;
+    --border: 280 20% 85%;
+    --input: 280 15% 90%;
+    --ring: 320 75% 55%;
 
     --radius: 0.75rem;
 
-    /* Custom design tokens - feminine tech palette */
-    --gradient-primary: linear-gradient(135deg, hsl(320 85% 65%), hsl(270 70% 60%));
-    --gradient-card: linear-gradient(145deg, hsl(280 25% 12%), hsl(280 25% 8%));
-    --gradient-glow: radial-gradient(ellipse at center, hsl(320 85% 65% / 0.15), transparent 70%);
-    --shadow-glow: 0 0 40px hsl(320 85% 65% / 0.3);
-    --shadow-card: 0 10px 40px hsl(280 25% 3% / 0.5);
-    --glass-bg: hsl(280 25% 10% / 0.7);
-    --glass-border: hsl(320 85% 65% / 0.2);
+    /* Custom design tokens - feminine tech light palette */
+    --gradient-primary: linear-gradient(135deg, hsl(320 75% 55%), hsl(270 60% 60%));
+    --gradient-card: linear-gradient(145deg, hsl(300 25% 98%), hsl(280 20% 94%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(320 75% 55% / 0.15), transparent 70%);
+    --shadow-glow: 0 0 40px hsl(320 75% 55% / 0.25);
+    --shadow-card: 0 10px 40px hsl(280 30% 15% / 0.08);
+    --glass-bg: hsl(300 25% 98% / 0.8);
+    --glass-border: hsl(320 75% 55% / 0.25);
 
-    --sidebar-background: 280 25% 8%;
-    --sidebar-foreground: 300 20% 96%;
-    --sidebar-primary: 320 85% 65%;
-    --sidebar-primary-foreground: 280 25% 6%;
-    --sidebar-accent: 280 25% 15%;
-    --sidebar-accent-foreground: 300 20% 96%;
-    --sidebar-border: 280 25% 22%;
-    --sidebar-ring: 320 85% 65%;
+    --sidebar-background: 300 20% 97%;
+    --sidebar-foreground: 280 30% 15%;
+    --sidebar-primary: 320 75% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 280 20% 92%;
+    --sidebar-accent-foreground: 280 30% 25%;
+    --sidebar-border: 280 20% 85%;
+    --sidebar-ring: 320 75% 55%;
   }
 
   .dark {
-    --background: 280 25% 6%;
+    --background: 280 25% 8%;
     --foreground: 300 20% 96%;
   }
 }
@@ -94,6 +94,7 @@
 
   .card-gradient {
     background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
   }
 
   .hover-glow {
@@ -128,10 +129,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(320 85% 65% / 0.3);
+    box-shadow: 0 0 20px hsl(320 75% 55% / 0.2);
   }
   50% {
-    box-shadow: 0 0 40px hsl(320 85% 65% / 0.5);
+    box-shadow: 0 0 40px hsl(320 75% 55% / 0.4);
   }
 }
 
@@ -169,18 +170,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(280 25% 6%);
+  background: hsl(300 20% 96%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(222 30% 25%);
+  background: hsl(280 20% 80%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(320 85% 65%);
-}
-
-::-webkit-scrollbar-track {
-  background: hsl(280 25% 6%);
+  background: hsl(320 75% 55%);
 }
