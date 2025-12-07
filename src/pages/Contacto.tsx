@@ -34,7 +34,7 @@ const Contacto = () => {
   };
 
   const contactInfo = [
-    { icon: <Mail className="w-5 h-5" />, label: 'Email', value: 'info@techsoluciones.com' },
+    { icon: <Mail className="w-5 h-5" />, label: 'Email', value: 'info@V-Services.com' },
     { icon: <Phone className="w-5 h-5" />, label: 'Teléfono', value: '+34 912 345 678' },
     { icon: <MapPin className="w-5 h-5" />, label: 'Ubicación', value: 'Madrid, España' },
     { icon: <Clock className="w-5 h-5" />, label: 'Horario', value: 'Lun - Vie: 9:00 - 18:00' },

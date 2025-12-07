@@ -28,7 +28,7 @@ const ServiceCard = ({ title, shortDescription, fullDescription, icon, features 
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call - Replace with actual Supabase call when enabled
+    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
 
     toast({
@@ -65,15 +65,18 @@ const ServiceCard = ({ title, shortDescription, fullDescription, icon, features 
       {/* Expanded Modal */}
       {isExpanded && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setIsExpanded(false)}
         >
+          {/* Overlay */}
           <div className="absolute inset-0 bg-foreground/50 backdrop-blur-sm" />
-          
+
+          {/* Modal */}
           <div
-            className="relative z-[101] w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-card rounded-2xl border border-border shadow-2xl animate-scale-in"
+            className="relative z-[10000] w-full max-w-2xl h-[90vh] bg-card rounded-2xl border border-border shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close button */}
             <button
               onClick={() => setIsExpanded(false)}
               className="absolute top-4 right-4 z-10 p-2 rounded-lg bg-secondary hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
@@ -81,9 +84,10 @@ const ServiceCard = ({ title, shortDescription, fullDescription, icon, features 
               <X className="w-5 h-5" />
             </button>
 
-            <div className="p-6 md:p-8">
+            {/* Scrollable content */}
+            <div className="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-6">
               {/* Header */}
-              <div className="flex items-start gap-4 mb-6">
+              <div className="flex items-start gap-4">
                 <div className="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
                   {icon}
                 </div>
@@ -94,7 +98,7 @@ const ServiceCard = ({ title, shortDescription, fullDescription, icon, features 
               </div>
 
               {/* Features */}
-              <div className="mb-8">
+              <div>
                 <h4 className="font-semibold text-foreground mb-3">Incluye:</h4>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {features.map((feature, index) => (
@@ -106,7 +110,7 @@ const ServiceCard = ({ title, shortDescription, fullDescription, icon, features 
                 </ul>
               </div>
 
-              {/* Form */}
+              {/* Formulario Solicitar Servicio */}
               <div className="border-t border-border pt-6">
                 <h4 className="font-semibold text-foreground mb-4">Solicitar este servicio</h4>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -139,7 +143,12 @@ const ServiceCard = ({ title, shortDescription, fullDescription, icon, features 
                     rows={4}
                     required
                   />
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {/* Botón sticky siempre visible */}
+                  <Button
+                    type="submit"
+                    className="w-full sticky bottom-0 bg-card/90 backdrop-blur-md"
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin mr-2" />

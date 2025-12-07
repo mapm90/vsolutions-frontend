@@ -7,20 +7,39 @@ const Footer = () => {
       {/* Wavy top SVG */}
       <div className="absolute top-0 left-0 right-0 -translate-y-full overflow-hidden">
         <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-auto"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 120L60 105C120 90 240 60 360 52.5C480 45 600 60 720 67.5C840 75 960 75 1080 67.5C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-            fill="hsl(222, 47%, 9%)"
-          />
-          {/* Dieresis dots (like ñ) */}
-          <circle cx="680" cy="40" r="8" fill="hsl(187, 100%, 50%)" opacity="0.8" />
-          <circle cx="760" cy="40" r="8" fill="hsl(187, 100%, 50%)" opacity="0.8" />
-        </svg>
+  viewBox="0 0 1440 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  className="w-full h-auto"
+  preserveAspectRatio="none"
+>
+  <defs>
+    <linearGradient id="animatedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#ff6ec7">
+        <animate
+          attributeName="stop-color"
+          values="#ff6ec7;#8e2de2;#ff6ec7"
+          dur="5s"
+          repeatCount="indefinite"
+        />
+      </stop>
+      <stop offset="100%" stopColor="#8e2de2">
+        <animate
+          attributeName="stop-color"
+          values="#8e2de2;#ff6ec7;#8e2de2"
+          dur="5s"
+          repeatCount="indefinite"
+        />
+      </stop>
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M0 120L60 105C120 90 240 60 360 52.5C480 45 600 60 720 67.5C840 75 960 75 1080 67.5C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+    fill="url(#animatedGradient)"
+  />
+</svg>
+
       </div>
 
       <div className="bg-card pt-16 pb-8">
@@ -37,7 +56,7 @@ const Footer = () => {
                     <Cpu className="w-2 h-2 text-accent-foreground" />
                   </div>
                 </div>
-                <span className="font-display font-bold text-lg text-foreground">TechSoluciones</span>
+                <span className="font-display font-bold text-lg text-foreground">V-Services</span>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 Tu aliado en tecnología. Soluciones informáticas profesionales para hogares y empresas.
@@ -67,7 +86,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3 text-muted-foreground text-sm">
                   <Mail className="w-4 h-4 text-primary" />
-                  info@techsoluciones.com
+                  info@V-Services.com
                 </li>
                 <li className="flex items-center gap-3 text-muted-foreground text-sm">
                   <Phone className="w-4 h-4 text-primary" />
@@ -75,7 +94,7 @@ const Footer = () => {
                 </li>
                 <li className="flex items-center gap-3 text-muted-foreground text-sm">
                   <MapPin className="w-4 h-4 text-primary" />
-                  Madrid, España
+                  España
                 </li>
               </ul>
             </div>
@@ -105,7 +124,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="border-t border-border pt-8 text-center">
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} TechSoluciones. Todos los derechos reservados.
+              © {new Date().getFullYear()} V-Services. Todos los derechos reservados.
             </p>
           </div>
         </div>

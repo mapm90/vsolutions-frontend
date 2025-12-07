@@ -49,7 +49,7 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="font-display font-bold text-xl text-foreground">TechSoluciones</span>
+                <span className="font-display font-bold text-xl text-foreground">V-Services</span>
                 <span className="text-xs text-muted-foreground">Servicios Informáticos</span>
               </div>
             </Link>
@@ -98,7 +98,7 @@ const Header = () => {
               <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center glow">
                 <Monitor className="w-5 h-5 text-primary" />
               </div>
-              <span className="font-display font-bold text-lg text-foreground">TS</span>
+              <span className="font-display font-bold text-lg text-foreground">VS</span>
             </Link>
 
             {/* Desktop Navigation */}
