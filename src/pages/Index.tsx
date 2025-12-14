@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Footer1 from '@/components/Footer1';
 import HeroSection from '@/components/HeroSection';
 
 const Index = () => {
@@ -9,7 +9,7 @@ const Index = () => {
       <main>
         <HeroSection />
       </main>
-      <Footer />
+      <Footer1 />
     </div>
   );
 };

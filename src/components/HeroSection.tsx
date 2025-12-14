@@ -1,99 +1,133 @@
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import perfil from '../media/perfil.jpg';
-
+import logo from '../media/logo1.png';
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen pt-24 relative overflow-hidden bg-background">
+    <section className="min-h-screen pt-0 md:pt-24 relative overflow-hidden bg-background">
+
       {/* Background Glow Effects */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
 
-      <div className="flex min-h-[calc(100vh-6rem)] ">
-        {/* Image Column - Left, Full Height, Edge to Edge */}
-        <div className="hidden lg:flex lg:w-[40%] relative items-end bg-gradient-to-br from-primary/10 via-accent/5 to-transparent rounded-tr-[3rem]">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
-          
-          {/* Founder Image Placeholder - Full width of column */}
-          <div className="relative w-full h-full flex items-end justify-center ">
-            <div className="w-full h-full bg-gradient-to-t from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-r-4 border-primary/30 rounded-tr-[3rem]">
-              <img 
-                src={perfil}
+      {/* Contenedor de columnas + onda */}
+      <div className="relative">
+        <div className="flex min-h-[calc(100vh-6rem)]">
+          {/* Image Column - PC */}
+          <div className="hidden lg:flex lg:w-[40%] relative items-end bg-gradient-to-br from-primary/10 via-accent/5 to-transparent rounded-tr-[3rem]">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
+            <div className="relative w-full h-full flex items-end justify-center">
+              <div className="w-full h-full bg-gradient-to-t from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-r-4 border-primary/30 rounded-tr-[3rem]">
+                <img
+                  src={perfil}
                   className="w-full h-full object-cover rounded-tr-[3rem]"
-              />
-            </div>
-            
-          </div>
-        </div>
-
-        {/* Mobile Image */}
-        <div className="lg:hidden absolute top-24 left-0 right-0 h-[300px] flex items-center justify-center bg-gradient-to-b from-primary/10 to-transparent">
-          <div className="w-48 h-48 rounded-full bg-gradient-to-br from-secondary to-card flex items-center justify-center border-4 border-primary/30 glow">
-            <div className="text-center">
-              
-      <img 
-          src={perfil}
-            className="w-full h-full object-cover rounded-t-[3rem]"
-              />
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Content Column - Right */}
-        <div className="w-full lg:w-[60%] flex flex-col justify-center px-6 lg:px-16 py-8 lg:py-16 mt-[320px] lg:mt-0">
-          <div className="max-w-2xl space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary font-medium">
-                                <span>+10 años de experiencia</span>
+          {/* Mobile Image */}
+          <div className="lg:hidden absolute top-24 left-0 right-0 h-[500px] flex items-center justify-center bg-gradient-to-b from-primary/10 to-transparent px-0">
+            <div className="w-full h-full bg-gradient-to-br from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-primary/30 relative">
+              <img src={perfil} className="w-full h-full object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Content Column */}
+          <div
+            className="
+              w-full lg:w-[60%] flex flex-col justify-center 
+              px-6 lg:px-16 py-8 lg:py-16 
+              mt-[320px] lg:mt-0 
+              bg-cover bg-center bg-no-repeat
+              relative
+            "
+          >
+            <div
+              className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-20"
+              style={{ backgroundImage: `url(${logo})` }}
+            />
+            <div className="max-w-2xl space-y-8 relative z-10">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary font-medium">
+                  <span>+10 años de experiencia</span>
+                </div>
+                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
+                  Soluciones <span className="text-gradient">Tecnológicas</span> a tu Medida
+                </h1>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Soy Verónica Borges, fundadora de V-Solutions. Con más de una
+                  década de experiencia en el sector tecnológico, me dedico a ofrecer
+                  soluciones informáticas personalizadas que realmente funcionan. Tanto en un ambiente 
+                  empresarial como para usuarios individuales en un ambiente doméstico, mi objetivo es simplificar la tecnología
+                  y hacerla accesible para todos. 
+                </p>
               </div>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-                Soluciones{' '}
-                <span className="text-gradient">Tecnológicas</span>{' '}
-                a tu Medida
-              </h1>
-
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Soy Verónica Borges, fundadora de V-Solutions. Con más de una década de experiencia en el sector tecnológico, me dedico a ofrecer soluciones informáticas personalizadas que realmente funcionan.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-display font-semibold text-xl text-foreground">
-                ¿Por qué elegirnos?
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  'Atención personalizada y cercana',
-                  'Diagnóstico gratuito y sin compromiso',
-                  'Soluciones rápidas y efectivas',
-                  'Garantía en todos nuestros servicios'
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center gap-3 text-muted-foreground">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button asChild size="lg" className="group">
-                <Link to="/contacto">
-                  Contacta Conmigo
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/servicios">
-                  Ver Servicios
-                </Link>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button asChild size="lg" className="group">
+                  <Link to="/contacto">
+                    Contacta Conmigo
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link to="/servicios">Ver Servicios</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* ------------------- SVG ONDA ------------------- */}
+        <svg
+  viewBox="0 0 1440 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  className="hidden lg:block absolute -bottom-5 left-0 w-full z-20 pointer-events-none"
+  preserveAspectRatio="none"
+>
+  <defs>
+    <linearGradient id="animatedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#ff6ec7">
+        <animate
+          attributeName="stop-color"
+          values="#ff6ec7;#8e2de2;#ff6ec7"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </stop>
+      <stop offset="100%" stopColor="#8e2de2">
+        <animate
+          attributeName="stop-color"
+          values="#8e2de2;#ff6ec7;#8e2de2"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </stop>
+    </linearGradient>
+
+    {/* Mask para difuminar borde superior */}
+    <linearGradient id="fadeMask" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="white" stopOpacity="0" />
+      <stop offset="20%" stopColor="white" stopOpacity="1" />
+      <stop offset="100%" stopColor="white" stopOpacity="1" />
+    </linearGradient>
+    <mask id="maskFade">
+      <rect x="0" y="0" width="1440" height="120" fill="url(#fadeMask)" />
+    </mask>
+  </defs>
+
+  <path
+    d="M0 120L60 105C120 90 240 60 360 52.5C480 45 600 60 720 67.5C840 75 960 75 1080 67.5C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+    fill="url(#animatedGradient)"
+    mask="url(#maskFade)"
+  />
+</svg>
+
       </div>
     </section>
   );

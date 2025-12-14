@@ -5,7 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { Mail, Phone, MapPin, Send, Clock, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Clock, MessageSquare,MessageCircle } from 'lucide-react';
+ 
+
 
 const Contacto = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,28 +19,80 @@ const Contacto = () => {
     mensaje: '',
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+  try {
+    const response = await fetch('http://10.80.171.129:4000/contacto', { 
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: formData.nombre,
+        telefono: formData.telefono,
+        correo: formData.email, // coincide con tu backend
+        asunto: formData.asunto,
+        mensaje: formData.mensaje,
+      }),
+    });
+
+    if (!response.ok) throw new Error('Error al enviar el mensaje');
+
+    const data = await response.json();
 
     toast({
       title: "¡Mensaje enviado!",
-      description: "Te responderemos lo antes posible.",
+      description: `ID de tu mensaje: ${data.id}`,
     });
 
     setFormData({ nombre: '', email: '', telefono: '', asunto: '', mensaje: '' });
+  } catch (error: any) {
+    console.error('Error real:', error);
+    toast({
+      title: "Error",
+      description: error.message || "No se pudo enviar el mensaje",
+      variant: "destructive",
+    });
+  } finally {
     setIsSubmitting(false);
-  };
+  }
+}
+;
 
-  const contactInfo = [
-    { icon: <Mail className="w-5 h-5" />, label: 'Email', value: 'info@V-Services.com' },
-    { icon: <Phone className="w-5 h-5" />, label: 'Teléfono', value: '+34 912 345 678' },
-    { icon: <MapPin className="w-5 h-5" />, label: 'Ubicación', value: 'Madrid, España' },
-    { icon: <Clock className="w-5 h-5" />, label: 'Horario', value: 'Lun - Vie: 9:00 - 18:00' },
-  ];
+
+
+
+const contactInfo = [
+  {
+    icon: <Mail className="w-5 h-5" />,
+    label: 'Email',
+    value: 'vservicesac@gmail.com',
+    href: 'mailto:vservicesac@gmail.com',
+  },
+  {
+    icon: <Phone className="w-5 h-5" />,
+    label: 'Teléfono',
+    value: '+34 674 993 764',
+    href: 'tel:+34674993764',
+  },
+  {
+    icon: <MessageCircle className="w-5 h-5 " />,
+    label: 'WhatsApp',
+    value: '+34 674 993 764',
+    href: 'https://wa.me/34674993764',
+  },
+  {
+    icon: <MapPin className="w-5 h-5" />,
+    label: 'Ubicación',
+    value: 'España',
+  },
+  {
+    icon: <Clock className="w-5 h-5" />,
+    label: 'Horario',
+    value: 'Lun - Sab: 9:00 - 18:00',
+  },
+];
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -122,21 +176,39 @@ const Contacto = () => {
             {/* Contact Info */}
             <div className="space-y-6">
               <div className="card-gradient rounded-2xl p-6 md:p-8 border border-border/50">
-                <h3 className="font-display font-semibold text-xl text-foreground mb-6">Información de Contacto</h3>
-                <div className="space-y-5">
-                  {contactInfo.map((item, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0 text-primary">
-                        {item.icon}
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">{item.label}</p>
-                        <p className="text-foreground font-medium">{item.value}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+  <h3 className="font-display font-semibold text-xl text-foreground mb-6">
+    Información de Contacto
+  </h3>
+
+  <div className="space-y-5">
+    {contactInfo.map((item, index) => {
+      const Wrapper = item.href ? 'a' : 'div';
+
+      return (
+        <Wrapper
+          key={index}
+          {...(item.href && {
+            href: item.href,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className: 'block hover:opacity-80 transition',
+          })}
+        >
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0 text-primary">
+              {item.icon}
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">{item.label}</p>
+              <p className="text-foreground font-medium">{item.value}</p>
+            </div>
+          </div>
+        </Wrapper>
+      );
+    })}
+  </div>
+</div>
+
 
               {/* Map Placeholder */}
               <div className="card-gradient rounded-2xl overflow-hidden border border-border/50 aspect-video">
