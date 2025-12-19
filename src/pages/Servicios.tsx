@@ -3,7 +3,12 @@ import Footer from '@/components/Footer';
 import ServiceCard from '@/components/ServiceCard';
 import { Monitor, HardDrive, Shield, Wifi, Wrench, Cloud, MonitorCheck, MonitorCog, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion'
+import { useState, useMemo, useEffect } from 'react';
+  
 const serviceVariants = {
+  
+
+  
   hidden: {
     opacity: 0,
     y: 40,
@@ -27,14 +32,14 @@ const serviceVariants = {
 const services = [
   {
     title: 'Instalacion y mantenimiento de Software',
-    shortDescription: '¿Crees que tu ordenador está lento o nececitas revizar por si faltan actualizaciones o hay alguno causando problemas, o nececitas algun software en especifico para el trabajo, el estudio o el ocio?',
+    shortDescription: '¿Crees que tu ordenador está lento o necesitas revizar por si faltan actualizaciones o hay alguno causando problemas, o necesitas algun software en especifico para el trabajo, el estudio o el ocio?',
     fullDescription: 'Ofrecemos servicios de instalación y configuración de software, desde sistemas operativos hasta aplicaciones específicas, asegurando que todo funcione correctamente.',
     icon: <MonitorCheck className="w-7 h-7 text-primary" />,
     features: ['Diagnóstico gratuito', 'Reparación de hardware', 'Cambio de componentes', 'Limpieza interna'],
   },
   {
     title: 'Reparación de Equipos',
-    shortDescription: '¿Tuviste algun accidente con tu prdenador o simplemente dejo de funcionar correctamente?',
+    shortDescription: '¿Tuviste algun accidente con tu ordenador o simplemente dejo de funcionar correctamente?',
     fullDescription: 'Servicio completo de diagnóstico y reparación para todo tipo de ordenadores. Identificamos el problema y lo solucionamos de forma rápida y eficiente.',
     icon: <Wrench className="w-7 h-7 text-primary" />,
     features: ['Diagnóstico gratuito', 'Reparación de hardware', 'Cambio de componentes', 'Limpieza interna',],
@@ -58,14 +63,14 @@ const services = [
   
   {
     title: 'Seguridad Informática',
-    shortDescription: '¿Los virus no te dejan apenas trabajar o navegar con tranquilidad, o sospechas que tienes intrusos o tu informacion esta expuessta?',
+    shortDescription: '¿Los virus no te dejan apenas trabajar o navegar con tranquilidad, o sospechas que tienes intrusos o tu informacion esta expuesta?',
     fullDescription: 'Instalación y configuración de soluciones de seguridad, eliminación de malware y asesoramiento para mantener tu información protegida.',
     icon: <ShieldCheck className="w-7 h-7 text-primary" />,
     features: ['Antivirus profesional', 'Eliminación de malware', 'Firewall', 'Copias de seguridad', 'Asesoramiento de seguridad'],
   },
   {
     title: 'Redes y Conectividad',
-    shortDescription: '¿tienes nuevos equipos que conectar o la señal de internet no llega bien a todas las zonas de tu casa u oficina?',
+    shortDescription: '¿Tienes nuevos equipos que conectar o la señal de internet no llega bien a todas las zonas de tu casa u oficina?',
     fullDescription: 'Instalación y configuración de redes WiFi, cableado estructurado, y solución de problemas de conectividad para hogares y empresas.',
     icon: <Wifi className="w-7 h-7 text-primary" />,
     features: ['Instalación de redes WiFi', 'Cableado estructurado', 'Extensores de señal', 'Configuración de routers', 'VPN'],
@@ -80,7 +85,7 @@ features: [ 'Montaje de PCs personalizadas',  'Actualización de componentes (RA
 shortDescription: '¿Sientes que tu negocio o proyecto necesita una presencia en linea profesional o una aplicacion para mejorar tus procesos o servicios?',
 fullDescription: 'Ofrecemos desarrollo de sitios web personalizados y aplicaciones móviles adaptadas a tus necesidades, desde el diseño hasta la implementación y mantenimiento, asegurando una experiencia de usuario óptima y funcionalidad avanzada.',
 icon: <MonitorCheck className="w-7 h-7 text-primary" />,
-features: [ 'Montaje de PCs personalizadas',  'Actualización de componentes (RAM, GPU, SSD, etc.)',  'Optimización del rendimiento',  'Asesoramiento según presupuesto',  'Compatibilidad garantizada'],
+features: [ 'Diseño web personalizado',  'Desarrollo de aplicaciones móviles',  'Optimización SEO',  'Mantenimiento y soporte',  'Integración con e-commerce y redes sociales'],
 },
    {title: 'Asesorias y consultorias informaticas',
 shortDescription: '¿No sabes que equipo o software necesitas para tu trabajo, estudio o ocio o simplemente quieres mejorar tu infraestructura tecnologica, o crees que hay algo que las tecnologias te pueden resolver? ',

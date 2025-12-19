@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import { apiFetch } from '@/pages/api/fetchapi';
+
 
 interface ServiceCardProps {
   title: string;
@@ -38,33 +40,51 @@ const ServiceCard = ({
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.nombre || !formData.telefono || !formData.correo || !formData.descripcion) {
-      toast({ title: 'Error', description: 'Por favor completa todos los campos', variant: 'destructive' });
-      return;
-    }
+  e.preventDefault();
 
-    try {
-      setLoading(true);
-      const res = await fetch('http://localhost:4000/solicitudes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        toast({ title: 'Éxito', description: 'Solicitud enviada correctamente' });
-        setFormData({ nombre: '', telefono: '', correo: '', descripcion: '', servicio: title });
-        setOpenForm(false);
-      } else {
-        toast({ title: 'Error', description: data.message || 'Error al enviar solicitud', variant: 'destructive' });
-      }
-    } catch (error: any) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (!formData.nombre || !formData.telefono || !formData.correo || !formData.descripcion) {
+    toast({
+      title: 'Error',
+      description: 'Por favor completa todos los campos',
+      variant: 'destructive',
+    });
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    await apiFetch('/solicitudes', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+    });
+
+    toast({
+      title: 'Éxito',
+      description: 'Solicitud enviada correctamente',
+    });
+
+    setFormData({
+      nombre: '',
+      telefono: '',
+      correo: '',
+      descripcion: '',
+      servicio: title,
+    });
+
+    setOpenForm(false);
+
+  } catch (error: any) {
+    toast({
+      title: 'Error',
+      description: error.message || 'Error al enviar solicitud',
+      variant: 'destructive',
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <motion.div

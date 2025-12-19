@@ -58,13 +58,18 @@ const HeroSection = () => {
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                   Soluciones <span className="text-gradient">Tecnológicas</span> a tu Medida
                 </h1>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  Soy Verónica Borges, fundadora de V-Solutions. Con más de una
-                  década de experiencia en el sector tecnológico, me dedico a ofrecer
-                  soluciones informáticas personalizadas que realmente funcionan. Tanto en un ambiente 
-                  empresarial como para usuarios individuales en un ambiente doméstico, mi objetivo es simplificar la tecnología
-                  y hacerla accesible para todos. 
-                </p>
+                <div className="text-lg text-muted-foreground leading-relaxed text-justify">
+  <p className="font-semibold mb-2">
+    Soy Verónica Borges, fundadora de <span className="whitespace-nowrap">V-Services</span>
+  </p>
+  <p>
+    Con más de una década de experiencia en el sector tecnológico, me dedico a ofrecer
+    soluciones informáticas personalizadas que realmente funcionan. Tanto en un ambiente 
+    empresarial como para usuarios individuales en un ambiente doméstico, mi objetivo es simplificar la tecnología
+    y hacerla accesible para todos.
+  </p>
+</div>
+
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">

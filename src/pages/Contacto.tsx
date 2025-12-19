@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Coments from '@/components/ComentsCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { Mail, Phone, MapPin, Send, Clock, MessageSquare,MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Clock, MessageSquare,MessageCircle, Contact } from 'lucide-react';
+ import { apiFetch } from './api/fetchapi';
+import ComentsCard from '@/components/ComentsCard';
  
 
 
 const Contacto = () => {
+    
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
@@ -24,38 +28,42 @@ const Contacto = () => {
   setIsSubmitting(true);
 
   try {
-    const response = await fetch('http://10.80.171.129:4000/contacto', { 
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nombre: formData.nombre,
-        telefono: formData.telefono,
-        correo: formData.email, // coincide con tu backend
-        asunto: formData.asunto,
-        mensaje: formData.mensaje,
-      }),
-    });
+  const data = await apiFetch<{ id: string }>('/contacto', {
+    method: 'POST',
+    body: JSON.stringify({
+      nombre: formData.nombre,
+      telefono: formData.telefono,
+      correo: formData.email,
+      asunto: formData.asunto,
+      mensaje: formData.mensaje,
+    }),
+  });
 
-    if (!response.ok) throw new Error('Error al enviar el mensaje');
+  toast({
+    title: "¡Mensaje enviado!",
+    description: `ID de tu mensaje: ${data.id}`,
+  });
 
-    const data = await response.json();
+  setFormData({
+    nombre: '',
+    email: '',
+    telefono: '',
+    asunto: '',
+    mensaje: '',
+  });
 
-    toast({
-      title: "¡Mensaje enviado!",
-      description: `ID de tu mensaje: ${data.id}`,
-    });
+} catch (error: any) {
+  console.error('Error real:', error);
 
-    setFormData({ nombre: '', email: '', telefono: '', asunto: '', mensaje: '' });
-  } catch (error: any) {
-    console.error('Error real:', error);
-    toast({
-      title: "Error",
-      description: error.message || "No se pudo enviar el mensaje",
-      variant: "destructive",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
+  toast({
+    title: "Error",
+    description: error.message || "No se pudo enviar el mensaje",
+    variant: "destructive",
+  });
+} finally {
+  setIsSubmitting(false);
+}
+
 }
 ;
 
@@ -210,19 +218,12 @@ const contactInfo = [
 </div>
 
 
-              {/* Map Placeholder */}
-              <div className="card-gradient rounded-2xl overflow-hidden border border-border/50 aspect-video">
-                <div className="w-full h-full bg-secondary/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="w-12 h-12 text-primary/50 mx-auto mb-2" />
-                    <p className="text-muted-foreground text-sm">Mapa interactivo</p>
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
       </main>
+      <ComentsCard/>
       <Footer />
     </div>
   );
