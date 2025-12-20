@@ -1,4 +1,4 @@
-const BASE_URL = 'http://10.250.120.129:4000';
+const BASE_URL = "http://10.250.120.129:4000";
 
 export async function apiFetch<T>(
   endpoint: string,
@@ -6,7 +6,7 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...(options.headers || {}),
     },
     ...options,

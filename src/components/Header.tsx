@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { cn } from '@/lib/utils';
-import logo from '../media/logo1.png';
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import logo from "../media/logo1.png";
 
 const Header = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -13,10 +13,10 @@ const Header = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: 'Inicio', path: '/' },
-    { name: 'Servicios', path: '/servicios' },
-    { name: 'Tips', path: '/tips' },
-    { name: 'Contacto', path: '/contacto' },
+    { name: "Inicio", path: "/" },
+    { name: "Servicios", path: "/servicios" },
+    { name: "Tips", path: "/tips" },
+    { name: "Contacto", path: "/contacto" },
   ];
 
   // Calcula desplazamiento máximo del logo
@@ -24,13 +24,13 @@ const Header = () => {
     const handleResize = () => {
       const headerWidth = window.innerWidth;
       const logoWidth = 48; // w-12 = 48px
-      setMaxLeftPx(-(headerWidth / 2 - logoWidth / 2 - 16)); 
+      setMaxLeftPx(-(headerWidth / 2 - logoWidth / 2 - 16));
       // el -16 es padding de los lados (px-4)
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -38,7 +38,8 @@ const Header = () => {
       const currentScrollY = window.scrollY;
 
       // Scroll hacia abajo: compacta inmediatamente
-      if (currentScrollY > lastScrollY && currentScrollY > 5) setIsCompact(true);
+      if (currentScrollY > lastScrollY && currentScrollY > 5)
+        setIsCompact(true);
 
       // Scroll hacia arriba: descompacta solo cuando logo esté cerca del centro
       if (currentScrollY < lastScrollY && scrollY <= 60) setIsCompact(false);
@@ -47,8 +48,8 @@ const Header = () => {
       setScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, scrollY]);
 
   // Interpolación del logo
@@ -61,8 +62,8 @@ const Header = () => {
         {/* Banner/fondo */}
         <div
           className={cn(
-            'absolute inset-0 bg-background/70 glass border-b border-border/50 transition-opacity duration-300',
-            isCompact ? 'opacity-0' : 'opacity-100'
+            "absolute inset-0 bg-background/70 glass border-b border-border/50 transition-opacity duration-300",
+            isCompact ? "opacity-0" : "opacity-100"
           )}
         />
 
@@ -75,12 +76,20 @@ const Header = () => {
             }}
           >
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center glow border border-primary/50">
-              <img src={logo} alt="Logo" className="w-6 h-6 object-contain drop-shadow-lg" />
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-6 h-6 object-contain drop-shadow-lg"
+              />
             </div>
             {!isCompact && progress < 0.05 && (
               <div className="flex flex-col ml-2">
-                <span className="font-display font-bold text-xl text-foreground">V-Services</span>
-                <span className="text-xs text-muted-foreground">Servicios Informáticos</span>
+                <span className="font-display font-bold text-xl text-foreground">
+                  V-Services
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Servicios Informáticos
+                </span>
               </div>
             )}
           </div>
@@ -92,8 +101,10 @@ const Header = () => {
                 key={item.path}
                 to={item.path}
                 className={cn(
-                  'relative font-medium text-sm transition-colors hover:text-primary',
-                  location.pathname === item.path ? 'text-primary' : 'text-foreground/80'
+                  "relative font-medium text-sm transition-colors hover:text-primary",
+                  location.pathname === item.path
+                    ? "text-primary"
+                    : "text-foreground/80"
                 )}
               >
                 {item.name}
@@ -109,7 +120,11 @@ const Header = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-foreground hover:text-primary transition-colors ml-auto"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </header>
@@ -117,8 +132,10 @@ const Header = () => {
       {/* Mobile Menu */}
       <div
         className={cn(
-          'fixed inset-0 z-40 md:hidden transition-all duration-300',
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          "fixed inset-0 z-40 md:hidden transition-all duration-300",
+          isMobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         )}
       >
         <div
@@ -132,10 +149,10 @@ const Header = () => {
               to={item.path}
               onClick={() => setIsMobileMenuOpen(false)}
               className={cn(
-                'font-medium text-lg py-3 px-4 rounded-xl transition-all',
+                "font-medium text-lg py-3 px-4 rounded-xl transition-all",
                 location.pathname === item.path
-                  ? 'bg-primary/20 text-primary'
-                  : 'text-foreground/80 hover:bg-secondary hover:text-foreground'
+                  ? "bg-primary/20 text-primary"
+                  : "text-foreground/80 hover:bg-secondary hover:text-foreground"
               )}
               style={{ animationDelay: `${index * 50}ms` }}
             >

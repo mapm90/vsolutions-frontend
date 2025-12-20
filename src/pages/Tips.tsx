@@ -1,18 +1,24 @@
-import useSWR from 'swr';
-import { useState, useMemo, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import TipCard from '@/components/TipCard';
-import { Search } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { apiFetch } from '@/pages/api/fetchapi';
+import useSWR from "swr";
+import { useState, useMemo, useEffect } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import TipCard from "@/components/TipCard";
+import { Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { apiFetch } from "@/pages/api/fetchapi";
+import { motion } from "framer-motion";
 
-const categories = ['Todos', 'Mantenimiento', 'Hardware', 'Software', 'Seguridad'];
-  
+const categories = [
+  "Todos",
+  "Mantenimiento",
+  "Hardware",
+  "Software",
+  "Seguridad",
+];
+
 interface Tip {
-
   _id: string;
   title: string;
   description: string;
@@ -22,15 +28,15 @@ interface Tip {
   date: string;
 }
 
-const fetcher = () => apiFetch<{ data: Tip[] }>('/tipss');
+const fetcher = () => apiFetch<{ data: Tip[] }>("/tipss");
 
 const Tips = () => {
-  const { data, error } = useSWR('/tipss', fetcher);
+  const { data, error } = useSWR("/tipss", fetcher);
 
   const tips = data?.data || [];
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [visibleCount, setVisibleCount] = useState(6);
 
   // Reset visibleCount cuando cambian búsqueda o categoría
@@ -44,7 +50,7 @@ const Tips = () => {
         tip.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tip.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory =
-        selectedCategory === 'Todos' || tip.category === selectedCategory;
+        selectedCategory === "Todos" || tip.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
   }, [tips, searchQuery, selectedCategory]);
@@ -58,14 +64,20 @@ const Tips = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-32 pb-16">
+      <motion.main
+        className="mt-[var(--header-height)] pb-16"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
               Nuestros <span className="text-gradient">Tips</span>
             </h1>
             <p className="text-muted-foreground text-lg">
-              Consejos y trucos tecnológicos para optimizar tu experiencia digital.
+              Consejos y trucos tecnológicos para optimizar tu experiencia
+              digital.
             </p>
           </div>
           {/* Search y categorías */}
@@ -86,10 +98,10 @@ const Tips = () => {
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={cn(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-all',
+                    "px-4 py-2 rounded-lg text-sm font-medium transition-all",
                     selectedCategory === category
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80'
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
                   )}
                 >
                   {category}
@@ -127,11 +139,13 @@ const Tips = () => {
             </>
           ) : (
             <div className="text-center py-16">
-              <p className="text-muted-foreground text-lg">No se encontraron tips.</p>
+              <p className="text-muted-foreground text-lg">
+                No se encontraron tips.
+              </p>
             </div>
           )}
         </div>
-      </main>
+      </motion.main>
       <Footer />
     </div>
   );

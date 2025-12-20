@@ -1,13 +1,12 @@
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import perfil from '../media/perfil.jpg';
-import logo from '../media/logo1.png';
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import perfil from "../media/perfil.jpg";
+import logo from "../media/logo1.png";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen pt-0 md:pt-24 relative overflow-hidden bg-background">
-
+    <section className="min-h-screen pt-0 relative overflow-hidden bg-background">
       {/* Background Glow Effects */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
@@ -56,20 +55,23 @@ const HeroSection = () => {
                   <span>+10 años de experiencia</span>
                 </div>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
-                  Soluciones <span className="text-gradient">Tecnológicas</span> a tu Medida
+                  Soluciones <span className="text-gradient">Tecnológicas</span>{" "}
+                  a tu Medida
                 </h1>
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
-  <p className="font-semibold mb-2">
-    Soy Verónica Borges, fundadora de <span className="whitespace-nowrap">V-Services</span>
-  </p>
-  <p>
-    Con más de una década de experiencia en el sector tecnológico, me dedico a ofrecer
-    soluciones informáticas personalizadas que realmente funcionan. Tanto en un ambiente 
-    empresarial como para usuarios individuales en un ambiente doméstico, mi objetivo es simplificar la tecnología
-    y hacerla accesible para todos.
-  </p>
-</div>
-
+                  <p className="font-semibold mb-2">
+                    Soy Verónica Borges, fundadora de{" "}
+                    <span className="whitespace-nowrap">V-Services</span>
+                  </p>
+                  <p>
+                    Con más de una década de experiencia en el sector
+                    tecnológico, me dedico a ofrecer soluciones informáticas
+                    personalizadas que realmente funcionan. Tanto en un ambiente
+                    empresarial como para usuarios individuales en un ambiente
+                    doméstico, mi objetivo es simplificar la tecnología y
+                    hacerla accesible para todos.
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -89,50 +91,61 @@ const HeroSection = () => {
 
         {/* ------------------- SVG ONDA ------------------- */}
         <svg
-  viewBox="0 0 1440 120"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  className="hidden lg:block absolute -bottom-5 left-0 w-full z-20 pointer-events-none"
-  preserveAspectRatio="none"
->
-  <defs>
-    <linearGradient id="animatedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stopColor="#ff6ec7">
-        <animate
-          attributeName="stop-color"
-          values="#ff6ec7;#8e2de2;#ff6ec7"
-          dur="3s"
-          repeatCount="indefinite"
-        />
-      </stop>
-      <stop offset="100%" stopColor="#8e2de2">
-        <animate
-          attributeName="stop-color"
-          values="#8e2de2;#ff6ec7;#8e2de2"
-          dur="3s"
-          repeatCount="indefinite"
-        />
-      </stop>
-    </linearGradient>
+          viewBox="0 0 1440 120"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="hidden lg:block absolute -bottom-5 left-0 w-full z-20 pointer-events-none"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient
+              id="animatedGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#ff6ec7">
+                <animate
+                  attributeName="stop-color"
+                  values="#ff6ec7;#8e2de2;#ff6ec7"
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+              </stop>
+              <stop offset="100%" stopColor="#8e2de2">
+                <animate
+                  attributeName="stop-color"
+                  values="#8e2de2;#ff6ec7;#8e2de2"
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+              </stop>
+            </linearGradient>
 
-    {/* Mask para difuminar borde superior */}
-    <linearGradient id="fadeMask" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="white" stopOpacity="0" />
-      <stop offset="20%" stopColor="white" stopOpacity="1" />
-      <stop offset="100%" stopColor="white" stopOpacity="1" />
-    </linearGradient>
-    <mask id="maskFade">
-      <rect x="0" y="0" width="1440" height="120" fill="url(#fadeMask)" />
-    </mask>
-  </defs>
+            {/* Mask para difuminar borde superior */}
+            <linearGradient id="fadeMask" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="white" stopOpacity="0" />
+              <stop offset="20%" stopColor="white" stopOpacity="1" />
+              <stop offset="100%" stopColor="white" stopOpacity="1" />
+            </linearGradient>
+            <mask id="maskFade">
+              <rect
+                x="0"
+                y="0"
+                width="1440"
+                height="120"
+                fill="url(#fadeMask)"
+              />
+            </mask>
+          </defs>
 
-  <path
-    d="M0 120L60 105C120 90 240 60 360 52.5C480 45 600 60 720 67.5C840 75 960 75 1080 67.5C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-    fill="url(#animatedGradient)"
-    mask="url(#maskFade)"
-  />
-</svg>
-
+          <path
+            d="M0 120L60 105C120 90 240 60 360 52.5C480 45 600 60 720 67.5C840 75 960 75 1080 67.5C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+            fill="url(#animatedGradient)"
+            mask="url(#maskFade)"
+          />
+        </svg>
       </div>
     </section>
   );

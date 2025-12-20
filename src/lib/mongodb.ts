@@ -1,14 +1,14 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI!;
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Debes definir MONGODB_URI en tu .env.local');
+  throw new Error("Debes definir MONGODB_URI en tu .env.local");
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   // En desarrollo reutilizamos la conexión
   if (!(global as any)._mongoClientPromise) {
     client = new MongoClient(uri);
@@ -22,4 +22,3 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export default clientPromise;
-

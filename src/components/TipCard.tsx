@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Play, X, ExternalLink, Calendar, Tag } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { Play, X, ExternalLink, Calendar, Tag } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface TipCardProps {
   title: string;
@@ -12,13 +12,20 @@ interface TipCardProps {
   date: string;
 }
 
-const TipCard = ({ title, description, thumbnail, videoUrl, category, date }: TipCardProps) => {
+const TipCard = ({
+  title,
+  description,
+  thumbnail,
+  videoUrl,
+  category,
+  date,
+}: TipCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Extract YouTube video ID
   const getYouTubeId = (url: string) => {
     const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
-    return match ? match[1] : '';
+    return match ? match[1] : "";
   };
 
   const videoId = getYouTubeId(videoUrl);
@@ -61,17 +68,20 @@ const TipCard = ({ title, description, thumbnail, videoUrl, category, date }: Ti
           <h3 className="font-display font-semibold text-lg text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
             {title}
           </h3>
-          <p className="text-muted-foreground text-sm line-clamp-2">{description}</p>
+          <p className="text-muted-foreground text-sm line-clamp-2">
+            {description}
+          </p>
         </div>
       </div>
 
       {/* Modal - Fixed positioning with proper z-index */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 animate-fade-in"
-     onClick={() => setIsModalOpen(false)}>
-
+        <div
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setIsModalOpen(false)}
+        >
           <div className="absolute inset-0 bg-foreground/50 backdrop-blur-sm" />
-          
+
           <div
             className="relative z-[101] w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-card rounded-2xl border border-border shadow-2xl animate-scale-in"
             onClick={(e) => e.stopPropagation()}
@@ -111,7 +121,9 @@ const TipCard = ({ title, description, thumbnail, videoUrl, category, date }: Ti
                   {date}
                 </span>
               </div>
-              <h2 className="font-display font-bold text-2xl text-foreground mb-3">{title}</h2>
+              <h2 className="font-display font-bold text-2xl text-foreground mb-3">
+                {title}
+              </h2>
               <p className="text-muted-foreground mb-4">{description}</p>
               <Button asChild variant="outline">
                 <a href={videoUrl} target="_blank" rel="noopener noreferrer">

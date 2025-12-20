@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { ReactElement } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/hooks/use-toast';
-import { apiFetch } from '@/pages/api/fetchapi';
-
+import { useState } from "react";
+import { ReactElement } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import { apiFetch } from "@/pages/api/fetchapi";
 
 interface ServiceCardProps {
   title: string;
@@ -27,73 +26,85 @@ const ServiceCard = ({
 }: ServiceCardProps) => {
   const [openForm, setOpenForm] = useState(false);
   const [formData, setFormData] = useState({
-    nombre: '',
-    telefono: '',
-    correo: '',
-    descripcion: '',
+    nombre: "",
+    telefono: "",
+    correo: "",
+    descripcion: "",
     servicio: title,
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!formData.nombre || !formData.telefono || !formData.correo || !formData.descripcion) {
-    toast({
-      title: 'Error',
-      description: 'Por favor completa todos los campos',
-      variant: 'destructive',
-    });
-    return;
-  }
+    if (
+      !formData.nombre ||
+      !formData.telefono ||
+      !formData.correo ||
+      !formData.descripcion
+    ) {
+      toast({
+        title: "Error",
+        description: "Por favor completa todos los campos",
+        variant: "destructive",
+      });
+      return;
+    }
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    await apiFetch('/solicitudes', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-    });
+      await apiFetch("/solicitudes", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
 
-    toast({
-      title: 'Éxito',
-      description: 'Solicitud enviada correctamente',
-    });
+      toast({
+        title: "Éxito",
+        description: "Solicitud enviada correctamente",
+      });
 
-    setFormData({
-      nombre: '',
-      telefono: '',
-      correo: '',
-      descripcion: '',
-      servicio: title,
-    });
+      setFormData({
+        nombre: "",
+        telefono: "",
+        correo: "",
+        descripcion: "",
+        servicio: title,
+      });
 
-    setOpenForm(false);
-
-  } catch (error: any) {
-    toast({
-      title: 'Error',
-      description: error.message || 'Error al enviar solicitud',
-      variant: 'destructive',
-    });
-  } finally {
-    setLoading(false);
-  }
-};
-
+      setOpenForm(false);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Error al enviar solicitud",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 40, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: index * 0.12, type: 'spring', stiffness: 120, damping: 20 }}
+      transition={{
+        delay: index * 0.12,
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+      }}
     >
       <div className="card-gradient rounded-2xl p-6 md:p-8 border border-border/50">
-        <h3 className="font-display font-semibold text-xl text-foreground mb-6">{title}</h3>
+        <h3 className="font-display font-semibold text-xl text-foreground mb-6">
+          {title}
+        </h3>
         <div className="space-y-5">
           <div className="flex items-start gap-4">
             <div className="w-7 h-7 text-primary">{icon}</div>
@@ -107,14 +118,14 @@ const ServiceCard = ({
               </ul>
 
               <Button onClick={() => setOpenForm(!openForm)}>
-                {openForm ? 'Cerrar sin enviar' : 'Solicitar servicio'}
+                {openForm ? "Cerrar sin enviar" : "Solicitar servicio"}
               </Button>
 
               <AnimatePresence>
                 {openForm && (
                   <motion.form
                     initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                     onSubmit={handleSubmit}
@@ -146,7 +157,7 @@ const ServiceCard = ({
                       onChange={handleChange}
                     />
                     <Button type="submit" disabled={loading}>
-                      {loading ? 'Enviando...' : 'Enviar solicitud'}
+                      {loading ? "Enviando..." : "Enviar solicitud"}
                     </Button>
                   </motion.form>
                 )}
