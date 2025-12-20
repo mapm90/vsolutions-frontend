@@ -109,8 +109,12 @@ const ServiceCard = ({
           <div className="flex items-start gap-4">
             <div className="w-7 h-7 text-primary">{icon}</div>
             <div className="flex-1">
-              <p className="text-muted-foreground mb-2">{shortDescription}</p>
-              <p className="text-foreground mb-4">{fullDescription}</p>
+              <p className="text-muted-foreground mb-2 text-justify">
+                {shortDescription}
+              </p>
+              <p className="text-foreground mb-4 text-justify">
+                {fullDescription}
+              </p>
               <ul className="list-disc list-inside space-y-1 mb-4">
                 {features.map((feature, i) => (
                   <li key={i}>{feature}</li>

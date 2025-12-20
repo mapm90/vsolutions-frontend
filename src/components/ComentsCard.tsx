@@ -13,6 +13,52 @@ interface Comentario {
   fecha: string;
   aprobado: boolean;
 }
+function tiempoRelativo(fecha: string | Date) {
+  const ahora = new Date();
+  const f = new Date(fecha);
+  const diffMs = ahora.getTime() - f.getTime();
+
+  const segundos = Math.floor(diffMs / 1000);
+  const minutos = Math.floor(segundos / 60);
+  const horas = Math.floor(minutos / 60);
+  const dias = Math.floor(horas / 24);
+  const meses = Math.floor(dias / 30);
+  const anios = Math.floor(dias / 365);
+
+  if (segundos < 60) return "Hace un momento";
+  if (minutos < 60) return `Hace ${minutos} minuto${minutos > 1 ? "s" : ""}`;
+  if (horas < 24) return `Hace ${horas} hora${horas > 1 ? "s" : ""}`;
+  if (dias < 30) return `Hace ${dias} día${dias > 1 ? "s" : ""}`;
+  if (meses < 12) return `Hace ${meses} mes${meses > 1 ? "es" : ""}`;
+  return `Hace ${anios} año${anios > 1 ? "s" : ""}`;
+}
+
+const accionesComentario: string[] = [
+  "ha comentado 💬",
+  "nos dice 👇",
+  "compartió su opinión ✍️",
+  "ha escrito ✍️",
+  "dejó este comentario 💭",
+  "nos cuenta 💬",
+  "expresó su opinión 🗣️",
+  "quiso compartir esto ✨",
+  "comentó lo siguiente 👇",
+  "dejó estas palabras ✨",
+  "nos deja su mensaje 💭",
+  "aportó su punto de vista ✍️",
+  "nos comparte su experiencia 💬",
+  "ha querido dejar su opinión ✨",
+  "expresó lo siguiente 👇",
+  "nos transmite su mensaje 💭",
+  "ha aportado este comentario ✍️",
+  "nos hace llegar su opinión 💬",
+  "quiso decirnos esto 👇",
+  "ha dejado su punto de vista 🗣️",
+  "nos comparte estas palabras ✨",
+  "aportó este mensaje 💭",
+  "comentó su experiencia ✍️",
+  "nos dejó este aporte 💬",
+];
 
 const ComentsCard = () => {
   const [openForm, setOpenForm] = useState(false);
@@ -131,15 +177,27 @@ const ComentsCard = () => {
           Lo que se comenta de V-Services:
         </h3>
         <ul className="space-y-2">
-          {comentarios.map((c) => (
-            <li key={c._id} className="border p-2 rounded">
-              <p className="font-bold">{c.nombre} ha comentado</p>
-              <p>{c.comentario}</p>
-              <p className="text-sm text-gray-500">
-                {new Date(c.fecha).toLocaleString()}
-              </p>
-            </li>
-          ))}
+          {[...comentarios]
+            .sort(
+              (a, b) =>
+                new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
+            )
+            .map((c) => (
+              <li key={c._id} className="border p-2 rounded">
+                <p className="font-bold">
+                  {c.nombre}{" "}
+                  {
+                    accionesComentario[
+                      Math.floor(Math.random() * accionesComentario.length)
+                    ]
+                  }
+                </p>
+                <p>{c.comentario}</p>
+                <p className="text-sm text-gray-500">
+                  {tiempoRelativo(c.fecha)}
+                </p>
+              </li>
+            ))}
         </ul>
       </div>
     </motion.div>

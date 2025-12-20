@@ -6,7 +6,7 @@ import logo from "../media/logo1.png";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen pt-0 relative overflow-hidden bg-background">
+    <section className="min-h-screen pt-0 lg:pt-0 relative overflow-hidden bg-background">
       {/* Background Glow Effects */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
@@ -28,7 +28,7 @@ const HeroSection = () => {
           </div>
 
           {/* Mobile Image */}
-          <div className="lg:hidden absolute top-24 left-0 right-0 h-[500px] flex items-center justify-center bg-gradient-to-b from-primary/10 to-transparent px-0">
+          <div className="lg:hidden absolute top-0 left-0 right-0 h-[500px] flex items-center justify-center bg-gradient-to-b from-primary/10 to-transparent px-0 z-0">
             <div className="w-full h-full bg-gradient-to-br from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-primary/30 relative">
               <img src={perfil} className="w-full h-full object-cover" />
               <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
