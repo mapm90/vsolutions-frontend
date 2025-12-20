@@ -13,7 +13,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";
-
+import fotosw from "../media/instalacionSW2.jpg";
 const serviceVariants = {
   hidden: {
     opacity: 0,
@@ -49,6 +49,7 @@ const services = [
       "Cambio de componentes",
       "Limpieza interna",
     ],
+    backgroundImage: fotosw,
   },
   {
     title: "Reparación de Equipos",
@@ -63,6 +64,7 @@ const services = [
       "Cambio de componentes",
       "Limpieza interna",
     ],
+    backgroundImage: fotosw,
   },
 
   {
@@ -79,6 +81,7 @@ const services = [
       "Recuperación de datos",
       "Garantía de 3 meses",
     ],
+    backgroundImage: fotosw,
   },
 
   {
@@ -95,6 +98,7 @@ const services = [
       "Backup de datos",
       "Informe de estado",
     ],
+    backgroundImage: fotosw,
   },
 
   {
@@ -111,6 +115,7 @@ const services = [
       "Copias de seguridad",
       "Asesoramiento de seguridad",
     ],
+    backgroundImage: fotosw,
   },
   {
     title: "Redes y Conectividad",
@@ -126,6 +131,7 @@ const services = [
       "Configuración de routers",
       "VPN",
     ],
+    backgroundImage: fotosw,
   },
   {
     title: "Ensamblaje y Actualización de ordenadores",
@@ -141,6 +147,7 @@ const services = [
       "Asesoramiento según presupuesto",
       "Compatibilidad garantizada",
     ],
+    backgroundImage: fotosw,
   },
   {
     title: "Sitios web y aplicaciones",
@@ -156,6 +163,7 @@ const services = [
       "Mantenimiento y soporte",
       "Integración con e-commerce y redes sociales",
     ],
+    backgroundImage: fotosw,
   },
   {
     title: "Asesorias y consultorias informaticas",
@@ -170,6 +178,7 @@ const services = [
       "tips",
       "Asesoramiento según presupuesto",
     ],
+    backgroundImage: fotosw,
   },
 ];
 
@@ -205,7 +214,7 @@ const Servicios = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="container mx-auto px-4 max-w-3xl">
+        <div className="container mx-auto px-4 max-w-7xl">
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
