@@ -116,7 +116,7 @@ const ComentsCard = () => {
               />
               <Textarea
                 name="comentario"
-                placeholder="Escribe tu comentario"
+                placeholder="Escribe tu comentario aquí"
                 value={formData.comentario}
                 onChange={handleChange}
               />
