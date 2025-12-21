@@ -101,6 +101,15 @@
 }
 
 @layer utilities {
+  .animate-gradient {
+    animation: gradientMove 14s ease infinite;
+    background-size: 300% 300%;
+  }
+
+  .group-hover\\:animate-sweep {
+    animation: lightSweep 1s ease-out forwards;
+  }
+
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-primary);
@@ -150,6 +159,29 @@
   50% {
     transform: translateY(-10px);
   }
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes lightSweep {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.group:hover .light-sweep {
+  animation: lightSweep 1s ease-out forwards;
 }
 
 @keyframes pulse-glow {

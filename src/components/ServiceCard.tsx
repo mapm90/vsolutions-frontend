@@ -103,33 +103,88 @@ const ServiceCard = ({
         damping: 20,
       }}
     >
-      <div className="relative rounded-2xl overflow-hidden border border-border/50 p-6 md:p-8 w-full max-w-6xl mx-auto">
-        {/* Imagen de fondo solo mitad inferior con degradado suave */}
+      <div className="group relative rounded-2xl overflow-hidden border border-border/50 p-6 md:p-8 w-full max-w-6xl mx-auto">
         {backgroundImage && (
-          <div
-            className="absolute inset-0 z-0 pointer-events-none rounded-2xl overflow-hidden transition-transform duration-700 ease-out group-hover:scale-105"
-            style={{
-              backgroundImage: `
-        linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,0.2) 60%),
-        url(${backgroundImage})
-      `,
-              backgroundSize: "cover",
-              backgroundPosition: "center bottom",
-              backgroundRepeat: "no-repeat",
-              filter: "blur(8px) brightness(1.5) saturate(2)",
-              opacity: 0.3, // baja opacidad para que el texto resalte
-              transform: "scale(1.05)",
-              maskImage: "linear-gradient(to top, black 60%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to top, black 60%, transparent 100%)",
-              willChange: "transform",
-            }}
-          />
-        )}
+          <div className="absolute inset-0 z-0 pointer-events-none rounded-2xl overflow-hidden group">
+            {/* ================= 1. IMAGEN BASE (ZOOM) ================= */}
+            <div
+              className="absolute inset-0 transform scale-[1.08] transition-transform duration-[1200ms] ease-out group-hover:scale-[1.18]"
+              style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                filter: "blur(4px) brightness(1.15) saturate(1.6)",
+                willChange: "transform, filter",
+              }}
+            />
 
-        {/* Overlay oscuro */}
-        {backgroundImage && (
-          <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none rounded-2xl" />
+            {/* ================= 2. GRADIENTE ANIMADO ================= */}
+            <div
+              className="absolute inset-0 animate-gradient"
+              style={{
+                backgroundImage: `
+          linear-gradient(
+            120deg,
+            rgba(0,255,200,0.45),
+            rgba(180,0,255,0.35),
+            rgba(0,0,0,0.7)
+          )
+        `,
+                backgroundSize: "300% 300%",
+                mixBlendMode: "screen",
+              }}
+            />
+
+            {/* ================= 3. LIGHT SWEEP ================= */}
+            <div className="light-sweep absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.35),transparent_70%)] mix-blend-overlay transition-opacity duration-300" />
+
+            {/* ================= 4. GLOW / AURA ================= */}
+            <div
+              className="absolute inset-0 opacity-80"
+              style={{
+                background: `
+          radial-gradient(
+            800px circle at 20% 15%,
+            rgba(0,255,255,0.35),
+            transparent 55%
+          ),
+          radial-gradient(
+            600px circle at 80% 70%,
+            rgba(255,0,200,0.25),
+            transparent 60%
+          )
+        `,
+                filter: "blur(70px)",
+              }}
+            />
+
+            {/* ================= 5. MÁSCARA PREMIUM ================= */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "black",
+                maskImage:
+                  "linear-gradient(to top, black 55%, rgba(0,0,0,0.6) 75%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to top, black 55%, rgba(0,0,0,0.6) 75%, transparent 100%)",
+                opacity: 0.45,
+              }}
+            />
+
+            {/* ================= 6. GRAIN SUAVE ================= */}
+            <div
+              className="absolute inset-0 opacity-[0.06] pointer-events-none"
+              style={{
+                backgroundImage:
+                  "url('https://grainy-gradients.vercel.app/noise.svg')",
+                backgroundRepeat: "repeat",
+                mixBlendMode: "soft-light",
+              }}
+            />
+
+            {/* ================= 7. OVERLAY OSCURO ================= */}
+            <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none rounded-2xl" />
+          </div>
         )}
 
         {/* Contenido */}

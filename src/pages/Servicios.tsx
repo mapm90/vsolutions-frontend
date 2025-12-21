@@ -13,10 +13,11 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import syelow from "../media/syelow.png";
 import sblue from "../media/sblue.png";
 import sgreen from "../media/sgreen.png";
 import sorange from "../media/sorange.png";
-import yelow from "../media/yelow.png";
+
 const serviceVariants = {
   hidden: {
     opacity: 0,
@@ -84,7 +85,7 @@ const services = [
       "Recuperación de datos",
       "Garantía de 3 meses",
     ],
-    backgroundImage: yelow,
+    backgroundImage: syelow,
   },
 
   {
@@ -166,7 +167,7 @@ const services = [
       "Mantenimiento y soporte",
       "Integración con e-commerce y redes sociales",
     ],
-    backgroundImage: yelow,
+    backgroundImage: sblue,
   },
   {
     title: "Asesorias y consultorias informaticas",
@@ -181,7 +182,7 @@ const services = [
       "tips",
       "Asesoramiento según presupuesto",
     ],
-    backgroundImage: sblue,
+    backgroundImage: sgreen,
   },
 ];
 
