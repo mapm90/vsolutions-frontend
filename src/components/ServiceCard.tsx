@@ -106,7 +106,7 @@ const ServiceCard = ({
       <div className="group relative rounded-2xl overflow-hidden border border-border/50 p-6 md:p-8 w-full max-w-6xl mx-auto">
         {backgroundImage && (
           <div className="absolute inset-0 z-0 pointer-events-none rounded-2xl overflow-hidden group">
-            {/* ================= 1. IMAGEN BASE (ZOOM) ================= */}
+            {/* IMAGEN BASE (ZOOM) */}
             <div
               className="absolute inset-0 transform scale-[1.08] transition-transform duration-[1200ms] ease-out group-hover:scale-[1.18]"
               style={{
@@ -118,7 +118,7 @@ const ServiceCard = ({
               }}
             />
 
-            {/* ================= 2. GRADIENTE ANIMADO ================= */}
+            {/* GRADIENTE ANIMADO */}
             <div
               className="absolute inset-0 animate-gradient"
               style={{
@@ -135,10 +135,10 @@ const ServiceCard = ({
               }}
             />
 
-            {/* ================= 3. LIGHT SWEEP ================= */}
+            {/* LIGHT SWEEP */}
             <div className="light-sweep absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.35),transparent_70%)] mix-blend-overlay transition-opacity duration-300" />
 
-            {/* ================= 4. GLOW / AURA ================= */}
+            {/* GLOW / AURA */}
             <div
               className="absolute inset-0 opacity-80"
               style={{
@@ -158,7 +158,7 @@ const ServiceCard = ({
               }}
             />
 
-            {/* ================= 5. MÁSCARA PREMIUM ================= */}
+            {/* MÁSCARA PREMIUM */}
             <div
               className="absolute inset-0"
               style={{
@@ -171,7 +171,7 @@ const ServiceCard = ({
               }}
             />
 
-            {/* ================= 6. GRAIN SUAVE ================= */}
+            {/* GRAIN SUAVE */}
             <div
               className="absolute inset-0 opacity-[0.06] pointer-events-none"
               style={{
@@ -182,7 +182,7 @@ const ServiceCard = ({
               }}
             />
 
-            {/* ================= 7. OVERLAY OSCURO ================= */}
+            {/* OVERLAY OSCURO */}
             <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none rounded-2xl" />
           </div>
         )}

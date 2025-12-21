@@ -180,10 +180,6 @@
   }
 }
 
-.group:hover .light-sweep {
-  animation: lightSweep 1s ease-out forwards;
-}
-
 @keyframes pulse-glow {
   0%,
   100% {
