@@ -13,7 +13,10 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import fotosw from "../media/instalacionSW2.jpg";
+import sblue from "../media/sblue.png";
+import sgreen from "../media/sgreen.png";
+import sorange from "../media/sorange.png";
+import yelow from "../media/yelow.png";
 const serviceVariants = {
   hidden: {
     opacity: 0,
@@ -49,7 +52,7 @@ const services = [
       "Cambio de componentes",
       "Limpieza interna",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: sblue,
   },
   {
     title: "Reparación de Equipos",
@@ -64,7 +67,7 @@ const services = [
       "Cambio de componentes",
       "Limpieza interna",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: sgreen,
   },
 
   {
@@ -81,7 +84,7 @@ const services = [
       "Recuperación de datos",
       "Garantía de 3 meses",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: yelow,
   },
 
   {
@@ -98,7 +101,7 @@ const services = [
       "Backup de datos",
       "Informe de estado",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: sorange,
   },
 
   {
@@ -115,7 +118,7 @@ const services = [
       "Copias de seguridad",
       "Asesoramiento de seguridad",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: sblue,
   },
   {
     title: "Redes y Conectividad",
@@ -131,7 +134,7 @@ const services = [
       "Configuración de routers",
       "VPN",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: sgreen,
   },
   {
     title: "Ensamblaje y Actualización de ordenadores",
@@ -147,7 +150,7 @@ const services = [
       "Asesoramiento según presupuesto",
       "Compatibilidad garantizada",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: sorange,
   },
   {
     title: "Sitios web y aplicaciones",
@@ -163,7 +166,7 @@ const services = [
       "Mantenimiento y soporte",
       "Integración con e-commerce y redes sociales",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: yelow,
   },
   {
     title: "Asesorias y consultorias informaticas",
@@ -178,7 +181,7 @@ const services = [
       "tips",
       "Asesoramiento según presupuesto",
     ],
-    backgroundImage: fotosw,
+    backgroundImage: sblue,
   },
 ];
 
