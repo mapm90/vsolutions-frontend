@@ -258,7 +258,7 @@ const Contacto = () => {
                           <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0 text-primary">
                             {item.icon}
                           </div>
-                          <div>
+                          <div className="text-left">
                             <p className="text-sm text-muted-foreground">
                               {item.label}
                             </p>
