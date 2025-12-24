@@ -233,15 +233,15 @@ const Servicios = () => {
       <Header />
 
       <motion.main
-        className="relative z-10 mt-[var(--header-height)] pb-24"
+        className="relative z-10 mt-12 md:mt-10 pb-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <motion.div className="text-center mb-8 md:mb-10 pt-4">
+        <motion.div className="text-center mb-2 md:mb-3 pt-0">
           {/* Hero Header */}
           <motion.div
-            className="text-center mb-10 pt-4"
+            className="text-center mb-10 pt-6"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}

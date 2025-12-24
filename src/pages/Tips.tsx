@@ -85,15 +85,15 @@ const Tips = () => {
       </div>
       <Header />
       <motion.main
-        className="relative z-10 mt-[var(--header-height)] pb-24"
+        className="relative z-10 mt-12 md:mt-10 pb-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="container mx-auto px-4 max-w-6xl">
-          {/* Header */}
+        <motion.div className="text-center mb-2 md:mb-3 pt-0">
+          {/* Hero Header */}
           <motion.div
-            className="text-center mb-20 pt-12"
+            className="text-center mb-10 pt-6"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -170,7 +170,7 @@ const Tips = () => {
               </p>
             </div>
           )}
-        </div>
+        </motion.div>
       </motion.main>
       <Footer />
     </div>
