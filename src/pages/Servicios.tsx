@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { apiFetch } from "@/pages/api/fetchapi";
 import {
   Wifi,
@@ -14,7 +16,7 @@ import {
   Cpu,
   Smartphone,
 } from "lucide-react";
-import { motion } from "framer-motion";
+
 import syelow from "../media/syelow.png";
 import sblue from "../media/sblue.png";
 import sgreen from "../media/sgreen.png";
@@ -55,7 +57,6 @@ const Servicios = () => {
     obtenerComentarios();
   }, []);
 
-  // Devuelve un comentario random con rating 4 o 5
   const comentarioAleatorio = (): Testimonial | null => {
     if (comentarios.length === 0) return null;
     const index = Math.floor(Math.random() * comentarios.length);
@@ -208,7 +209,6 @@ const Servicios = () => {
       testimonial: comentarioAleatorio(),
     },
   ];
-
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated background gradients */}
@@ -226,10 +226,7 @@ const Servicios = () => {
         />
         <div
           className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full opacity-10 blur-[80px] animate-pulse-glow"
-          style={{
-            background: "hsl(var(--glow-pink))",
-            animationDelay: "4s",
-          }}
+          style={{ background: "hsl(var(--glow-pink))", animationDelay: "4s" }}
         />
       </div>
 
@@ -252,7 +249,6 @@ const Servicios = () => {
             <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
               Nuestros <span className="text-gradient">Servicios</span>
             </h1>
-
             <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               Soluciones informáticas profesionales adaptadas a tus necesidades.
               <br />
@@ -260,11 +256,26 @@ const Servicios = () => {
             </p>
           </motion.div>
 
-          {/* Services Grid */}
+          {/* Services Grid con animación de scroll */}
           <div className="container mx-auto px-4 max-w-6xl space-y-8">
-            {services.map((service, index) => (
-              <ServiceCard key={service.title} {...service} index={index} />
-            ))}
+            {services.map((service, index) => {
+              const { ref, inView } = useInView({
+                triggerOnce: true,
+                threshold: 0.1,
+              });
+
+              return (
+                <motion.div
+                  key={service.title}
+                  ref={ref}
+                  initial={{ opacity: 0, y: 1 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.1 }}
+                >
+                  <ServiceCard {...service} index={index} />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </motion.main>
