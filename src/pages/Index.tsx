@@ -2,9 +2,16 @@ import Header from "@/components/Header";
 import Footer1 from "@/components/Footer1";
 import HeroSection from "@/components/HeroSection";
 import { motion } from "framer-motion";
+
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <motion.div
+      className="min-h-screen bg-background relative overflow-hidden"
+      initial={{ opacity: 0, y: 20 }} // empieza invisible y ligeramente abajo
+      animate={{ opacity: 1, y: 0 }} // se mueve a su posición natural
+      exit={{ opacity: 0, y: -20 }} // opcional si usas un router con transiciones
+      transition={{ duration: 0.8, ease: "easeOut" }} // duración y suavizado
+    >
       <div className="fixed inset-0 pointer-events-none">
         <div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"
@@ -24,18 +31,21 @@ const Index = () => {
             animationDelay: "4s",
           }}
         />
-      </div>{" "}
+      </div>
+
       <Header />
+
       <motion.main
         className="relative z-10 mt-[var(--header-height)] pb-24"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, y: 30 }} // ligera diferencia con el contenedor para efecto escalonado
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
       >
         <HeroSection />
       </motion.main>
+
       <Footer1 />
-    </div>
+    </motion.div>
   );
 };
 
