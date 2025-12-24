@@ -238,10 +238,10 @@ const Servicios = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="container mx-auto px-4 max-w-6xl">
+        <motion.div className="text-center mb-8 md:mb-10 pt-4">
           {/* Hero Header */}
           <motion.div
-            className="text-center mb-20 pt-12"
+            className="text-center mb-10 pt-4"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -277,7 +277,7 @@ const Servicios = () => {
               );
             })}
           </div>
-        </div>
+        </motion.div>
       </motion.main>
 
       <Footer />
