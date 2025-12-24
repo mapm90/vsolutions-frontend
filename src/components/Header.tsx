@@ -53,8 +53,10 @@ const Header = () => {
   }, [lastScrollY, scrollY]);
 
   // Interpolación del logo
-  const progress = isCompact ? 1 : Math.min(scrollY / 120, 1);
+  const progress = scrollY === 0 ? 0 : Math.min(scrollY / 120, 1);
   const logoTranslateX = maxLeftPx * progress;
+  // Determinar si las letras deben mostrarse
+  const showText = !isCompact || scrollY === 0;
 
   return (
     <>
@@ -82,8 +84,8 @@ const Header = () => {
                 className="w-6 h-6 object-contain drop-shadow-lg"
               />
             </div>
-            {!isCompact && progress < 0.05 && (
-              <div className="flex flex-col ml-2">
+            {showText && (
+              <div className="flex flex-col ml-2 transition-opacity duration-150">
                 <span className="font-display font-bold text-xl text-foreground">
                   V-Services
                 </span>
