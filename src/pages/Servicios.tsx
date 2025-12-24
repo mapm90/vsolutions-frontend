@@ -255,7 +255,8 @@ const Servicios = () => {
 
             <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               Soluciones informáticas profesionales adaptadas a tus necesidades.
-              Haz clic en cualquier servicio para más información.
+              <br />
+              Haz clic en cualquier servicio para solicitarlo
             </p>
           </motion.div>
 
