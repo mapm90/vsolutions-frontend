@@ -2,15 +2,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
 import {
-  Monitor,
-  HardDrive,
-  Shield,
   Wifi,
   Wrench,
-  Cloud,
   MonitorCheck,
   MonitorCog,
   ShieldCheck,
+  Code2,
+  Lightbulb,
+  Cpu,
+  Smartphone,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import syelow from "../media/syelow.png";
@@ -18,50 +18,79 @@ import sblue from "../media/sblue.png";
 import sgreen from "../media/sgreen.png";
 import sorange from "../media/sorange.png";
 
-const serviceVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-    scale: 0.96,
-    filter: "blur(6px)",
+// Sample testimonials for each service
+const testimonials = {
+  software: {
+    name: "Carlos M.",
+    text: "Excelente servicio, mi PC funciona como nueva",
+    rating: 5,
   },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    filter: "blur(0)",
-    transition: {
-      delay: i * 0.12,
-      type: "spring" as const,
-      stiffness: 120,
-      damping: 20,
-    },
-  }),
+  reparacion: {
+    name: "Ana L.",
+    text: "Muy profesionales y rápidos",
+    rating: 5,
+  },
+  moviles: {
+    name: "Miguel R.",
+    text: "Repararon mi móvil en tiempo récord",
+    rating: 4,
+  },
+  mantenimiento: {
+    name: "Laura S.",
+    text: "Mi equipo ya no se sobrecalienta",
+    rating: 5,
+  },
+  seguridad: {
+    name: "Pedro G.",
+    text: "Me salvaron de un ransomware",
+    rating: 5,
+  },
+  redes: {
+    name: "María T.",
+    text: "WiFi perfecto en toda la casa",
+    rating: 5,
+  },
+  ensamblaje: {
+    name: "Jorge F.",
+    text: "El PC gaming que siempre soñé",
+    rating: 5,
+  },
+  web: {
+    name: "Elena V.",
+    text: "Mi negocio creció gracias a la web",
+    rating: 5,
+  },
+  asesoria: {
+    name: "Roberto D.",
+    text: "Consejos que valen oro",
+    rating: 4,
+  },
 };
 
 const services = [
   {
-    title: "Instalacion y mantenimiento de Software",
+    title: "Instalación y mantenimiento de Software",
     shortDescription:
-      "¿Crees que tu ordenador está lento o necesitas revizar por si faltan actualizaciones o hay alguno causando problemas, o necesitas algun software en especifico para el trabajo, el estudio o el ocio?",
+      "¿Crees que tu ordenador está lento o necesitas revisar por si faltan actualizaciones?",
     fullDescription:
       "Ofrecemos servicios de instalación y configuración de software, desde sistemas operativos hasta aplicaciones específicas, asegurando que todo funcione correctamente.",
-    icon: <MonitorCheck className="w-7 h-7 text-primary" />,
+    icon: <MonitorCheck className="w-7 h-7" />,
     features: [
       "Diagnóstico gratuito",
-      "Reparación de hardware",
-      "Cambio de componentes",
-      "Limpieza interna",
+      "Instalación de software",
+      "Actualizaciones",
+      "Optimización del sistema",
     ],
     backgroundImage: sblue,
+    testimonial: testimonials.software,
   },
   {
     title: "Reparación de Equipos",
     shortDescription:
-      "¿Tuviste algun accidente con tu ordenador o simplemente dejo de funcionar correctamente?",
+      "¿Tuviste algún accidente con tu ordenador o simplemente dejó de funcionar?",
     fullDescription:
       "Servicio completo de diagnóstico y reparación para todo tipo de ordenadores. Identificamos el problema y lo solucionamos de forma rápida y eficiente.",
-    icon: <Wrench className="w-7 h-7 text-primary" />,
+    icon: <Wrench className="w-7 h-7" />,
     features: [
       "Diagnóstico gratuito",
       "Reparación de hardware",
@@ -69,185 +98,189 @@ const services = [
       "Limpieza interna",
     ],
     backgroundImage: sgreen,
+    testimonial: testimonials.reparacion,
   },
-
   {
     title: "Móviles y tablets",
     shortDescription:
-      "¿Fallos en el sistema operativo, pantalla rota, bateria que no dura nada o problemas de conectividad?",
+      "¿Pantalla rota, batería que no dura o problemas de conectividad?",
     fullDescription:
       "Reparación y mantenimiento de dispositivos móviles y tablets, incluyendo reemplazo de pantallas, baterías y solución de problemas de software.",
-    icon: <MonitorCog className="w-7 h-7 text-primary" />,
+    icon: <Smartphone className="w-7 h-7" />,
     features: [
       "Reemplazo de pantallas",
       "Cambio de baterías",
-      "Solución de problemas de software",
+      "Solución de software",
       "Recuperación de datos",
-      "Garantía de 3 meses",
     ],
     backgroundImage: syelow,
+    testimonial: testimonials.moviles,
   },
-
   {
     title: "Mantenimiento Preventivo",
     shortDescription:
-      "¿Notas que tu equipo se sobrecalienta o va mas lento de lo normal  o se apaga de repente?",
+      "¿Tu equipo se sobrecalienta o va más lento de lo normal?",
     fullDescription:
       "El mantenimiento preventivo alarga la vida útil de tu equipo y previene fallos inesperados. Incluye limpieza, actualización y optimización.",
-    icon: <MonitorCog className="w-7 h-7 text-primary" />,
+    icon: <MonitorCog className="w-7 h-7" />,
     features: [
       "Limpieza de sistema",
       "Actualización de software",
-      "Optimización de rendimiento",
+      "Optimización",
       "Backup de datos",
-      "Informe de estado",
     ],
     backgroundImage: sorange,
+    testimonial: testimonials.mantenimiento,
   },
-
   {
     title: "Seguridad Informática",
     shortDescription:
-      "¿Los virus no te dejan apenas trabajar o navegar con tranquilidad, o sospechas que tienes intrusos o tu informacion esta expuesta?",
+      "¿Virus, malware o sospechas que tu información está expuesta?",
     fullDescription:
       "Instalación y configuración de soluciones de seguridad, eliminación de malware y asesoramiento para mantener tu información protegida.",
-    icon: <ShieldCheck className="w-7 h-7 text-primary" />,
+    icon: <ShieldCheck className="w-7 h-7" />,
     features: [
       "Antivirus profesional",
       "Eliminación de malware",
       "Firewall",
       "Copias de seguridad",
-      "Asesoramiento de seguridad",
     ],
     backgroundImage: sblue,
+    testimonial: testimonials.seguridad,
   },
   {
     title: "Redes y Conectividad",
     shortDescription:
-      "¿Tienes nuevos equipos que conectar o la señal de internet no llega bien a todas las zonas de tu casa u oficina?",
+      "¿La señal WiFi no llega bien a todas las zonas de tu casa?",
     fullDescription:
       "Instalación y configuración de redes WiFi, cableado estructurado, y solución de problemas de conectividad para hogares y empresas.",
-    icon: <Wifi className="w-7 h-7 text-primary" />,
+    icon: <Wifi className="w-7 h-7" />,
     features: [
       "Instalación de redes WiFi",
       "Cableado estructurado",
       "Extensores de señal",
-      "Configuración de routers",
-      "VPN",
+      "Configuración VPN",
     ],
     backgroundImage: sgreen,
+    testimonial: testimonials.redes,
   },
   {
-    title: "Ensamblaje y Actualización de ordenadores",
+    title: "Ensamblaje y Actualización",
     shortDescription:
-      "¿Quieres dar un salto de calidad y rendimiento a tu equipo actual o prefieres un equipo totalmente nuevo adaptado a tus necesidades?",
+      "¿Quieres dar un salto de rendimiento a tu equipo actual?",
     fullDescription:
-      "Hacemos tu proyecto a medida para que tu PC alcance el mejor rendimiento según tu presupuesto, desde la selección de componentes hasta el ensamblaje y configuración final. También realizamos actualizaciones y mejoras de equipos existentes, garantizando compatibilidad y eficiencia.",
-    icon: <MonitorCheck className="w-7 h-7 text-primary" />,
+      "Hacemos tu proyecto a medida para que tu PC alcance el mejor rendimiento según tu presupuesto, desde la selección de componentes hasta el ensamblaje final.",
+    icon: <Cpu className="w-7 h-7" />,
     features: [
-      "Montaje de PCs personalizadas",
-      "Actualización de componentes (RAM, GPU, SSD, etc.)",
-      "Optimización del rendimiento",
-      "Asesoramiento según presupuesto",
+      "Montaje de PCs",
+      "Actualización de RAM, GPU, SSD",
+      "Optimización",
       "Compatibilidad garantizada",
     ],
     backgroundImage: sorange,
+    testimonial: testimonials.ensamblaje,
   },
   {
     title: "Sitios web y aplicaciones",
-    shortDescription:
-      "¿Sientes que tu negocio o proyecto necesita una presencia en linea profesional o una aplicacion para mejorar tus procesos o servicios?",
+    shortDescription: "¿Tu negocio necesita presencia online profesional?",
     fullDescription:
-      "Ofrecemos desarrollo de sitios web personalizados y aplicaciones móviles adaptadas a tus necesidades, desde el diseño hasta la implementación y mantenimiento, asegurando una experiencia de usuario óptima y funcionalidad avanzada.",
-    icon: <MonitorCheck className="w-7 h-7 text-primary" />,
+      "Desarrollo de sitios web personalizados y aplicaciones móviles adaptadas a tus necesidades, desde el diseño hasta la implementación.",
+    icon: <Code2 className="w-7 h-7" />,
     features: [
       "Diseño web personalizado",
-      "Desarrollo de aplicaciones móviles",
+      "Apps móviles",
       "Optimización SEO",
-      "Mantenimiento y soporte",
-      "Integración con e-commerce y redes sociales",
+      "E-commerce",
     ],
     backgroundImage: sblue,
+    testimonial: testimonials.web,
   },
   {
-    title: "Asesorias y consultorias informaticas",
-    shortDescription:
-      "¿No sabes que equipo o software necesitas para tu trabajo, estudio o ocio o simplemente quieres mejorar tu infraestructura tecnologica, o crees que hay algo que las tecnologias te pueden resolver? ",
+    title: "Asesorías y consultorías",
+    shortDescription: "¿No sabes qué equipo o software necesitas?",
     fullDescription:
-      "Tenemos la experiencia para asesorarte en la selección de hardware y software que mejor se adapte a tus necesidades, así como en la optimización de tus sistemas actuales. Ofrecemos consultorías personalizadas para ayudarte a tomar decisiones informadas y maximizar el rendimiento de tu infraestructura tecnológica.",
-    icon: <MonitorCheck className="w-7 h-7 text-primary" />,
+      "Asesoramiento en la selección de hardware y software que mejor se adapte a tus necesidades, así como en la optimización de tus sistemas actuales.",
+    icon: <Lightbulb className="w-7 h-7" />,
     features: [
-      "Asesorias",
-      "Consejos",
-      "tips",
-      "Asesoramiento según presupuesto",
+      "Asesorías personalizadas",
+      "Análisis de necesidades",
+      "Recomendaciones",
+      "Optimización de costos",
     ],
     backgroundImage: sgreen,
+    testimonial: testimonials.asesoria,
   },
 ];
 
 const Servicios = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <style>{`
-        @keyframes slideFromLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        @keyframes slideFromRight {
-          from {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background gradients */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div
+          className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"
+          style={{ background: "hsl(var(--glow-primary))" }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full opacity-15 blur-[100px] animate-pulse-glow"
+          style={{
+            background: "hsl(var(--glow-accent))",
+            animationDelay: "2s",
+          }}
+        />
+        <div
+          className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full opacity-10 blur-[80px] animate-pulse-glow"
+          style={{
+            background: "hsl(var(--glow-pink))",
+            animationDelay: "4s",
+          }}
+        />
+      </div>
+
       <Header />
+
       <motion.main
-        className="mt-[var(--header-height)] pb-16"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative z-10 mt-[var(--header-height)] pb-24"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
       >
-        <div className="container mx-auto px-4 max-w-7xl">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* Hero Header */}
+          <motion.div
+            className="text-center mb-20 pt-12"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.span
+              className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-primary mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              Soluciones profesionales
+            </motion.span>
+
+            <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
               Nuestros <span className="text-gradient">Servicios</span>
             </h1>
-            <p className="text-muted-foreground text-lg">
-              Soluciones informáticas profesionales adaptadas a tus necesidades.
-              Haz clic en cualquier servicio para más información y solicitar
-              presupuesto.
-            </p>
-          </div>
 
-          {/* Services List */}
-          <div className="space-y-6">
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              Soluciones informáticas profesionales adaptadas a tus necesidades.
+              Haz clic en cualquier servicio para más información.
+            </p>
+          </motion.div>
+
+          {/* Services Grid */}
+          <div className="space-y-8">
             {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                custom={index}
-                variants={serviceVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-3px" }}
-              >
-                <ServiceCard {...service} />
-              </motion.div>
+              <ServiceCard key={service.title} {...service} index={index} />
             ))}
           </div>
         </div>
       </motion.main>
+
       <Footer />
     </div>
   );
