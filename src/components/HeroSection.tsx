@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import perfil from "../media/perfil.jpg";
 import logo from "../media/logo1.png";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
@@ -51,9 +52,14 @@ const HeroSection = () => {
             />
             <div className="max-w-2xl space-y-8 relative z-10">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary font-medium">
-                  <span>+10 años de experiencia</span>
-                </div>
+                <motion.span
+                  className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-primary mb-6"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  +10 Años de Experiencia
+                </motion.span>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                   Soluciones <span className="text-gradient">Tecnológicas</span>{" "}
                   a tu Medida

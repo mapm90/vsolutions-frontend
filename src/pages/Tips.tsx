@@ -62,24 +62,50 @@ const Tips = () => {
   if (!data) return <div>Cargando...</div>;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none">
+        <div
+          className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"
+          style={{ background: "hsl(var(--glow-primary))" }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full opacity-15 blur-[100px] animate-pulse-glow"
+          style={{
+            background: "hsl(var(--glow-accent))",
+            animationDelay: "2s",
+          }}
+        />
+        <div
+          className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full opacity-10 blur-[80px] animate-pulse-glow"
+          style={{
+            background: "hsl(var(--glow-pink))",
+            animationDelay: "4s",
+          }}
+        />
+      </div>
       <Header />
       <motion.main
-        className="mt-[var(--header-height)] pb-16"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative z-10 mt-[var(--header-height)] pb-24"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
       >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* Header */}
+          <motion.div
+            className="text-center mb-20 pt-12"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
               Nuestros <span className="text-gradient">Tips</span>
             </h1>
-            <p className="text-muted-foreground text-lg">
-              Consejos y trucos tecnológicos para optimizar tu experiencia
-              digital.
+
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              Trucos y consejos para tu vida tecnológica.
             </p>
-          </div>
+          </motion.div>
           {/* Search y categorías */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1 max-w-md">
