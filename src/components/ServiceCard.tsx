@@ -1,4 +1,6 @@
-import { useState, useRef, ReactElement } from "react";
+import { useState, useEffect, useRef, ReactElement } from "react";
+import noice from "../media/noise.svg";
+
 import {
   motion,
   AnimatePresence,
@@ -28,7 +30,6 @@ interface ServiceCardProps {
   features: string[];
   index?: number;
   backgroundImage?: string;
-  testimonial?: Testimonial;
 }
 
 const ServiceCard = ({
@@ -39,7 +40,6 @@ const ServiceCard = ({
   features,
   index = 0,
   backgroundImage,
-  testimonial,
 }: ServiceCardProps) => {
   const [openForm, setOpenForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -50,12 +50,13 @@ const ServiceCard = ({
     servicio: title,
   });
   const [loading, setLoading] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] =
+    useState<Testimonial | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   // Mouse tracking for spotlight effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-
   const spotlightX = useSpring(mouseX, { stiffness: 500, damping: 50 });
   const spotlightY = useSpring(mouseY, { stiffness: 500, damping: 50 });
 
@@ -116,6 +117,32 @@ const ServiceCard = ({
     }
   };
 
+  // Fetch testimonial aleatorio cada 10 segundos
+  const fetchRandomTestimonial = async () => {
+    try {
+      const res = await apiFetch("/comentss");
+      if ((res as any).success) {
+        const approved = (res as any).data.filter((c: any) => c.aprobado);
+        if (approved.length === 0) return;
+        const random = approved[Math.floor(Math.random() * approved.length)];
+        const rating = Math.floor(Math.random() * 2) + 4; // 4 o 5 estrellas
+        setCurrentTestimonial({
+          name: random.nombre,
+          text: random.comentario,
+          rating,
+        });
+      }
+    } catch (err) {
+      console.error("Error fetching testimonial:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchRandomTestimonial();
+    const interval = setInterval(fetchRandomTestimonial, 10000); // cada 15s
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <motion.div
       ref={cardRef}
@@ -130,7 +157,7 @@ const ServiceCard = ({
       onMouseMove={handleMouseMove}
       className="group relative"
     >
-      {/* Outer glow effect */}
+      {/* Outer glow */}
       <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-glow-primary via-glow-accent to-glow-pink opacity-0 group-hover:opacity-30 blur-xl transition-all duration-700" />
 
       {/* Animated border */}
@@ -148,24 +175,28 @@ const ServiceCard = ({
 
       {/* Main card container */}
       <div className="relative glass rounded-3xl overflow-hidden p-8 md:p-10 transition-all duration-500 group-hover:shadow-glow-lg">
-        {/* Spotlight effect following cursor */}
+        {/* Spotlight effect */}
         <motion.div
-          className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
             background: useTransform(
               [spotlightX, spotlightY],
               ([x, y]) =>
-                `radial-gradient(600px circle at ${x}px ${y}px, hsl(var(--glow-primary) / 0.15), transparent 40%)`
+                `radial-gradient(600px circle at ${x}px ${y}px, 
+          rgba(255, 0, 221, 1), 
+          rgba(0, 255, 200, 0.18) 60%, 
+          transparent 100%)`
             ),
+            mixBlendMode: "screen", // hace que se mezcle con la imagen de fondo
           }}
         />
 
-        {/* Background image with enhanced effects */}
+        {/* Background image */}
         {backgroundImage && (
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-3xl">
-            {/* Base image with parallax-like zoom on hover */}
+          <>
+            {/* Imagen de fondo: siempre detrás */}
             <motion.div
-              className="absolute inset-0"
+              className="absolute inset-0 -z-10 rounded-3xl"
               initial={{ scale: 1.1 }}
               whileHover={{ scale: 1.2 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -177,56 +208,49 @@ const ServiceCard = ({
               }}
             />
 
-            {/* Animated gradient overlay */}
+            {/* Degradado animado encima de la imagen */}
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 rounded-3xl"
               style={{
                 background:
-                  "linear-gradient(135deg, hsl(var(--glow-primary) / 0.3), hsl(var(--glow-accent) / 0.2), hsl(var(--background) / 0.9))",
+                  "linear-gradient(135deg, hsl(var(--glow-primary)/0.3), hsl(var(--glow-accent)/0.2), hsl(var(--background)/0.9))",
                 backgroundSize: "200% 200%",
                 animation: "gradient-shift 10s ease infinite",
               }}
             />
 
-            {/* Glass overlay for readability */}
-            <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
+            {/* Blur semi-transparente */}
+            <div className="absolute inset-0 bg-background/70 backdrop-blur-sm rounded-3xl" />
 
-            {/* Grain texture */}
+            {/* Textura de ruido */}
             <div
-              className="absolute inset-0 opacity-[0.03]"
+              className="absolute inset-0 opacity-[0.03] rounded-3xl"
               style={{
-                backgroundImage:
-                  "url('https://grainy-gradients.vercel.app/noise.svg')",
+                backgroundImage: noice,
                 backgroundRepeat: "repeat",
               }}
             />
-          </div>
+          </>
         )}
 
         {/* Content */}
         <div className="relative z-10">
-          {/* Header with floating icon */}
           <div className="flex items-start gap-6 mb-6">
-            {/* Floating glowing icon */}
             <motion.div
               className="relative flex-shrink-0"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              {/* Icon glow background */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-glow-primary to-glow-accent opacity-50 blur-xl animate-pulse-glow" />
-
-              {/* Icon container */}
               <div className="relative w-16 h-16 rounded-2xl glass flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-colors duration-300">
                 <div className="text-primary icon-glow scale-125">{icon}</div>
               </div>
             </motion.div>
 
-            {/* Title */}
             <div className="flex-1 text-left md:text-center">
               <motion.h3
                 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-2"
-                initial={{ opacity: 0, x: 0 }} // no mover en móvil
+                initial={{ opacity: 0, x: 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 + 0.2 }}
               >
@@ -243,7 +267,6 @@ const ServiceCard = ({
             </div>
           </div>
 
-          {/* Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -255,7 +278,6 @@ const ServiceCard = ({
             </p>
           </motion.div>
 
-          {/* Features list with staggered animation */}
           <motion.ul
             className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6"
             initial="hidden"
@@ -279,7 +301,6 @@ const ServiceCard = ({
                 className="flex items-center gap-3 text-foreground/80"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  {/* Puntito visible con gradiente y glow */}
                   <span
                     className="inline-block w-4 h-4 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent shadow-[0_0_8px_rgba(0,255,200,0.6),0_0_12px_rgba(255,100,255,0.4)] animate-bounce"
                     style={{
@@ -288,8 +309,6 @@ const ServiceCard = ({
                       animationIterationCount: "infinite",
                     }}
                   />
-
-                  {/* Texto */}
                   <span className="text-sm font-medium text-foreground">
                     {feature}
                   </span>
@@ -298,62 +317,55 @@ const ServiceCard = ({
             ))}
           </motion.ul>
 
-          {/* Mini testimonial */}
-          {testimonial && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.6 }}
-              className="glass rounded-2xl p-4 mb-6 border border-primary/10"
-            >
-              <div className="flex items-center gap-3">
-                {/* Avatar */}
-                <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105">
-                  {/* Glow animado detrás */}
-                  <span className="absolute inset-0 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent opacity-25 blur-xl animate-pulse"></span>
-
-                  {testimonial.avatar ? (
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      className="relative w-10 h-10 rounded-full object-cover shadow-inner"
-                    />
-                  ) : (
+          {/* Testimonial dinámico con efecto de revelación */}
+          <AnimatePresence mode="wait">
+            {currentTestimonial && (
+              <motion.div
+                key={currentTestimonial.name + currentTestimonial.text}
+                initial={{ opacity: 0, x: -20, scaleX: 0 }}
+                animate={{ opacity: 1, x: 0, scaleX: 1 }}
+                exit={{ opacity: 0, x: 20, scaleX: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                style={{ transformOrigin: "left" }} // apertura desde la izquierda
+                className="glass rounded-2xl p-4 mb-6 border border-primary/10 origin-top"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105">
+                    <span className="absolute inset-0 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent opacity-25 blur-xl animate-pulse"></span>
                     <span className="relative z-10 text-primary font-display font-bold text-lg drop-shadow-md animate-bounce">
-                      {testimonial.name.charAt(0).toUpperCase()}
+                      {currentTestimonial.name.charAt(0).toUpperCase()}
                     </span>
-                  )}
-                </div>
-
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-foreground text-sm">
-                      {testimonial.name}
-                    </span>
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-3 h-3 ${
-                            i < testimonial.rating
-                              ? "text-yellow-400 fill-yellow-400"
-                              : "text-muted-foreground/30"
-                          }`}
-                        />
-                      ))}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-foreground text-sm">
+                        {currentTestimonial.name}
+                      </span>
+                      <div className="flex gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-3 h-3 ${
+                              i < currentTestimonial.rating
+                                ? "text-yellow-400 fill-yellow-400"
+                                : "text-muted-foreground/30"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="bg-muted/20 p-4 rounded-lg max-w-md">
+                      <p className="text-left text-muted-foreground text-xs italic">
+                        "{currentTestimonial.text}"
+                      </p>
                     </div>
                   </div>
-                  <div className="bg-muted/20 p-4 rounded-lg max-w-md">
-                    <p className="text-left text-muted-foreground text-xs italic">
-                      "{testimonial.text}"
-                    </p>
-                  </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {/* CTA Button */}
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -367,7 +379,6 @@ const ServiceCard = ({
             </Button>
           </motion.div>
 
-          {/* Animated Form */}
           <AnimatePresence>
             {openForm && (
               <motion.form
@@ -387,7 +398,6 @@ const ServiceCard = ({
                   >
                     Solicitar presupuesto
                   </motion.h4>
-
                   {[
                     {
                       name: "nombre",
@@ -417,7 +427,6 @@ const ServiceCard = ({
                       />
                     </motion.div>
                   ))}
-
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -431,7 +440,6 @@ const ServiceCard = ({
                       className="input-glass min-h-[100px]"
                     />
                   </motion.div>
-
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

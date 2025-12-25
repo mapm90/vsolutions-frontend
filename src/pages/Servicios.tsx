@@ -1,10 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { apiFetch } from "@/pages/api/fetchapi";
 import {
   Wifi,
   Wrench,
@@ -22,193 +20,143 @@ import sblue from "../media/sblue.png";
 import sgreen from "../media/sgreen.png";
 import sorange from "../media/sorange.png";
 
-interface Comentario {
-  _id: string;
-  nombre: string;
-  comentario: string;
-  fecha: string;
-  aprobado: boolean;
-}
-
-interface Testimonial {
-  name: string;
-  text: string;
-  rating: number;
-}
+const services = [
+  {
+    title: "Instalación y mantenimiento de Software",
+    shortDescription:
+      "¿Crees que tu ordenador está lento o necesitas revisar por si faltan actualizaciones?",
+    fullDescription:
+      "Ofrecemos servicios de instalación y configuración de software, desde sistemas operativos hasta aplicaciones específicas, asegurando que todo funcione correctamente.",
+    icon: <MonitorCheck className="w-7 h-7" />,
+    features: [
+      "Diagnóstico gratuito",
+      "Instalación de software",
+      "Actualizaciones",
+      "Optimización del sistema",
+    ],
+    backgroundImage: sblue,
+  },
+  {
+    title: "Reparación de Equipos",
+    shortDescription:
+      "¿Tuviste algún accidente con tu ordenador o simplemente dejó de funcionar?",
+    fullDescription:
+      "Servicio completo de diagnóstico y reparación para todo tipo de ordenadores. Identificamos el problema y lo solucionamos de forma rápida y eficiente.",
+    icon: <Wrench className="w-7 h-7" />,
+    features: [
+      "Diagnóstico gratuito",
+      "Reparación de hardware",
+      "Cambio de componentes",
+      "Limpieza interna",
+    ],
+    backgroundImage: sgreen,
+  },
+  {
+    title: "Móviles y tablets",
+    shortDescription:
+      "¿Pantalla rota, batería que no dura o problemas de conectividad?",
+    fullDescription:
+      "Reparación y mantenimiento de dispositivos móviles y tablets, incluyendo reemplazo de pantallas, baterías y solución de problemas de software.",
+    icon: <Smartphone className="w-7 h-7" />,
+    features: [
+      "Reemplazo de pantallas",
+      "Cambio de baterías",
+      "Solución de software",
+      "Recuperación de datos",
+    ],
+    backgroundImage: syelow,
+  },
+  {
+    title: "Mantenimiento Preventivo",
+    shortDescription:
+      "¿Tu equipo se sobrecalienta o va más lento de lo normal?",
+    fullDescription:
+      "El mantenimiento preventivo alarga la vida útil de tu equipo y previene fallos inesperados. Incluye limpieza, actualización y optimización.",
+    icon: <MonitorCog className="w-7 h-7" />,
+    features: [
+      "Limpieza de sistema",
+      "Actualización de software",
+      "Optimización",
+      "Backup de datos",
+    ],
+    backgroundImage: sorange,
+  },
+  {
+    title: "Seguridad Informática",
+    shortDescription:
+      "¿Virus, malware o sospechas que tu información está expuesta?",
+    fullDescription:
+      "Instalación y configuración de soluciones de seguridad, eliminación de malware y asesoramiento para mantener tu información protegida.",
+    icon: <ShieldCheck className="w-7 h-7" />,
+    features: [
+      "Antivirus profesional",
+      "Eliminación de malware",
+      "Firewall",
+      "Copias de seguridad",
+    ],
+    backgroundImage: sblue,
+  },
+  {
+    title: "Redes y Conectividad",
+    shortDescription:
+      "¿La señal WiFi no llega bien a todas las zonas de tu casa?",
+    fullDescription:
+      "Instalación y configuración de redes WiFi, cableado estructurado, y solución de problemas de conectividad para hogares y empresas.",
+    icon: <Wifi className="w-7 h-7" />,
+    features: [
+      "Instalación de redes WiFi",
+      "Cableado estructurado",
+      "Extensores de señal",
+      "Configuración VPN",
+    ],
+    backgroundImage: sgreen,
+  },
+  {
+    title: "Ensamblaje y Actualización",
+    shortDescription:
+      "¿Quieres dar un salto de rendimiento a tu equipo actual?",
+    fullDescription:
+      "Hacemos tu proyecto a medida para que tu PC alcance el mejor rendimiento según tu presupuesto, desde la selección de componentes hasta el ensamblaje final.",
+    icon: <Cpu className="w-7 h-7" />,
+    features: [
+      "Montaje de PCs",
+      "Actualización de RAM, GPU, SSD",
+      "Optimización",
+      "Compatibilidad garantizada",
+    ],
+    backgroundImage: sorange,
+  },
+  {
+    title: "Sitios web y aplicaciones",
+    shortDescription: "¿Tu negocio necesita presencia online profesional?",
+    fullDescription:
+      "Desarrollo de sitios web personalizados y aplicaciones móviles adaptadas a tus necesidades, desde el diseño hasta la implementación.",
+    icon: <Code2 className="w-7 h-7" />,
+    features: [
+      "Diseño web personalizado",
+      "Apps móviles",
+      "Optimización SEO",
+      "E-commerce",
+    ],
+    backgroundImage: sblue,
+  },
+  {
+    title: "Asesorías y consultorías",
+    shortDescription: "¿No sabes qué equipo o software necesitas?",
+    fullDescription:
+      "Asesoramiento en la selección de hardware y software que mejor se adapte a tus necesidades, así como en la optimización de tus sistemas actuales.",
+    icon: <Lightbulb className="w-7 h-7" />,
+    features: [
+      "Asesorías personalizadas",
+      "Análisis de necesidades",
+      "Recomendaciones",
+      "Optimización de costos",
+    ],
+    backgroundImage: sgreen,
+  },
+];
 
 const Servicios = () => {
-  const [comentarios, setComentarios] = useState<Comentario[]>([]);
-
-  const obtenerComentarios = async () => {
-    try {
-      const res = await apiFetch("/comentss");
-      if ((res as any).success) {
-        const comentariosAprobados = (res as any).data.filter(
-          (c: Comentario) => c.aprobado
-        );
-        setComentarios(comentariosAprobados);
-      }
-    } catch (error) {
-      console.error("Error al obtener comentarios:", error);
-    }
-  };
-
-  useEffect(() => {
-    obtenerComentarios();
-  }, []);
-
-  const comentarioAleatorio = (): Testimonial | null => {
-    if (comentarios.length === 0) return null;
-    const index = Math.floor(Math.random() * comentarios.length);
-    const c = comentarios[index];
-    const rating = Math.floor(Math.random() * 2) + 4; // 4 o 5
-    return { name: c.nombre, text: c.comentario, rating };
-  };
-
-  const services = [
-    {
-      title: "Instalación y mantenimiento de Software",
-      shortDescription:
-        "¿Crees que tu ordenador está lento o necesitas revisar por si faltan actualizaciones?",
-      fullDescription:
-        "Ofrecemos servicios de instalación y configuración de software, desde sistemas operativos hasta aplicaciones específicas, asegurando que todo funcione correctamente.",
-      icon: <MonitorCheck className="w-7 h-7" />,
-      features: [
-        "Diagnóstico gratuito",
-        "Instalación de software",
-        "Actualizaciones",
-        "Optimización del sistema",
-      ],
-      backgroundImage: sblue,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Reparación de Equipos",
-      shortDescription:
-        "¿Tuviste algún accidente con tu ordenador o simplemente dejó de funcionar?",
-      fullDescription:
-        "Servicio completo de diagnóstico y reparación para todo tipo de ordenadores. Identificamos el problema y lo solucionamos de forma rápida y eficiente.",
-      icon: <Wrench className="w-7 h-7" />,
-      features: [
-        "Diagnóstico gratuito",
-        "Reparación de hardware",
-        "Cambio de componentes",
-        "Limpieza interna",
-      ],
-      backgroundImage: sgreen,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Móviles y tablets",
-      shortDescription:
-        "¿Pantalla rota, batería que no dura o problemas de conectividad?",
-      fullDescription:
-        "Reparación y mantenimiento de dispositivos móviles y tablets, incluyendo reemplazo de pantallas, baterías y solución de problemas de software.",
-      icon: <Smartphone className="w-7 h-7" />,
-      features: [
-        "Reemplazo de pantallas",
-        "Cambio de baterías",
-        "Solución de software",
-        "Recuperación de datos",
-      ],
-      backgroundImage: syelow,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Mantenimiento Preventivo",
-      shortDescription:
-        "¿Tu equipo se sobrecalienta o va más lento de lo normal?",
-      fullDescription:
-        "El mantenimiento preventivo alarga la vida útil de tu equipo y previene fallos inesperados. Incluye limpieza, actualización y optimización.",
-      icon: <MonitorCog className="w-7 h-7" />,
-      features: [
-        "Limpieza de sistema",
-        "Actualización de software",
-        "Optimización",
-        "Backup de datos",
-      ],
-      backgroundImage: sorange,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Seguridad Informática",
-      shortDescription:
-        "¿Virus, malware o sospechas que tu información está expuesta?",
-      fullDescription:
-        "Instalación y configuración de soluciones de seguridad, eliminación de malware y asesoramiento para mantener tu información protegida.",
-      icon: <ShieldCheck className="w-7 h-7" />,
-      features: [
-        "Antivirus profesional",
-        "Eliminación de malware",
-        "Firewall",
-        "Copias de seguridad",
-      ],
-      backgroundImage: sblue,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Redes y Conectividad",
-      shortDescription:
-        "¿La señal WiFi no llega bien a todas las zonas de tu casa?",
-      fullDescription:
-        "Instalación y configuración de redes WiFi, cableado estructurado, y solución de problemas de conectividad para hogares y empresas.",
-      icon: <Wifi className="w-7 h-7" />,
-      features: [
-        "Instalación de redes WiFi",
-        "Cableado estructurado",
-        "Extensores de señal",
-        "Configuración VPN",
-      ],
-      backgroundImage: sgreen,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Ensamblaje y Actualización",
-      shortDescription:
-        "¿Quieres dar un salto de rendimiento a tu equipo actual?",
-      fullDescription:
-        "Hacemos tu proyecto a medida para que tu PC alcance el mejor rendimiento según tu presupuesto, desde la selección de componentes hasta el ensamblaje final.",
-      icon: <Cpu className="w-7 h-7" />,
-      features: [
-        "Montaje de PCs",
-        "Actualización de RAM, GPU, SSD",
-        "Optimización",
-        "Compatibilidad garantizada",
-      ],
-      backgroundImage: sorange,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Sitios web y aplicaciones",
-      shortDescription: "¿Tu negocio necesita presencia online profesional?",
-      fullDescription:
-        "Desarrollo de sitios web personalizados y aplicaciones móviles adaptadas a tus necesidades, desde el diseño hasta la implementación.",
-      icon: <Code2 className="w-7 h-7" />,
-      features: [
-        "Diseño web personalizado",
-        "Apps móviles",
-        "Optimización SEO",
-        "E-commerce",
-      ],
-      backgroundImage: sblue,
-      testimonial: comentarioAleatorio(),
-    },
-    {
-      title: "Asesorías y consultorías",
-      shortDescription: "¿No sabes qué equipo o software necesitas?",
-      fullDescription:
-        "Asesoramiento en la selección de hardware y software que mejor se adapte a tus necesidades, así como en la optimización de tus sistemas actuales.",
-      icon: <Lightbulb className="w-7 h-7" />,
-      features: [
-        "Asesorías personalizadas",
-        "Análisis de necesidades",
-        "Recomendaciones",
-        "Optimización de costos",
-      ],
-      backgroundImage: sgreen,
-      testimonial: comentarioAleatorio(),
-    },
-  ];
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated background gradients */}
@@ -256,7 +204,7 @@ const Servicios = () => {
             </p>
           </motion.div>
 
-          {/* Services Grid con animación de scroll */}
+          {/* Services Grid */}
           <div className="container mx-auto px-4 max-w-6xl space-y-8">
             {services.map((service, index) => {
               const { ref, inView } = useInView({
