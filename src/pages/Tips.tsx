@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { apiFetch } from "@/pages/api/fetchapi";
 import { motion } from "framer-motion";
+import NotFound from "./NotFound";
+import ErrorPage from "./ErrorPage";
 
 const categories = [
   "Todos",
@@ -57,9 +59,27 @@ const Tips = () => {
 
   const visibleTips = filteredTips.slice(0, visibleCount);
   const hasMore = visibleCount < filteredTips.length;
+  const [showLoader, setShowLoader] = useState(true);
 
-  if (error) return <div>Error al cargar tips</div>;
-  if (!data) return <div>Cargando...</div>;
+  useEffect(() => {
+    // Mostrar loader 2 segundos antes de renderizar datos (solo para testing)
+    const timer = setTimeout(() => setShowLoader(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  if (error) return <ErrorPage />;
+
+  if (!data || showLoader) {
+    return (
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted to-background">
+        <div className="absolute h-40 w-40 rounded-full bg-primary/20 blur-3xl animate-pulse" />
+
+        <div className="relative z-10 text-center">
+          <div className="mx-auto mb-4 h-10 w-10 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
+          <p className="text-sm text-muted-foreground">Cargando Tips…</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
