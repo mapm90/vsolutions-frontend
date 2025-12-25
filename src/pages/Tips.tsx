@@ -197,7 +197,7 @@ const Tips = () => {
                     size="lg"
                     onClick={() => setVisibleCount((prev) => prev + 6)}
                   >
-                    mostrar más tips
+                    Mostrar más tips
                   </Button>
                 </div>
               )}
