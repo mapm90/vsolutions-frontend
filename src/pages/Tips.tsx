@@ -75,7 +75,26 @@ const Tips = () => {
 
         <div className="relative z-10 text-center">
           <div className="mx-auto mb-4 h-10 w-10 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
-          <p className="text-sm text-muted-foreground">Cargando Tips…</p>
+          <div className="text-center">
+            <p className="text-2xl font-semibold text-muted-foreground mb-4">
+              Cargando Tips
+              <span className="inline-flex ml-1 gap-0.5">
+                <span className="inline-block animate-bounce">.</span>
+                <span
+                  className="inline-block animate-bounce"
+                  style={{ animationDelay: "0.15s" }}
+                >
+                  .
+                </span>
+                <span
+                  className="inline-block animate-bounce"
+                  style={{ animationDelay: "0.3s" }}
+                >
+                  .
+                </span>
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     );
