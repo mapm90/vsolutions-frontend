@@ -26,7 +26,9 @@ const NotFound = () => {
           404
         </h1>
 
-        <p className="mt-6 text-lg font-medium">Esta página no existe</p>
+        <p className="mt-6 text-lg font-medium">
+          Página en mantenimiento, por favor regresa más tarde.
+        </p>
 
         <div className="mt-10 flex items-center justify-center gap-6">
           <a
