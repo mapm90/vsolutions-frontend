@@ -248,7 +248,7 @@ const ServiceCard = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 + 0.4 }}
-            className="mb-6"
+            className="mb-6 text-left max-w-full"
           >
             <p className="text-foreground/90 leading-relaxed">
               {fullDescription}
