@@ -223,10 +223,10 @@ const ServiceCard = ({
             </motion.div>
 
             {/* Title */}
-            <div className="flex-1">
+            <div className="flex-1 text-left md:text-center">
               <motion.h3
                 className="font-display font-bold text-2xl md:text-3xl text-foreground mb-2"
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: 0 }} // no mover en móvil
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 + 0.2 }}
               >
@@ -234,7 +234,7 @@ const ServiceCard = ({
               </motion.h3>
               <motion.p
                 className="text-muted-foreground text-sm md:text-base"
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
               >
