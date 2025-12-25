@@ -63,7 +63,7 @@ const Tips = () => {
 
   useEffect(() => {
     // Mostrar loader 2 segundos antes de renderizar datos (solo para testing)
-    const timer = setTimeout(() => setShowLoader(false), 1500);
+    const timer = setTimeout(() => setShowLoader(false), 15000);
     return () => clearTimeout(timer);
   }, []);
   if (error) return <ErrorPage />;
