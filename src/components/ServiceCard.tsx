@@ -280,7 +280,14 @@ const ServiceCard = ({
               >
                 <div className="flex items-center gap-2 mb-2">
                   {/* Puntito visible con gradiente y glow */}
-                  <span className="block w-3 h-3 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent shadow-md animate-pulse" />
+                  <span
+                    className="inline-block w-4 h-4 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent shadow-[0_0_8px_rgba(0,255,200,0.6),0_0_12px_rgba(255,100,255,0.4)] animate-bounce"
+                    style={{
+                      animationDuration: "1s",
+                      animationTimingFunction: "ease-in-out",
+                      animationIterationCount: "infinite",
+                    }}
+                  />
 
                   {/* Texto */}
                   <span className="text-sm font-medium text-foreground">
@@ -301,15 +308,20 @@ const ServiceCard = ({
             >
               <div className="flex items-center gap-3">
                 {/* Avatar */}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent flex items-center justify-center text-primary-foreground font-bold text-sm">
+                <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105">
+                  {/* Glow animado detrás */}
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent opacity-25 blur-xl animate-pulse"></span>
+
                   {testimonial.avatar ? (
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
-                      className="w-full h-full rounded-full object-cover"
+                      className="relative w-10 h-10 rounded-full object-cover shadow-inner"
                     />
                   ) : (
-                    testimonial.name.charAt(0).toUpperCase()
+                    <span className="relative z-10 text-primary font-display font-bold text-lg drop-shadow-md animate-bounce">
+                      {testimonial.name.charAt(0).toUpperCase()}
+                    </span>
                   )}
                 </div>
 
