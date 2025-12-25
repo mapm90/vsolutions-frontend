@@ -95,7 +95,7 @@ const ServiceCard = ({
       });
       toast({
         title: "Éxito",
-        description: "Solicitud enviada correctamente",
+        description: `Gracias por contactarnos, ${formData.nombre}. Te responderemos pronto.`,
       });
       setFormData({
         nombre: "",
@@ -278,8 +278,15 @@ const ServiceCard = ({
                 }}
                 className="flex items-center gap-3 text-foreground/80"
               >
-                <span className="w-2 h-2 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent flex-shrink-0" />
-                <span className="text-sm">{feature}</span>
+                <div className="flex items-center gap-2 mb-2">
+                  {/* Puntito visible con gradiente y glow */}
+                  <span className="block w-3 h-3 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent shadow-md animate-pulse" />
+
+                  {/* Texto */}
+                  <span className="text-sm font-medium text-foreground">
+                    {feature}
+                  </span>
+                </div>
               </motion.li>
             ))}
           </motion.ul>
@@ -324,9 +331,11 @@ const ServiceCard = ({
                       ))}
                     </div>
                   </div>
-                  <p className="text-muted-foreground text-xs italic">
-                    "{testimonial.text}"
-                  </p>
+                  <div className="bg-muted/20 p-4 rounded-lg max-w-md">
+                    <p className="text-left text-muted-foreground text-xs italic">
+                      "{testimonial.text}"
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

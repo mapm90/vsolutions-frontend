@@ -49,7 +49,7 @@ const Contacto = () => {
 
       toast({
         title: "¡Mensaje enviado!",
-        description: `ID de tu mensaje: ${data.id}`,
+        description: `Gracias por contactarnos, ${formData.nombre}. Te responderemos pronto.`,
       });
 
       setFormData({
