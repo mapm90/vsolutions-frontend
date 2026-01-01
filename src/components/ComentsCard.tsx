@@ -72,7 +72,10 @@ const ComentsCard = () => {
   // Obtener comentarios aprobados
   const obtenerComentarios = async () => {
     try {
-      const res = await apiFetch("/comentss"); // tu ruta GET
+      const res = await apiFetch("/comentss", {
+        method: "GET", // explícito para que quede claro que es lectura
+      });
+
       if ((res as any).success) {
         setComentarios((res as any).data.filter((c: Comentario) => c.aprobado));
       }
