@@ -120,7 +120,7 @@ const ServiceCard = ({
   // Fetch testimonial aleatorio cada 10 segundos
   const fetchRandomTestimonial = async () => {
     try {
-      const res = await apiFetch("/comentss");
+      const res = await apiFetch("/comentario");
       if ((res as any).success) {
         const approved = (res as any).data.filter((c: any) => c.aprobado);
         if (approved.length === 0) return;
