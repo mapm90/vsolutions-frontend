@@ -46,6 +46,7 @@ const accionesComentario: string[] = [
   "nos comparte su experiencia 💡",
   "nos cuenta lo que opina ✨",
   "nos deja su mensaje breve 💬",
+  "nos dice por aquí 💬",
   "nos comenta algo interesante 🗣️",
   "quiso decirnos esto 👇",
   "nos deja su feeling 💖",
