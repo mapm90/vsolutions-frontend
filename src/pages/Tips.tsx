@@ -198,7 +198,8 @@ const Tips = () => {
             </h1>
 
             <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Trucos y consejos para tu vida tecnológica.
+              Trucos y consejos para mejorar tu experiencia con equipos y
+              software.
             </p>
           </motion.div>
           {/* Search y categorías */}
@@ -216,6 +217,7 @@ const Tips = () => {
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
                 <button
+                  aria-label={`filtrar tips por ${category}`}
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={cn(
