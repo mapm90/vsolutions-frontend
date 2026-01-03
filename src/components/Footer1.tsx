@@ -126,7 +126,7 @@ const Footer1 = () => {
           <div className="border-t border-border pt-8 text-center">
             <p className="text-muted-foreground text-sm">
               © {new Date().getFullYear()} V-Services. Todos los derechos
-              reservados.
+              reservados. Servicios informáticos profesionales en España.
             </p>
           </div>
         </div>

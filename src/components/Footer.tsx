@@ -168,8 +168,8 @@ const Footer = () => {
           {/* Copyright */}
           <div className="border-t border-border pt-8 text-center">
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} V-Services. Todos los derechos
-              reservados.
+              © {new Date().getFullYear()} V-Services.Todos los derechos
+              reservados. Servicios informáticos profesionales en España.
             </p>
           </div>
         </div>
