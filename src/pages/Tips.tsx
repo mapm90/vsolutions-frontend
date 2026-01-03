@@ -176,6 +176,10 @@ const Tips = () => {
                 "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu ",
               ],
             },
+            fouder: {
+              "@type": "Person",
+              name: "Verónica Borges",
+            },
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": "https://v-services.vercel.app/tips",

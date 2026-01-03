@@ -168,6 +168,10 @@ const Contacto = () => {
                 "https://www.facebook.com/profile.php?id=61584523994754",
                 "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu ",
               ],
+              founder: {
+                "@type": "Person",
+                name: "Verónica Borges",
+              },
               potentialAction: {
                 "@type": "CommunicateAction",
                 target: "https://v-services.vercel.app/contacto",
