@@ -11,7 +11,7 @@ import { apiFetch } from "@/pages/api/fetchapi";
 import { motion } from "framer-motion";
 import NotFound from "./NotFound";
 import ErrorPage from "./ErrorPage";
-
+import { Helmet } from "react-helmet-async";
 const categories = [
   "Todos",
   "Mantenimiento",
@@ -123,6 +123,58 @@ const Tips = () => {
         />
       </div>
       <Header />
+      <Helmet>
+        <title>Tips y Consejos | V-Services</title>
+        <meta
+          name="description"
+          content="Descubre los mejores tips y consejos tecnológicos de V-Services para optimizar tus dispositivos, seguridad y software."
+        />
+        <link rel="canonical" href="https://v-services.vercel.app/tips" />
+
+        {/* OpenGraph */}
+        <meta property="og:title" content="Tips y Consejos | V-Services" />
+        <meta
+          property="og:description"
+          content="Descubre los mejores tips y consejos tecnológicos de V-Services para optimizar tus dispositivos, seguridad y software."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://v-services.vercel.app/tips" />
+        <meta property="og:image" content="/favicon.ico" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Tips y Consejos | V-Services" />
+        <meta
+          name="twitter:description"
+          content="Descubre los mejores tips y consejos tecnológicos de V-Services para optimizar tus dispositivos, seguridad y software."
+        />
+        <meta name="twitter:image" content="/favicon.ico" />
+
+        {/* Schema JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "V-Services Tips",
+            url: "https://v-services.vercel.app/tips",
+            description:
+              "Tips y consejos tecnológicos de V-Services: optimización de dispositivos, seguridad, software y más.",
+            publisher: {
+              "@type": "Organization",
+              name: "V-Services",
+              logo: {
+                "@type": "ImageObject",
+                url: "/favicon.ico",
+              },
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": "https://v-services.vercel.app/tips",
+            },
+          })}
+        </script>
+      </Helmet>
+
       <motion.main
         className="relative z-10 mt-12 md:mt-10 pb-12"
         initial={{ opacity: 0 }}

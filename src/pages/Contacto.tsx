@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 import {
   Mail,
@@ -103,6 +104,55 @@ const Contacto = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <Helmet>
+        <title>Contacto | V-Services - Servicios Informáticos</title>
+        <meta
+          name="description"
+          content="Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
+        />
+        <link rel="canonical" href="https://v-services.vercel.app/contacto" />
+        {/* OpenGraph */}
+        <meta
+          property="og:title"
+          content="Contacto | V-Services - Servicios Informáticos"
+        />
+        <meta
+          property="og:description"
+          content="Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://v-services.vercel.app/contacto"
+        />
+        <meta property="og:image" content="/favicon.ico" />{" "}
+        {/* Mejor reemplazar por OG image real */}
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Contacto | V-Services - Servicios Informáticos"
+        />
+        <meta
+          name="twitter:description"
+          content="Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
+        />
+        <meta name="twitter:image" content="/favicon.ico" />
+        {/* Schema JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "V-Services",
+            url: "https://v-services.vercel.app/contacto",
+            description:
+              "Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h.",
+            telephone: "+34674993764",
+            areaServed: "ES",
+          })}
+        </script>
+      </Helmet>
+
       <div className="fixed inset-0 pointer-events-none">
         <div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"

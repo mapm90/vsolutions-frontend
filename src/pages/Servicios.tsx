@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Helmet } from "react-helmet-async";
 import {
   Wifi,
   Wrench,
@@ -179,6 +180,56 @@ const Servicios = () => {
       </div>
 
       <Header />
+      <Helmet>
+        <title>Servicios Informáticos | V-Services</title>
+        <meta
+          name="description"
+          content="Descubre los servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más."
+        />
+        <link rel="canonical" href="https://v-services.vercel.app/servicios" />
+
+        {/* OpenGraph */}
+        <meta
+          property="og:title"
+          content="Servicios Informáticos | V-Services"
+        />
+        <meta
+          property="og:description"
+          content="Descubre los servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://v-services.vercel.app/servicios"
+        />
+        <meta property="og:image" content="/favicon.ico" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Servicios Informáticos | V-Services"
+        />
+        <meta
+          name="twitter:description"
+          content="Descubre los servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más."
+        />
+        <meta name="twitter:image" content="/favicon.ico" />
+
+        {/* Schema JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "V-Services",
+            url: "https://v-services.vercel.app/servicios",
+            description:
+              "Servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más.",
+            telephone: "+34674993764",
+            areaServed: "ES",
+          })}
+        </script>
+      </Helmet>
 
       <motion.main
         className="relative z-10 mt-12 md:mt-10 pb-12"
