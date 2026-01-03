@@ -80,7 +80,7 @@ const Header = () => {
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center glow border border-primary/50">
               <img
                 src={logo}
-                alt="Logo"
+                alt="Logo de V-Services"
                 className="w-6 h-6 object-contain drop-shadow-lg"
               />
             </div>
