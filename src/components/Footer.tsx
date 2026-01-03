@@ -118,7 +118,7 @@ const Footer = () => {
                 </li>
                 <li className="flex items-center gap-3 text-muted-foreground text-sm">
                   <MapPin className="w-4 h-4 text-primary" />
-                  España
+                  Servicio disponible en España
                 </li>
               </ul>
             </div>
