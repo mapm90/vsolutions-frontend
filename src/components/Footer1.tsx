@@ -35,8 +35,8 @@ const Footer1 = () => {
                 </span>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Tu aliado en tecnología. Soluciones informáticas profesionales
-                para hogares y empresas.
+                Tu aliado en tecnología. Servicios informáticos profesionales
+                para hogares, autónomos y empresas en España.
               </p>
             </div>
 
