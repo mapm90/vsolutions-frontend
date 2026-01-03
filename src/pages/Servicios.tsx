@@ -230,7 +230,18 @@ const Servicios = () => {
             description:
               "Servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más.",
             telephone: "+34674993764",
+            email: "vservicesac@gmail.com",
             areaServed: "ES",
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "ES",
+              addressLocality: "España",
+            },
+            openingHours: ["Mo-Sa 09:00-18:00"],
+            sameAs: [
+              "https://www.facebook.com/profile.php?id=61584523994754",
+              "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu ",
+            ],
           })}
         </script>
       </Helmet>

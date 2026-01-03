@@ -155,6 +155,7 @@ const Tips = () => {
         <meta name="twitter:image" content="/favicon.ico" />
 
         {/* Schema JSON-LD */}
+
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -170,10 +171,18 @@ const Tips = () => {
                 "@type": "ImageObject",
                 url: "/favicon.ico",
               },
+              sameAs: [
+                "https://www.facebook.com/profile.php?id=61584523994754",
+                "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu ",
+              ],
             },
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": "https://v-services.vercel.app/tips",
+            },
+            author: {
+              "@type": "Person",
+              name: "Verónica Borges",
             },
           })}
         </script>

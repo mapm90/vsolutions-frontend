@@ -146,13 +146,34 @@ const Contacto = () => {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: "V-Services",
+            "@type": "ContactPage",
             url: "https://v-services.vercel.app/contacto",
+            name: "Contacto | V-Services",
             description:
-              "Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h.",
-            telephone: "+34674993764",
-            areaServed: "ES",
+              "Página para contactar con V-Services, soporte técnico y servicios informáticos personalizados. Respuesta en menos de 24h.",
+            mainEntity: {
+              "@type": "ProfessionalService",
+              name: "V-Services",
+              url: "https://v-services.vercel.app",
+              telephone: "+34674993764",
+              email: "vservicesac@gmail.com",
+              areaServed: "ES",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "ES",
+                addressLocality: "España",
+              },
+              openingHours: ["Mo-Su 09:00-18:00"],
+              sameAs: [
+                "https://www.facebook.com/profile.php?id=61584523994754",
+                "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu ",
+              ],
+              potentialAction: {
+                "@type": "CommunicateAction",
+                target: "https://v-services.vercel.app/contacto",
+                actionPlatform: "http://schema.org/DesktopWebPlatform",
+              },
+            },
           })}
         </script>
       </Helmet>
