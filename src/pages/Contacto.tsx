@@ -105,6 +105,10 @@ const Contacto = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <Helmet>
+        <meta
+          name="google-site-verification"
+          content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
+        />
         <title>Contacto | V-Services - Servicios Informáticos</title>
         <meta
           name="description"

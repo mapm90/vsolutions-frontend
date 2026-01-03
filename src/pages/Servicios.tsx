@@ -181,6 +181,10 @@ const Servicios = () => {
 
       <Header />
       <Helmet>
+        <meta
+          name="google-site-verification"
+          content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
+        />
         <title>Servicios Informáticos | V-Services</title>
         <meta
           name="description"

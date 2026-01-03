@@ -124,6 +124,10 @@ const Tips = () => {
       </div>
       <Header />
       <Helmet>
+        <meta
+          name="google-site-verification"
+          content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
+        />
         <title>Tips y Consejos | V-Services</title>
         <meta
           name="description"

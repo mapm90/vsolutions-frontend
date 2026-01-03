@@ -15,6 +15,10 @@ const Index = () => {
     >
       {/* 🔹 Helmet para SEO */}
       <Helmet>
+        <meta
+          name="google-site-verification"
+          content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
+        />
         <title>Servicios Informáticos en España | V-Services</title>
         <meta
           name="description"
