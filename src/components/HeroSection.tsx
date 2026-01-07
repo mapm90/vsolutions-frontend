@@ -71,7 +71,7 @@ const HeroSection = () => {
                 </h1>
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
                   <p className="font-semibold mb-2">
-                    Soy sergio gonzalez, fundadora de{" "}
+                    Soy Verónica Borges, fundadora de{" "}
                     <span className="whitespace-nowrap">V-Services</span>
                   </p>
                   <p>
