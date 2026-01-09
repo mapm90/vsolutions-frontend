@@ -4,6 +4,10 @@ import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import logo from "../media/logo1.png";
 
+// easing cúbico (movimiento orgánico)
+const easeInOutCubic = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
 const Header = () => {
   const [scrollY, setScrollY] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -23,9 +27,8 @@ const Header = () => {
   useEffect(() => {
     const handleResize = () => {
       const headerWidth = window.innerWidth;
-      const logoWidth = 48; // w-12 = 48px
+      const logoWidth = 48;
       setMaxLeftPx(-(headerWidth / 2 - logoWidth / 2 - 16));
-      // el -16 es padding de los lados (px-4)
     };
 
     handleResize();
@@ -37,11 +40,9 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Scroll hacia abajo: compacta inmediatamente
       if (currentScrollY > lastScrollY && currentScrollY > 5)
         setIsCompact(true);
 
-      // Scroll hacia arriba: descompacta solo cuando logo esté cerca del centro
       if (currentScrollY < lastScrollY && scrollY <= 60) setIsCompact(false);
 
       setLastScrollY(currentScrollY);
@@ -52,27 +53,27 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, scrollY]);
 
-  // Interpolación del logo
-  const progress = scrollY === 0 ? 0 : Math.min(scrollY / 120, 1);
-  const logoTranslateX = maxLeftPx * progress;
-  // Determinar si las letras deben mostrarse
+  // Interpolación orgánica del logo
+  const rawProgress = Math.min(scrollY / 140, 1);
+  const easedProgress = easeInOutCubic(rawProgress);
+  const logoTranslateX = maxLeftPx * easedProgress;
+
   const showText = !isCompact || scrollY === 0;
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 h-16">
-        {/* Banner/fondo */}
         <div
           className={cn(
-            "absolute inset-0 bg-transparent border-0 transition-opacity duration-300",
+            "absolute inset-0 bg-background/70 glass border-b border-border/50 transition-opacity duration-300",
             isCompact ? "opacity-0" : "opacity-100"
           )}
         />
 
         <div className="relative w-full h-16 flex items-center justify-between px-4">
-          {/* Logo centrado */}
+          {/* Logo */}
           <div
-            className="absolute left-1/2 top-1/2 flex items-center transition-transform duration-300"
+            className="absolute left-1/2 top-1/2 flex items-center transition-transform duration-500 ease-out"
             style={{
               transform: `translate(-50%, -50%) translateX(${logoTranslateX}px)`,
             }}
@@ -84,8 +85,9 @@ const Header = () => {
                 className="w-6 h-6 object-contain drop-shadow-lg"
               />
             </div>
+
             {showText && (
-              <div className="flex flex-col ml-2 transition-opacity duration-150">
+              <div className="flex flex-col ml-2 transition-opacity duration-200">
                 <span className="font-display font-bold text-xl text-foreground">
                   vdmm-services
                 </span>
@@ -117,7 +119,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-foreground hover:text-primary transition-colors ml-auto"
