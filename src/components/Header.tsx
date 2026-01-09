@@ -65,8 +65,8 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 h-16">
         <div
           className={cn(
-            "absolute inset-0 bg-background/70 glass border-b border-border/50 transition-opacity duration-300",
-            isCompact ? "opacity-0" : "opacity-100"
+            "absolute inset-0 bg-background/0 backdrop-blur-md glass border-b border-border/50 transition-opacity duration-300",
+            isCompact ? "opacity-0" : "opacity-40"
           )}
         />
 
