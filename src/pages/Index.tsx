@@ -106,7 +106,7 @@ const Index = () => {
       <Header />
 
       <motion.main
-        className="relative z-10 mt-[var(--header-height)] pb-24"
+        className="relative z-10 mt-[var(--header-height)] "
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
