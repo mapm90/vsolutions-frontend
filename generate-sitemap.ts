@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs";
 import { SitemapStream, streamToPromise } from "sitemap";
 
-const baseUrl = "https://v-services.vercel.app";
+const baseUrl = "https://vdmm-services.vercel.app";
 
 // Aquí pones todas tus rutas
 const pages: string[] = [

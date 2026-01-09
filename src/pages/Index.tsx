@@ -19,31 +19,31 @@ const Index = () => {
           name="google-site-verification"
           content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
         />
-        <title>Servicios Informáticos en España | V-Services</title>
+        <title>Servicios Informáticos en España | vdmm-services</title>
         <meta
           name="description"
           content="Servicios informáticos profesionales para hogares y empresas en España. Soporte técnico, mantenimiento IT y soluciones tecnológicas a tu medida."
         />
-        <link rel="canonical" href="https://v-services.vercel.app/" />
+        <link rel="canonical" href="https://vdmm-services.vercel.app/" />
 
         {/* OpenGraph */}
         <meta
           property="og:title"
-          content="Servicios Informáticos en España | V-Services"
+          content="Servicios Informáticos en España | vdmm-services"
         />
         <meta
           property="og:description"
           content="Servicios informáticos profesionales para hogares y empresas en España. Soporte técnico, mantenimiento IT y soluciones tecnológicas."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://v-services.vercel.app/" />
+        <meta property="og:url" content="https://vdmm-services.vercel.app/" />
         <meta property="og:image" content="/favicon.ico" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Servicios Informáticos en España | V-Services"
+          content="Servicios Informáticos en España | vdmm-services"
         />
         <meta
           name="twitter:description"
@@ -56,8 +56,8 @@ const Index = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "V-Services",
-            url: "https://v-services.vercel.app/",
+            name: "vdmm-services",
+            url: "https://vdmm-services.vercel.app/",
             description:
               "Servicios informáticos profesionales para hogares y empresas en España. Soporte técnico, mantenimiento IT y soluciones tecnológicas a tu medida.",
             telephone: "+34674993764",

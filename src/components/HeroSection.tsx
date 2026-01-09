@@ -22,7 +22,7 @@ const HeroSection = () => {
               <div className="w-full h-full bg-gradient-to-t from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-r-4 border-primary/30 rounded-tr-[3rem]">
                 <img
                   src={perfil}
-                  alt="Verónica Borges, fundadora de V-Services, especialista en servicios informáticos"
+                  alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
                   className="w-full h-full object-cover rounded-tr-[3rem] animate-color-cycle"
                 />
               </div>
@@ -34,7 +34,7 @@ const HeroSection = () => {
             <div className="w-full h-full bg-gradient-to-br from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-primary/30 relative">
               <img
                 src={perfil}
-                alt="Verónica Borges, fundadora de V-Services, especialista en servicios informáticos"
+                alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
                 className="w-full h-full object-cover animate-color-cycle"
               />
               <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
@@ -72,7 +72,7 @@ const HeroSection = () => {
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
                   <p className="font-semibold mb-2">
                     Soy Verónica Borges, fundadora de{" "}
-                    <span className="whitespace-nowrap">V-Services</span>
+                    <span className="whitespace-nowrap">vdmm-services</span>
                   </p>
                   <p>
                     Con más de una década de experiencia en el sector

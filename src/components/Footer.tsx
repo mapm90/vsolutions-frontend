@@ -74,7 +74,7 @@ const Footer = () => {
                   </div>
                 </div>
                 <span className="font-display font-bold text-lg text-foreground">
-                  V-Services
+                  vdmm-services
                 </span>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed">
@@ -168,7 +168,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="border-t border-border pt-8 text-center">
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} V-Services.Todos los derechos
+              © {new Date().getFullYear()} vdmm-services.Todos los derechos
               reservados. Servicios informáticos profesionales en España.
             </p>
           </div>

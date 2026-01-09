@@ -109,25 +109,28 @@ const Contacto = () => {
           name="google-site-verification"
           content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
         />
-        <title>Contacto | V-Services - Servicios Informáticos</title>
+        <title>Contacto | vdmm-services - Servicios Informáticos</title>
         <meta
           name="description"
-          content="Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
+          content="Contacta con vdmm-services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
         />
-        <link rel="canonical" href="https://v-services.vercel.app/contacto" />
+        <link
+          rel="canonical"
+          href="https://vdmm-services.vercel.app/contacto"
+        />
         {/* OpenGraph */}
         <meta
           property="og:title"
-          content="Contacto | V-Services - Servicios Informáticos"
+          content="Contacto | vdmm-services - Servicios Informáticos"
         />
         <meta
           property="og:description"
-          content="Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
+          content="Contacta con vdmm-services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content="https://v-services.vercel.app/contacto"
+          content="https://vdmm-services.vercel.app/contacto"
         />
         <meta property="og:image" content="/favicon.ico" />{" "}
         {/* Mejor reemplazar por OG image real */}
@@ -135,11 +138,11 @@ const Contacto = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Contacto | V-Services - Servicios Informáticos"
+          content="Contacto | vdmm-services - Servicios Informáticos"
         />
         <meta
           name="twitter:description"
-          content="Contacta con V-Services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
+          content="Contacta con vdmm-services para soporte técnico, mantenimiento IT y soluciones informáticas personalizadas. Respuesta en menos de 24h."
         />
         <meta name="twitter:image" content="/favicon.ico" />
         {/* Schema JSON-LD */}
@@ -147,14 +150,14 @@ const Contacto = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            url: "https://v-services.vercel.app/contacto",
-            name: "Contacto | V-Services",
+            url: "https://vdmm-services.vercel.app/contacto",
+            name: "Contacto | vdmm-services",
             description:
-              "Página para contactar con V-Services, soporte técnico y servicios informáticos personalizados. Respuesta en menos de 24h.",
+              "Página para contactar con vdmm-services, soporte técnico y servicios informáticos personalizados. Respuesta en menos de 24h.",
             mainEntity: {
               "@type": "ProfessionalService",
-              name: "V-Services",
-              url: "https://v-services.vercel.app",
+              name: "vdmm-services",
+              url: "https://vdmm-services.vercel.app",
               telephone: "+34674993764",
               email: "vservicesac@gmail.com",
               areaServed: "ES",
@@ -174,7 +177,7 @@ const Contacto = () => {
               },
               potentialAction: {
                 "@type": "CommunicateAction",
-                target: "https://v-services.vercel.app/contacto",
+                target: "https://vdmm-services.vercel.app/contacto",
                 actionPlatform: "http://schema.org/DesktopWebPlatform",
               },
             },

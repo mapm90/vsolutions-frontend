@@ -190,7 +190,7 @@ const ComentsCard = () => {
         </AnimatePresence>
 
         <h3 className="text-lg font-semibold mt-6 mb-2">
-          Mira los comentarios que representan a V-Services:
+          Mira los comentarios que representan a vdmm-services:
         </h3>
         <ul className="space-y-2">
           {[...comentarios]

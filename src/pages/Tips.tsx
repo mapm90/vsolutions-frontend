@@ -128,29 +128,32 @@ const Tips = () => {
           name="google-site-verification"
           content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
         />
-        <title>Tips y Consejos | V-Services</title>
+        <title>Tips y Consejos | vdmm-services</title>
         <meta
           name="description"
-          content="Descubre los mejores tips y consejos tecnológicos de V-Services para optimizar tus dispositivos, seguridad y software."
+          content="Descubre los mejores tips y consejos tecnológicos de vdmm-services para optimizar tus dispositivos, seguridad y software."
         />
-        <link rel="canonical" href="https://v-services.vercel.app/tips" />
+        <link rel="canonical" href="https://vdmm-services.vercel.app/tips" />
 
         {/* OpenGraph */}
-        <meta property="og:title" content="Tips y Consejos | V-Services" />
+        <meta property="og:title" content="Tips y Consejos | vdmm-services" />
         <meta
           property="og:description"
-          content="Descubre los mejores tips y consejos tecnológicos de V-Services para optimizar tus dispositivos, seguridad y software."
+          content="Descubre los mejores tips y consejos tecnológicos de vdmm-services para optimizar tus dispositivos, seguridad y software."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://v-services.vercel.app/tips" />
+        <meta
+          property="og:url"
+          content="https://vdmm-services.vercel.app/tips"
+        />
         <meta property="og:image" content="/favicon.ico" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Tips y Consejos | V-Services" />
+        <meta name="twitter:title" content="Tips y Consejos | vdmm-services" />
         <meta
           name="twitter:description"
-          content="Descubre los mejores tips y consejos tecnológicos de V-Services para optimizar tus dispositivos, seguridad y software."
+          content="Descubre los mejores tips y consejos tecnológicos de vdmm-services para optimizar tus dispositivos, seguridad y software."
         />
         <meta name="twitter:image" content="/favicon.ico" />
 
@@ -160,13 +163,13 @@ const Tips = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Blog",
-            name: "V-Services Tips",
-            url: "https://v-services.vercel.app/tips",
+            name: "vdmm-services Tips",
+            url: "https://vdmm-services.vercel.app/tips",
             description:
-              "Tips y consejos tecnológicos de V-Services: optimización de dispositivos, seguridad, software y más.",
+              "Tips y consejos tecnológicos de vdmm-services: optimización de dispositivos, seguridad, software y más.",
             publisher: {
               "@type": "Organization",
-              name: "V-Services",
+              name: "vdmm-services",
               logo: {
                 "@type": "ImageObject",
                 url: "/favicon.ico",
@@ -182,7 +185,7 @@ const Tips = () => {
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": "https://v-services.vercel.app/tips",
+              "@id": "https://vdmm-services.vercel.app/tips",
             },
             author: {
               "@type": "Person",

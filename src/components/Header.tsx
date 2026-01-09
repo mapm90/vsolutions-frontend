@@ -80,14 +80,14 @@ const Header = () => {
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center glow border border-primary/50">
               <img
                 src={logo}
-                alt="Logo de V-Services"
+                alt="Logo de vdmm-services"
                 className="w-6 h-6 object-contain drop-shadow-lg"
               />
             </div>
             {showText && (
               <div className="flex flex-col ml-2 transition-opacity duration-150">
                 <span className="font-display font-bold text-xl text-foreground">
-                  V-Services
+                  vdmm-services
                 </span>
                 <span className="text-xs text-muted-foreground">
                   Servicios Informáticos

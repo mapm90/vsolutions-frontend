@@ -185,26 +185,29 @@ const Servicios = () => {
           name="google-site-verification"
           content="3I3BcxtLxT08wGKjkNOOqNRzPwLc8w5cHaeZEuHMe-g"
         />
-        <title>Servicios Informáticos | V-Services</title>
+        <title>Servicios Informáticos | vdmm-services</title>
         <meta
           name="description"
-          content="Descubre los servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más."
+          content="Descubre los servicios informáticos profesionales de vdmm-services: reparación de equipos, mantenimiento, redes, seguridad y más."
         />
-        <link rel="canonical" href="https://v-services.vercel.app/servicios" />
+        <link
+          rel="canonical"
+          href="https://vdmm-services.vercel.app/servicios"
+        />
 
         {/* OpenGraph */}
         <meta
           property="og:title"
-          content="Servicios Informáticos | V-Services"
+          content="Servicios Informáticos | vdmm-services"
         />
         <meta
           property="og:description"
-          content="Descubre los servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más."
+          content="Descubre los servicios informáticos profesionales de vdmm-services: reparación de equipos, mantenimiento, redes, seguridad y más."
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content="https://v-services.vercel.app/servicios"
+          content="https://vdmm-services.vercel.app/servicios"
         />
         <meta property="og:image" content="/favicon.ico" />
 
@@ -212,11 +215,11 @@ const Servicios = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Servicios Informáticos | V-Services"
+          content="Servicios Informáticos | vdmm-services"
         />
         <meta
           name="twitter:description"
-          content="Descubre los servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más."
+          content="Descubre los servicios informáticos profesionales de vdmm-services: reparación de equipos, mantenimiento, redes, seguridad y más."
         />
         <meta name="twitter:image" content="/favicon.ico" />
 
@@ -225,10 +228,10 @@ const Servicios = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "V-Services",
-            url: "https://v-services.vercel.app/servicios",
+            name: "vdmm-services",
+            url: "https://vdmm-services.vercel.app/servicios",
             description:
-              "Servicios informáticos profesionales de V-Services: reparación de equipos, mantenimiento, redes, seguridad y más.",
+              "Servicios informáticos profesionales de vdmm-services: reparación de equipos, mantenimiento, redes, seguridad y más.",
             telephone: "+34674993764",
             email: "vservicesac@gmail.com",
             areaServed: "ES",
