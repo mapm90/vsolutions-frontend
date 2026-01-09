@@ -86,16 +86,24 @@ const Header = () => {
               />
             </div>
 
-            {showText && (
-              <div className="flex flex-col ml-2 transition-opacity duration-200">
-                <span className="font-display font-bold text-xl text-foreground">
-                  vdmm-services
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  Servicios Informáticos
-                </span>
-              </div>
-            )}
+            <div
+              className={cn(
+                "flex flex-col ml-2 overflow-hidden",
+                // Transiciona explícitamente el blur
+                "transition-[opacity,transform,max-width,filter]",
+                "duration-[300ms,600ms] ease-out",
+                showText
+                  ? "opacity-100 translate-x-0 scale-100 max-w-[220px] blur-0"
+                  : "opacity-0 -translate-x-3 scale-95 max-w-0 blur-[4px]"
+              )}
+            >
+              <span className="font-display font-bold text-xl text-foreground whitespace-nowrap">
+                vdmm-services
+              </span>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">
+                Servicios Informáticos
+              </span>
+            </div>
           </div>
 
           {/* Desktop nav */}
