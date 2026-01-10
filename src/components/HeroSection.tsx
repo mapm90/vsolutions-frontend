@@ -72,7 +72,7 @@ const HeroSection = () => {
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
                   <p className="font-semibold mb-2">
                     Soy Verónica Borges, fundadora de{" "}
-                    <span className="whitespace-nowrap">vdmm-services</span>
+                    <span className="whitespace-nowrap">VDMM-Services</span>
                   </p>
                   <p>
                     Con más de una década de experiencia en el sector
