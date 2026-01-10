@@ -66,7 +66,7 @@ const Header = () => {
         <div
           className={cn(
             "absolute inset-0 bg-background/0 backdrop-blur-md glass border-b border-border/50 transition-opacity duration-300",
-            isCompact ? "opacity-0" : "opacity-40"
+            isCompact ? "opacity-90" : "opacity-100"
           )}
         />
 
