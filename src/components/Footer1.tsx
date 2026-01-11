@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const Footer1 = () => {
   return (
-    <footer className="relative mt-20">
+    <footer>
       {/* Wavy top SVG */}
       <div className="bg-card pt-16 pb-8">
         <div className="container mx-auto px-4">

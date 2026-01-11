@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="relative mt-20">
+    <footer>
       {/* Wavy top SVG */}
       <div className="absolute top-0 left-0 right-0 -translate-y-full overflow-hidden">
         <svg
