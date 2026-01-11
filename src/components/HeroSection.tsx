@@ -107,7 +107,7 @@ const HeroSection = () => {
                   as="button"
                   className="custom-class"
                   color="magenta"
-                  speed="3s"
+                  speed="1s"
                 >
                   <Button asChild size="lg" className="group">
                     <Link to="/contacto">
@@ -120,7 +120,7 @@ const HeroSection = () => {
                   as="button"
                   className="custom-class"
                   color="magenta"
-                  speed="2s"
+                  speed="1.5s"
                 >
                   <Button asChild variant="outline" size="lg">
                     <Link to="/servicios" className="text-black">
