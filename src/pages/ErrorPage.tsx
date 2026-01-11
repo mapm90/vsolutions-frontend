@@ -19,7 +19,7 @@ const ErrorPage = () => {
         <h1 className="text-7xl font-extrabold text-red-600 drop-shadow-lg animate-fade-in">
           <FuzzyText
             baseIntensity={0.7}
-            hoverIntensity={1}
+            hoverIntensity={1.4}
             enableHover={true}
             color="#c50303"
           >

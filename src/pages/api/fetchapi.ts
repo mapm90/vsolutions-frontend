@@ -1,4 +1,4 @@
-const BASE_URL = "https://vsolutions-backendd.vercel.app/api";
+const BASE_URL = "https://vsolutions-backendd.vercel.app/aapi";
 
 export async function apiFetch<T>(
   endpoint: string,
