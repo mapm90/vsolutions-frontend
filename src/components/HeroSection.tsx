@@ -8,12 +8,14 @@ import TextType from "./TextType";
 import { useState } from "react";
 import SplashCursor from "./SplashCursor";
 import StarBorder from "./StarBorder";
+import LightPillar from "./LightPillar";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
   return (
     <section className="min-h-screen pt-0 lg:pt-0 relative overflow-hidden bg-background">
       <SplashCursor />
+
       {/* Background Glow Effects */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
