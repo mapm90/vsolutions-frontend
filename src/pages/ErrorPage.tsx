@@ -1,23 +1,34 @@
+import FuzzyText from "./../components/FuzzyText";
+
 const ErrorPage = () => {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted to-background">
       {/* Glows decorativos */}
-      <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-red-400/20 blur-3xl animate-pulse" />
-      <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-red-500/20 blur-3xl animate-pulse animation-delay-200" />
+      <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-red-400/20 blur-3xl animate-pulse pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-red-500/20 blur-3xl animate-pulse animation-delay-200 pointer-events-none" />
 
-      <div className="relative z-10 text-center px-6">
-        <h1 className="text-7xl font-extrabold text-red-600 mb-4 drop-shadow-lg animate-fade-in">
-          Error
+      {/* Contenedor centrado */}
+      <div className="relative z-10 flex flex-col items-center text-center px-6 gap-6">
+        <h1 className="text-7xl font-extrabold text-red-600 drop-shadow-lg animate-fade-in">
+          <FuzzyText
+            baseIntensity={0.2}
+            hoverIntensity={0.5}
+            enableHover={true}
+            color="#c50303"
+          >
+            Error
+          </FuzzyText>
         </h1>
+
         <p
-          className="text-lg text-red-800 mb-6 animate-fade-in"
+          className="text-lg text-red-800 animate-fade-in"
           style={{ animationDelay: "0.2s" }}
         >
           Oops! Algo salió mal y no podemos cargar esta página.
         </p>
 
         <div
-          className="flex justify-center gap-6 mt-4 animate-fade-in"
+          className="flex flex-col sm:flex-row justify-center gap-6 mt-4 animate-fade-in"
           style={{ animationDelay: "0.4s" }}
         >
           <a

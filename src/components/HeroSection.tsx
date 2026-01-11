@@ -4,10 +4,15 @@ import { Button } from "@/components/ui/button";
 import perfil from "../media/perfil.jpg";
 import logo from "../media/logo1.png";
 import { motion } from "framer-motion";
+import TextType from "./TextType";
+import { useState } from "react";
+import SplashCursor from "./SplashCursor";
 
 const HeroSection = () => {
+  const [showSecond, setShowSecond] = useState(false);
   return (
     <section className="min-h-screen pt-0 lg:pt-0 relative overflow-hidden bg-background">
+      <SplashCursor />
       {/* Background Glow Effects */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
@@ -71,9 +76,20 @@ const HeroSection = () => {
                 </h1>
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
                   <p className="font-semibold mb-2">
-                    Soy Verónica Borges, fundadora de{" "}
-                    <span className="whitespace-nowrap">VDMM-Services</span>
+                    <TextType
+                      text={[
+                        "Soy Verónica Borges, fundadora de VDMM-Services ...",
+                        "especialista en servicios informáticos ...",
+                        "y estoy aquí para ayudarte.",
+                      ]}
+                      typingSpeed={50}
+                      pauseDuration={3000}
+                      deletingSpeed={20}
+                      showCursor={true}
+                      cursorCharacter="|"
+                    />
                   </p>
+
                   <p>
                     Con más de una década de experiencia en el sector
                     tecnológico, me dedico a ofrecer soluciones informáticas
@@ -92,6 +108,7 @@ const HeroSection = () => {
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
+
                 <Button asChild variant="outline" size="lg">
                   <Link to="/servicios">Ver Servicios</Link>
                 </Button>

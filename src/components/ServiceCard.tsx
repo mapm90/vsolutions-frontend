@@ -148,9 +148,9 @@ const ServiceCard = ({
     <ElectricBorder
       color="#ff7dee"
       speed={1}
-      chaos={0.5}
+      chaos={0.7}
       thickness={2}
-      style={{ borderRadius: 16 }}
+      style={{ borderRadius: 18 }}
     >
       <motion.div
         ref={cardRef}

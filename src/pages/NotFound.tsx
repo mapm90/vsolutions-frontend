@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import FuzzyText from "./../components/FuzzyText";
 
 const NotFound = () => {
   const location = useLocation();
@@ -17,17 +18,29 @@ const NotFound = () => {
       <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl animate-pulse" />
       <div className="absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-secondary/25 blur-3xl animate-pulse" />
 
-      <div className="relative z-10 text-center max-w-md px-6">
+      <div className="relative z-10 flex flex-col items-center text-center max-w-md px-6">
         <span className="block text-sm uppercase tracking-widest text-muted-foreground">
-          Error
+          <FuzzyText
+            baseIntensity={0.2}
+            hoverIntensity={0.5}
+            enableHover={true}
+          >
+            Error
+          </FuzzyText>
         </span>
 
         <h1 className="mt-2 text-7xl font-extrabold tracking-tight text-primary drop-shadow-sm">
-          404
+          <FuzzyText
+            baseIntensity={0.2}
+            hoverIntensity={0.5}
+            enableHover={true}
+          >
+            404
+          </FuzzyText>
         </h1>
 
         <p className="mt-6 text-lg font-medium">
-          Página en mantenimiento, por favor regresa más tarde.
+          Lo sentimos, regrese a la página anterior o al inicio.
         </p>
 
         <div className="mt-10 flex items-center justify-center gap-6">

@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import SplashCursor from "./../components/SplashCursor";
 
 import {
   Mail,
@@ -104,6 +105,7 @@ const Contacto = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <SplashCursor />
       <Helmet>
         <meta
           name="google-site-verification"
