@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import TextType from "./TextType";
 import { useState } from "react";
 import SplashCursor from "./SplashCursor";
+import StarBorder from "./StarBorder";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
@@ -102,16 +103,31 @@ const HeroSection = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button asChild size="lg" className="group">
-                  <Link to="/contacto">
-                    Contacta Conmigo
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/servicios">Ver Servicios</Link>
-                </Button>
+                <StarBorder
+                  as="button"
+                  className="custom-class"
+                  color="magenta"
+                  speed="3s"
+                >
+                  <Button asChild size="lg" className="group">
+                    <Link to="/contacto">
+                      Contacta Conmigo
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                </StarBorder>
+                <StarBorder
+                  as="button"
+                  className="custom-class"
+                  color="magenta"
+                  speed="2s"
+                >
+                  <Button asChild variant="outline" size="lg">
+                    <Link to="/servicios" className="text-black">
+                      Ver Servicios
+                    </Link>
+                  </Button>
+                </StarBorder>
               </div>
             </div>
           </div>
