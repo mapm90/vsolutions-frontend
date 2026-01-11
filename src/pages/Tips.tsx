@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { apiFetch } from "@/pages/api/fetchapi";
 import { motion } from "framer-motion";
-import NotFound from "./NotFound";
+
 import ErrorPage from "./ErrorPage";
 import { Helmet } from "react-helmet-async";
-import SplashCursor from "./../components/SplashCursor";
+import SplashCursor from "@/components/SplashCursor";
 const categories = [
   "Todos",
   "Mantenimiento",
