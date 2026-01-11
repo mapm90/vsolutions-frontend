@@ -1,8 +1,15 @@
 import FuzzyText from "./../components/FuzzyText";
-
+import Noise from "./../components/Noise";
 const ErrorPage = () => {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted to-background">
+      <Noise
+        patternSize={250}
+        patternScaleX={1}
+        patternScaleY={1}
+        patternRefreshInterval={2}
+        patternAlpha={200}
+      />
       {/* Glows decorativos */}
       <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-red-400/20 blur-3xl animate-pulse pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-red-500/20 blur-3xl animate-pulse animation-delay-200 pointer-events-none" />

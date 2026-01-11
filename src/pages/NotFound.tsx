@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import FuzzyText from "./../components/FuzzyText";
-
+import Noise from "./../components/Noise";
 const NotFound = () => {
   const location = useLocation();
 
@@ -14,6 +14,13 @@ const NotFound = () => {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted to-background">
+      <Noise
+        patternSize={250}
+        patternScaleX={1}
+        patternScaleY={1}
+        patternRefreshInterval={2}
+        patternAlpha={200}
+      />
       {/* Glows decorativos */}
       <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/25 blur-3xl animate-pulse" />
       <div className="absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-secondary/25 blur-3xl animate-pulse" />
@@ -53,7 +60,7 @@ const NotFound = () => {
 
           <a
             href="javascript:history.back()"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:scale-105 hover:shadow-xl"
           >
             Página anterior
           </a>
