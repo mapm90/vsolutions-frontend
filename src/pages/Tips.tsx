@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import NotFound from "./NotFound";
 import ErrorPage from "./ErrorPage";
 import { Helmet } from "react-helmet-async";
+import SplashCursor from "./../components/SplashCursor";
 const categories = [
   "Todos",
   "Mantenimiento",
@@ -102,6 +103,7 @@ const Tips = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <SplashCursor />
       <div className="fixed inset-0 pointer-events-none">
         <div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"
