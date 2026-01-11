@@ -76,7 +76,7 @@ const HeroSection = () => {
                   a tu Medida
                 </h1>
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
-                  <p className="font-semibold mb-2">
+                  <p className="font-semibold mb-2 text-left lg:text-left">
                     <TextType
                       text={[
                         "Soy Verónica Borges, fundadora de VDMM-Services ...",
