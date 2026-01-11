@@ -27,21 +27,13 @@ const NotFound = () => {
 
       <div className="relative z-10 flex flex-col items-center text-center max-w-md px-6">
         <span className="block text-sm uppercase tracking-widest text-muted-foreground">
-          <FuzzyText
-            baseIntensity={0.2}
-            hoverIntensity={0.5}
-            enableHover={true}
-          >
+          <FuzzyText baseIntensity={0.7} hoverIntensity={1} enableHover={true}>
             Error
           </FuzzyText>
         </span>
 
         <h1 className="mt-2 text-7xl font-extrabold tracking-tight text-primary drop-shadow-sm">
-          <FuzzyText
-            baseIntensity={0.2}
-            hoverIntensity={0.5}
-            enableHover={true}
-          >
+          <FuzzyText baseIntensity={0.7} hoverIntensity={1} enableHover={true}>
             404
           </FuzzyText>
         </h1>
