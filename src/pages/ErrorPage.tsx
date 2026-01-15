@@ -1,5 +1,5 @@
-import FuzzyText from "./../components/FuzzyText";
-import Noise from "./../components/Noise";
+import FuzzyText from "../efects/FuzzyText";
+import Noise from "../efects/Noise";
 const ErrorPage = () => {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-background via-muted to-background">

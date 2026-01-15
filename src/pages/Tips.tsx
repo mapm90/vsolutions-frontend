@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 
 import ErrorPage from "./ErrorPage";
 import { Helmet } from "react-helmet-async";
-import SplashCursor from "@/components/SplashCursor";
+import SplashCursor from "@/efects/SplashCursor";
 const categories = [
   "Todos",
   "Mantenimiento",

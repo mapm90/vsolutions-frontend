@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import SplashCursor from "./../components/SplashCursor";
+import SplashCursor from "../efects/SplashCursor";
 
 import {
   Mail,

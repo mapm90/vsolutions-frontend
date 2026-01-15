@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import FuzzyText from "./../components/FuzzyText";
-import Noise from "./../components/Noise";
+import FuzzyText from "../efects/FuzzyText";
+import Noise from "../efects/Noise";
 const NotFound = () => {
   const location = useLocation();
 

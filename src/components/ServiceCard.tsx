@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, ReactElement } from "react";
 import noice from "../media/noise.svg";
-import ElectricBorder from "./ElectricBorder";
+import ElectricBorder from "../efects/ElectricBorder";
 
 import {
   motion,

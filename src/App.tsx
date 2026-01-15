@@ -8,7 +8,7 @@ import Servicios from "./pages/Servicios";
 import Tips from "./pages/Tips";
 import Contacto from "./pages/Contacto";
 import NotFound from "./pages/NotFound";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./efects/ScrollToTop";
 const queryClient = new QueryClient();
 
 const App = () => (

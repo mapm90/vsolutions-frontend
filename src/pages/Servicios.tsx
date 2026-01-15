@@ -17,10 +17,10 @@ import {
   Smartphone,
 } from "lucide-react";
 
-import syelow from "../media/syelow.png";
-import sblue from "../media/sblue.png";
-import sgreen from "../media/sgreen.png";
-import sorange from "../media/sorange.png";
+import syelow from "../media/syelow.avif";
+import sblue from "../media/sblue.avif";
+import sgreen from "../media/sgreen.avif";
+import sorange from "../media/sorange.avif";
 
 const services = [
   {

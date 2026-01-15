@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import perfil from "../media/perfil.avif";
 import logo from "../media/logo1.png";
 import { motion } from "framer-motion";
-import TextType from "./TextType";
+import TextType from "../efects/TextType";
 import { useState } from "react";
-import SplashCursor from "./SplashCursor";
-import StarBorder from "./StarBorder";
+import SplashCursor from "../efects/SplashCursor";
+import StarBorder from "../efects/StarBorder";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
