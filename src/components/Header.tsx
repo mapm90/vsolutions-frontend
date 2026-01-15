@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import logo from "../media/logo1.png";
+import logo from "../media/logo1.avif";
 
 // easing cúbico (movimiento orgánico)
 const easeInOutCubic = (t: number) =>

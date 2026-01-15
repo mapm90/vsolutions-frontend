@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import perfil from "../media/perfil.avif";
-import logo from "../media/logo1.png";
+import logo from "../media/logo1.avif";
 import { motion } from "framer-motion";
 import TextType from "../efects/TextType";
 import { useState } from "react";
