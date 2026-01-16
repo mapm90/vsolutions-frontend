@@ -10,7 +10,7 @@ if (!process.env.MONGODB_URI) {
 
 declare global {
   // Extiende el tipo global para incluir _mongoClientPromise
-  // eslint-disable-next-line no-var
+
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
