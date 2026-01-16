@@ -70,7 +70,7 @@ const HeroSection = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  +10 Años de Experiencia
+                  +10 Años de Experiencias
                 </motion.span>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                   Soluciones <span className="text-gradient">Tecnológicas</span>{" "}
