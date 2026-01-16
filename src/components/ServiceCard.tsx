@@ -69,7 +69,7 @@ const ServiceCard = ({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -145,353 +145,389 @@ const ServiceCard = ({
   }, []);
 
   return (
-    <ElectricBorder
-      color="#ff7dee"
-      speed={1}
-      chaos={0.7}
-      thickness={2}
-      style={{ borderRadius: 18 }}
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 60, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 0.1,
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+      }}
+      onMouseMove={handleMouseMove}
+      className="group relative"
     >
-      <motion.div
-        ref={cardRef}
-        initial={{ opacity: 0, y: 60, scale: 0.9 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{
-          duration: 0.1,
-          type: "spring",
-          stiffness: 100,
-          damping: 15,
-        }}
-        onMouseMove={handleMouseMove}
-        className="group relative"
-      >
-        {/* Outer glow */}
-        <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-glow-primary via-glow-accent to-glow-pink opacity-0 group-hover:opacity-30 blur-xl transition-all duration-700" />
+      {/* Outer glow */}
+      <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-glow-primary via-glow-accent to-glow-pink opacity-0 group-hover:opacity-30 blur-xl transition-all duration-700" />
 
-        {/* Animated border */}
-        <div className="absolute -inset-[1px] rounded-3xl overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              background:
-                "linear-gradient(90deg, hsl(var(--glow-primary)), hsl(var(--glow-accent)), hsl(var(--glow-pink)), hsl(var(--glow-cyan)), hsl(var(--glow-primary)))",
-              backgroundSize: "300% 100%",
-              animation: "gradient-shift 4s linear infinite",
-            }}
-          />
-        </div>
+      {/* Animated border */}
+      <div className="absolute -inset-[1px] rounded-3xl overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            background:
+              "linear-gradient(90deg, hsl(var(--glow-primary)), hsl(var(--glow-accent)), hsl(var(--glow-pink)), hsl(var(--glow-cyan)), hsl(var(--glow-primary)))",
+            backgroundSize: "300% 100%",
+            animation: "gradient-shift 4s linear infinite",
+          }}
+        />
+      </div>
 
-        {/* Main card container */}
-        <div className="relative glass rounded-3xl overflow-hidden p-8 md:p-10 transition-all duration-500 group-hover:shadow-glow-lg">
-          {/* Spotlight effect */}
-          <motion.div
-            className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: useTransform(
-                [spotlightX, spotlightY],
-                ([x, y]) =>
-                  `radial-gradient(600px circle at ${x}px ${y}px, 
+      {/* Main card container */}
+      <div className="relative glass rounded-3xl overflow-hidden p-8 md:p-10 transition-all duration-500 group-hover:shadow-glow-lg">
+        {/* Spotlight effect */}
+        <motion.div
+          className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{
+            background: useTransform(
+              [spotlightX, spotlightY],
+              ([x, y]) =>
+                `radial-gradient(600px circle at ${x}px ${y}px, 
           rgba(255, 0, 221, 1), 
           rgba(0, 255, 200, 0.18) 60%, 
-          transparent 100%)`
-              ),
-              mixBlendMode: "screen", // hace que se mezcle con la imagen de fondo
-            }}
-          />
+          transparent 100%)`,
+            ),
+            mixBlendMode: "screen", // hace que se mezcle con la imagen de fondo
+          }}
+        />
 
-          {/* Background image */}
-          {backgroundImage && (
-            <>
-              {/* Imagen de fondo: siempre detrás */}
-              <motion.div
-                className="absolute inset-0 -z-10 rounded-3xl"
-                initial={{ scale: 1.1 }}
-                whileHover={{ scale: 1.2 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                style={{
-                  backgroundImage: `url(${backgroundImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  filter: "blur(8px) brightness(0.8) saturate(1.4)",
-                }}
-              />
-
-              {/* Degradado animado encima de la imagen */}
-              <div
-                className="absolute inset-0 rounded-3xl"
-                style={{
-                  background:
-                    "linear-gradient(135deg, hsl(var(--glow-primary)/0.3), hsl(var(--glow-accent)/0.2), hsl(var(--background)/0.9))",
-                  backgroundSize: "200% 200%",
-                  animation: "gradient-shift 10s ease infinite",
-                }}
-              />
-
-              {/* Blur semi-transparente */}
-              <div className="absolute inset-0 bg-background/70 backdrop-blur-sm rounded-3xl" />
-
-              {/* Textura de ruido */}
-              <div
-                className="absolute inset-0 opacity-[0.03] rounded-3xl"
-                style={{
-                  backgroundImage: noice,
-                  backgroundRepeat: "repeat",
-                }}
-              />
-            </>
-          )}
-
-          {/* Content */}
-          <div className="relative z-10">
-            <div className="flex items-start gap-6 mb-6">
-              <motion.div
-                className="relative flex-shrink-0"
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-glow-primary to-glow-accent opacity-50 blur-xl animate-pulse-glow" />
-                <div className="relative w-16 h-16 rounded-2xl glass flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-colors duration-300">
-                  <div className="text-primary icon-glow scale-125">{icon}</div>
-                </div>
-              </motion.div>
-
-              <div className="flex-1 text-left md:text-center">
-                <motion.h3
-                  className="font-display font-bold text-2xl md:text-3xl text-foreground mb-2"
-                  initial={{ opacity: 0, x: 0 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 + 0.2 }}
-                >
-                  {title}
-                </motion.h3>
-                <motion.p
-                  className="text-muted-foreground text-sm md:text-base"
-                  initial={{ opacity: 0, x: 0 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                >
-                  {shortDescription}
-                </motion.p>
-              </div>
-            </div>
-
+        {/* Background image */}
+        {backgroundImage && (
+          <>
+            {/* Imagen de fondo: siempre detrás */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.4 }}
-              className="mb-6 text-left max-w-full"
-            >
-              <p className="text-foreground/90 leading-relaxed">
-                {fullDescription}
-              </p>
-            </motion.div>
+              className="absolute inset-0 -z-10 rounded-3xl"
+              initial={{ scale: 1.1 }}
+              whileHover={{ scale: 1.2 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                filter: "blur(8px) brightness(0.8) saturate(1.4)",
+              }}
+            />
 
-            <motion.ul
-              className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                visible: {
-                  transition: {
-                    staggerChildren: 0.08,
-                    delayChildren: index * 0.1 + 0.5,
-                  },
-                },
+            {/* Degradado animado encima de la imagen */}
+            <div
+              className="absolute inset-0 rounded-3xl"
+              style={{
+                background:
+                  "linear-gradient(135deg, hsl(var(--glow-primary)/0.3), hsl(var(--glow-accent)/0.2), hsl(var(--background)/0.9))",
+                backgroundSize: "200% 200%",
+                animation: "gradient-shift 10s ease infinite",
+              }}
+            />
+
+            {/* Blur semi-transparente */}
+            <div className="absolute inset-0 bg-background/70 backdrop-blur-sm rounded-3xl" />
+
+            {/* Textura de ruido */}
+            <div
+              className="absolute inset-0 opacity-[0.03] rounded-3xl"
+              style={{
+                backgroundImage: noice,
+                backgroundRepeat: "repeat",
+              }}
+            />
+          </>
+        )}
+
+        {/* Content */}
+        <div className="relative z-10">
+          <div className="flex items-start gap-6 mb-6">
+            <motion.div
+              className="relative flex-shrink-0"
+              animate={{ y: [0, -8, 0] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
             >
-              {features.map((feature, i) => (
-                <motion.li
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                  className="flex items-center gap-3 text-foreground/80"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span
-                      className="inline-block w-4 h-4 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent shadow-[0_0_8px_rgba(0,255,200,0.6),0_0_12px_rgba(255,100,255,0.4)] animate-bounce"
-                      style={{
-                        animationDuration: "1s",
-                        animationTimingFunction: "ease-in-out",
-                        animationIterationCount: "infinite",
-                      }}
-                    />
-                    <span className="text-sm font-medium text-foreground">
-                      {feature}
-                    </span>
-                  </div>
-                </motion.li>
-              ))}
-            </motion.ul>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-glow-primary to-glow-accent opacity-50 blur-xl animate-pulse-glow" />
+              <div className="relative w-16 h-16 rounded-2xl glass flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-colors duration-300">
+                <div className="text-primary icon-glow scale-125">{icon}</div>
+              </div>
+            </motion.div>
 
-            {/* Testimonial dinámico con efecto de revelación */}
-            <AnimatePresence mode="wait">
-              {currentTestimonial && (
-                <motion.div
-                  key={currentTestimonial.name + currentTestimonial.text}
-                  initial={{ opacity: 0, x: -20, scaleX: 0 }}
-                  animate={{ opacity: 1, x: 0, scaleX: 1 }}
-                  exit={{ opacity: 0, x: 20, scaleX: 0 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                  style={{ transformOrigin: "left" }} // apertura desde la izquierda
-                  className="glass rounded-2xl p-4 mb-6 border border-primary/10 origin-top"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105">
-                      <span className="absolute inset-0 rounded-full bg-gradient-to-br from-glow-primary to-glow-accent opacity-25 blur-xl animate-pulse"></span>
-                      <span className="relative z-10 text-primary font-display font-bold text-lg drop-shadow-md animate-bounce">
+            <div className="flex-1 text-left md:text-center">
+              <motion.h3
+                className="font-display font-bold text-2xl md:text-3xl text-foreground mb-2"
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 + 0.2 }}
+              >
+                {title}
+              </motion.h3>
+              <motion.p
+                className="text-muted-foreground text-sm md:text-base"
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+              >
+                {shortDescription}
+              </motion.p>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 + 0.4 }}
+            className="mb-6 text-left max-w-full"
+          >
+            <p className="text-foreground/90 leading-relaxed">
+              {fullDescription}
+            </p>
+          </motion.div>
+
+          <motion.ul
+            className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.08,
+                  delayChildren: index * 0.1 + 0.5,
+                },
+              },
+            }}
+          >
+            {features.map((feature, i) => (
+              <motion.li
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0 },
+                }}
+                className="flex items-center gap-3 text-foreground/80"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    className="inline-block w-4 h-4 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent shadow-[0_0_8px_rgba(0,255,200,0.6),0_0_12px_rgba(255,100,255,0.4)] animate-bounce"
+                    style={{
+                      animationDuration: "1s",
+                      animationTimingFunction: "ease-in-out",
+                      animationIterationCount: "infinite",
+                    }}
+                  />
+                  <span className="text-sm font-medium text-foreground">
+                    {feature}
+                  </span>
+                </div>
+              </motion.li>
+            ))}
+          </motion.ul>
+
+          {/* Testimonial dinámico con efecto de revelación */}
+          <AnimatePresence mode="wait">
+            {currentTestimonial && (
+              <motion.div
+                key={currentTestimonial.name + currentTestimonial.text}
+                initial={{ opacity: 0, rotateY: -90, scale: 0.8 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                exit={{ opacity: 0, rotateY: 90, scale: 0.8 }}
+                transition={{ duration: 0.7, type: "spring" }}
+                className="mb-8"
+                style={{ perspective: 1000 }}
+              >
+                <div className="glass-intense rounded-2xl p-5 border border-primary/20">
+                  <div className="flex items-start gap-4">
+                    <motion.div
+                      className="relative w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden"
+                      whileHover={{ scale: 1.1 }}
+                      style={{
+                        background: `linear-gradient(135deg, hsl(var(--glow-primary)), hsl(var(--glow-accent)))`,
+                      }}
+                    >
+                      <motion.div
+                        className="absolute inset-0"
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        style={{
+                          background: `conic-gradient(from 0deg, hsl(var(--glow-primary)), hsl(var(--glow-accent)), hsl(var(--glow-pink)), hsl(var(--glow-primary)))`,
+                        }}
+                      />
+                      <span className="relative z-10 text-primary-foreground font-bold text-xl">
                         {currentTestimonial.name.charAt(0).toUpperCase()}
                       </span>
-                    </div>
+                    </motion.div>
                     <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-foreground text-sm">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="font-semibold text-foreground">
                           {currentTestimonial.name}
                         </span>
-                        <div className="flex gap-0.5">
+                        <div className="flex gap-1">
                           {[...Array(5)].map((_, i) => (
-                            <Star
+                            <motion.div
                               key={i}
-                              className={`w-3 h-3 ${
-                                i < currentTestimonial.rating
-                                  ? "text-yellow-400 fill-yellow-400"
-                                  : "text-muted-foreground/30"
-                              }`}
-                            />
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: i * 0.1 }}
+                            >
+                              <Star
+                                className={`w-4 h-4 ${
+                                  i < currentTestimonial.rating
+                                    ? "text-yellow-400 fill-yellow-400"
+                                    : "text-muted-foreground/30"
+                                }`}
+                              />
+                            </motion.div>
                           ))}
                         </div>
                       </div>
-                      <div className="bg-muted/20 p-4 rounded-lg max-w-md">
-                        <p className="text-left text-muted-foreground text-xs italic">
-                          "{currentTestimonial.text}"
-                        </p>
-                      </div>
+                      <p className="text-muted-foreground text-left text-sm italic leading-relaxed">
+                        "{currentTestimonial.text}"
+                      </p>
                     </div>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.7 }}
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 + 0.8 }}
+          >
+            <ElectricBorder
+              color="rgb(15, 74, 201)"
+              speed={1}
+              chaos={0.3}
+              thickness={3}
+              style={{
+                borderRadius: 16,
+                display: "inline-block",
+                padding: 5,
+              }}
             >
               <Button
                 onClick={() => setOpenForm(!openForm)}
-                className="btn-premium text-primary-foreground font-semibold px-8 py-6 text-base rounded-xl"
+                className="btn-premium text-primary-foreground font-bold px-10 py-7 text-lg rounded-2xl w-auto"
               >
-                {openForm ? "Cerrar formulario" : "Solicitar servicio"}
-              </Button>
-            </motion.div>
-
-            <AnimatePresence>
-              {openForm && (
-                <motion.form
-                  initial={{ opacity: 0, height: 0, y: -20 }}
-                  animate={{ opacity: 1, height: "auto", y: 0 }}
-                  exit={{ opacity: 0, height: 0, y: -20 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  onSubmit={handleSubmit}
-                  className="mt-6 overflow-hidden"
+                <motion.span
+                  className="flex items-center gap-3"
+                  whileHover={{ scale: 1.05 }}
                 >
-                  <div className="glass rounded-2xl p-6 space-y-4 border border-primary/10">
-                    <motion.h4
-                      className="text-lg font-semibold text-foreground mb-4"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      Solicitar presupuesto
-                    </motion.h4>
-                    {[
-                      {
-                        name: "nombre",
-                        placeholder: "Nombre completo",
-                        type: "text",
-                      },
-                      {
-                        name: "telefono",
-                        placeholder: "Teléfono",
-                        type: "tel",
-                      },
-                      {
-                        name: "correo",
-                        placeholder: "Correo electrónico",
-                        type: "email",
-                      },
-                    ].map((field, i) => (
-                      <motion.div
-                        key={field.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.15 + i * 0.08 }}
-                      >
-                        <Input
-                          name={field.name}
-                          placeholder={field.placeholder}
-                          type={field.type}
-                          value={formData[field.name as keyof typeof formData]}
-                          onChange={handleChange}
-                          className="input-glass"
-                        />
-                      </motion.div>
-                    ))}
+                  {openForm ? "Cerrar formulario" : "Solicitar servicio"}
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  ></motion.div>
+                </motion.span>
+              </Button>
+            </ElectricBorder>
+          </motion.div>
+
+          <AnimatePresence>
+            {openForm && (
+              <motion.form
+                initial={{ opacity: 0, height: 0, y: -20 }}
+                animate={{ opacity: 1, height: "auto", y: 0 }}
+                exit={{ opacity: 0, height: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                onSubmit={handleSubmit}
+                className="mt-6 overflow-hidden"
+              >
+                <div className="glass rounded-2xl p-6 space-y-4 border border-primary/10">
+                  <motion.h4
+                    className="text-lg font-semibold text-foreground mb-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    Solicitar presupuesto
+                  </motion.h4>
+                  {[
+                    {
+                      name: "nombre",
+                      placeholder: "Nombre completo",
+                      type: "text",
+                    },
+                    {
+                      name: "telefono",
+                      placeholder: "Teléfono",
+                      type: "tel",
+                    },
+                    {
+                      name: "correo",
+                      placeholder: "Correo electrónico",
+                      type: "email",
+                    },
+                  ].map((field, i) => (
                     <motion.div
+                      key={field.name}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 }}
+                      transition={{ delay: 0.15 + i * 0.08 }}
                     >
-                      <Textarea
-                        name="descripcion"
-                        placeholder="Descripción de la solicitud"
-                        value={formData.descripcion}
+                      <Input
+                        name={field.name}
+                        placeholder={field.placeholder}
+                        type={field.type}
+                        value={formData[field.name as keyof typeof formData]}
                         onChange={handleChange}
-                        className="input-glass min-h-[100px]"
+                        className="input-glass"
                       />
                     </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 }}
+                  ))}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <Textarea
+                      name="descripcion"
+                      placeholder="Descripción de la solicitud"
+                      value={formData.descripcion}
+                      onChange={handleChange}
+                      className="input-glass min-h-[100px]"
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <Button
+                      type="submit"
+                      disabled={loading}
+                      className="btn-premium w-full text-primary-foreground font-semibold py-6 rounded-xl"
                     >
-                      <Button
-                        type="submit"
-                        disabled={loading}
-                        className="btn-premium w-full text-primary-foreground font-semibold py-6 rounded-xl"
-                      >
-                        {loading ? (
-                          <span className="flex items-center gap-2">
-                            <motion.span
-                              animate={{ rotate: 360 }}
-                              transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                ease: "linear",
-                              }}
-                              className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
-                            />
-                            Enviando...
-                          </span>
-                        ) : (
-                          "Enviar solicitud"
-                        )}
-                      </Button>
-                    </motion.div>
-                  </div>
-                </motion.form>
-              )}
-            </AnimatePresence>
-          </div>
+                      {loading ? (
+                        <span className="flex items-center gap-2">
+                          <motion.span
+                            animate={{ rotate: 360 }}
+                            transition={{
+                              duration: 1,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
+                            className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
+                          />
+                          Enviando...
+                        </span>
+                      ) : (
+                        "Enviar solicitud"
+                      )}
+                    </Button>
+                  </motion.div>
+                </div>
+              </motion.form>
+            )}
+          </AnimatePresence>
         </div>
-      </motion.div>
-    </ElectricBorder>
+      </div>
+    </motion.div>
   );
 };
 
