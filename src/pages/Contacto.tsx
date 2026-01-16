@@ -60,12 +60,15 @@ const Contacto = () => {
         asunto: "",
         mensaje: "",
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error real:", error);
+
+      const errorMessage =
+        error instanceof Error ? error.message : "No se pudo enviar el mensaje";
 
       toast({
         title: "Error",
-        description: error.message || "No se pudo enviar el mensaje",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

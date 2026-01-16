@@ -36,7 +36,7 @@ const fetcher = () => apiFetch<{ data: Tip[] }>("/tipss");
 const Tips = () => {
   const { data, error } = useSWR("/tipss", fetcher);
 
-  const tips = data?.data || [];
+  const tips = useMemo(() => data?.data || [], [data]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -242,7 +242,7 @@ const Tips = () => {
                     "px-4 py-2 rounded-lg text-sm font-medium transition-all",
                     selectedCategory === category
                       ? "bg-primary text-primary-foreground"
-                      : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                      : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80",
                   )}
                 >
                   {category}

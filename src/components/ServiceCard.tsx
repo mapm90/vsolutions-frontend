@@ -33,6 +33,15 @@ interface ServiceCardProps {
   backgroundImage?: string;
 }
 
+interface TestimonialResponse {
+  success: boolean;
+  data: Array<{
+    nombre: string;
+    comentario: string;
+    aprobado: boolean;
+  }>;
+}
+
 const ServiceCard = ({
   title,
   shortDescription,
@@ -107,10 +116,12 @@ const ServiceCard = ({
         servicio: title,
       });
       setOpenForm(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Error al enviar solicitud";
       toast({
         title: "Error",
-        description: error.message || "Error al enviar solicitud",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -122,8 +133,10 @@ const ServiceCard = ({
   const fetchRandomTestimonial = async () => {
     try {
       const res = await apiFetch("/comentario");
-      if ((res as any).success) {
-        const approved = (res as any).data.filter((c: any) => c.aprobado);
+      if ((res as TestimonialResponse).success) {
+        const approved = (res as TestimonialResponse).data.filter(
+          (c) => c.aprobado,
+        );
         if (approved.length === 0) return;
         const random = approved[Math.floor(Math.random() * approved.length)];
         const rating = Math.floor(Math.random() * 2) + 4; // 4 o 5 estrellas

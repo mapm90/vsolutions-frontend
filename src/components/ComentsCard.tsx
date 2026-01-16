@@ -89,8 +89,14 @@ const ComentsCard = () => {
         method: "GET", // explícito para que quede claro que es lectura
       });
 
-      if ((res as any).success) {
-        setComentarios((res as any).data.filter((c: Comentario) => c.aprobado));
+      interface ApiResponse {
+        success: boolean;
+        data: Comentario[];
+      }
+
+      const response = res as ApiResponse;
+      if (response.success) {
+        setComentarios(response.data.filter((c: Comentario) => c.aprobado));
       }
     } catch (error) {
       console.error("Error al obtener comentarios:", error);
@@ -134,10 +140,11 @@ const ComentsCard = () => {
 
       setFormData({ nombre: "", comentario: "" });
       setOpenForm(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Error al enviar comentario";
       toast({
         title: "Error",
-        description: error.message || "Error al enviar comentario",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

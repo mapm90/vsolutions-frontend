@@ -8,13 +8,19 @@ if (!process.env.MONGODB_URI) {
   throw new Error("Debes definir MONGODB_URI en tu .env.local");
 }
 
+declare global {
+  // Extiende el tipo global para incluir _mongoClientPromise
+  // eslint-disable-next-line no-var
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
+}
+
 if (process.env.NODE_ENV === "development") {
   // En desarrollo reutilizamos la conexión
-  if (!(global as any)._mongoClientPromise) {
+  if (!global._mongoClientPromise) {
     client = new MongoClient(uri);
-    (global as any)._mongoClientPromise = client.connect();
+    global._mongoClientPromise = client.connect();
   }
-  clientPromise = (global as any)._mongoClientPromise;
+  clientPromise = global._mongoClientPromise;
 } else {
   // En producción
   client = new MongoClient(uri);

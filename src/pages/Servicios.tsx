@@ -158,6 +158,25 @@ const services = [
   },
 ];
 
+function ServiceItem({ service, index }: { service: typeof services[number]; index: number }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  return (
+    <motion.div
+      key={service.title}
+      ref={ref}
+      initial={{ opacity: 0, y: 1 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5 }}
+    >
+      <ServiceCard {...service} index={index} />
+    </motion.div>
+  );
+}
+
 const Servicios = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -278,26 +297,12 @@ const Servicios = () => {
             </p>
           </motion.div>
 
+          {/* Services Grid con ScrollStack */}
           {/* Services Grid */}
           <div className="container mx-auto px-4 max-w-6xl space-y-8">
-            {services.map((service, index) => {
-              const { ref, inView } = useInView({
-                triggerOnce: true,
-                threshold: 0.1,
-              });
-
-              return (
-                <motion.div
-                  key={service.title}
-                  ref={ref}
-                  initial={{ opacity: 0, y: 1 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5 }}
-                >
-                  <ServiceCard {...service} index={index} />
-                </motion.div>
-              );
-            })}
+            {services.map((service, index) => (
+              <ServiceItem key={service.title} service={service} index={index} />
+            ))}
           </div>
         </motion.div>
       </motion.main>
