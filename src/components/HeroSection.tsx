@@ -8,6 +8,7 @@ import TextType from "../efects/TextType";
 import { useState } from "react";
 import SplashCursor from "../efects/SplashCursor";
 import StarBorder from "../efects/StarBorder";
+import "../efects/botton.css";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
@@ -110,13 +111,15 @@ const HeroSection = () => {
                   color="magenta"
                   speed="1s"
                 >
-                  <Button asChild size="lg" className="group">
+                  <Button asChild size="lg" className="liquid-btn">
                     <Link to="/contacto">
+                      <span className="shine"></span>
                       Contacta Conmigo
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
                 </StarBorder>
+
                 <StarBorder
                   as="button"
                   className="custom-class"
