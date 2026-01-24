@@ -187,3 +187,371 @@
   background: hsl(320 75% 55%);
   border-radius: 4px;
 }
+.text-type {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.text-type__cursor {
+  margin-left: 0.25rem;
+  display: inline-block;
+  opacity: 1;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
+.star-border-container {
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.border-gradient-bottom {
+  position: absolute;
+  width: 300%;
+  height: 50%;
+  opacity: 0.7;
+  bottom: -12px;
+  right: -250%;
+  border-radius: 50%;
+  animation: star-movement-bottom linear infinite alternate;
+  z-index: 0;
+}
+
+.border-gradient-top {
+  position: absolute;
+  opacity: 0.7;
+  width: 300%;
+  height: 50%;
+  top: -12px;
+  left: -250%;
+  border-radius: 50%;
+  animation: star-movement-top linear infinite alternate;
+  z-index: 0;
+}
+
+.inner-content {
+  position: relative;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  padding: 16px 26px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}
+.liquid-btn {
+  position: relative;
+  padding: 18px 50px;
+  font-size: 22px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  overflow: hidden;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, red, blue);
+  box-shadow:
+    0 0 20px rgba(79, 172, 254, 0.8),
+    0 0 40px rgba(0, 242, 254, 0.6);
+  transition: transform 0.2s ease;
+}
+.liquid-btn:hover {
+  transform: scale(1.05);
+}
+.liquid-btn::before,
+.liquid-btn::after {
+  content: "";
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 300%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 20%,
+    transparent 70%
+  );
+  animation: wave 6s linear infinite;
+  border-radius: 40%;
+  z-index: 1;
+}
+.liquid-btn::after {
+  animation-duration: 8s;
+  opacity: 0.6;
+}
+.shine {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 60%
+  );
+  transform: skewX(-25deg);
+  animation: shineMove 4s infinite;
+  z-index: 2;
+}
+@keyframes wave {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10%) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+@keyframes shineMove {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+.light-pillar-fallback {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #888;
+  font-size: 14px;
+}
+
+.light-pillar-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.liquid-box-btn {
+  position: relative;
+  padding: 18px 28px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+
+  /* Variables del borde animado */
+  --border-angle: 0turn;
+  --main-bg: linear-gradient(135deg, red, blue);
+  --gradient-border: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    #08f,
+    #f03 99%,
+    transparent
+  );
+
+  border: 5px solid transparent;
+  border-radius: 50px;
+
+  background:
+    var(--main-bg) padding-box,
+    var(--gradient-border) border-box;
+
+  box-shadow:
+    0 0 20px rgba(79, 172, 254, 0.8),
+    0 0 40px rgba(0, 242, 254, 0.6);
+
+  overflow: hidden;
+  transition: transform 0.2s ease;
+
+  animation: bg-spin 3s linear infinite;
+}
+
+.liquid-box-btn:hover {
+  transform: scale(1.05);
+  animation-play-state: paused;
+}
+
+/* Ondas líquidas */
+.liquid-box-btn::before,
+.liquid-box-btn::after {
+  content: "";
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 300%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 20%,
+    transparent 70%
+  );
+  animation: wave 6s linear infinite;
+  border-radius: 40%;
+  z-index: 1;
+}
+
+.liquid-box-btn::after {
+  animation-duration: 8s;
+  opacity: 0.6;
+}
+
+/* Brillo */
+.liquid-box-btn .shine {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 60%
+  );
+  transform: skewX(-25deg);
+  animation: shineMove 4s infinite;
+  z-index: 2;
+}
+
+/* Texto encima de todo */
+.liquid-box-btn span {
+  position: relative;
+  z-index: 3;
+}
+
+/* Animaciones */
+@keyframes wave {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10%) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+@keyframes shineMove {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+.noise-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+.star-border-container {
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.border-gradient-bottom {
+  position: absolute;
+  width: 300%;
+  height: 50%;
+  opacity: 0.7;
+  bottom: -12px;
+  right: -250%;
+  border-radius: 50%;
+  animation: star-movement-bottom linear infinite alternate;
+  z-index: 0;
+}
+
+.border-gradient-top {
+  position: absolute;
+  opacity: 0.7;
+  width: 300%;
+  height: 50%;
+  top: -12px;
+  left: -250%;
+  border-radius: 50%;
+  animation: star-movement-top linear infinite alternate;
+  z-index: 0;
+}
+
+.inner-content {
+  position: relative;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  padding: 16px 26px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}

@@ -7,9 +7,6 @@ import { motion } from "framer-motion";
 import TextType from "../efects/TextType";
 import { useState } from "react";
 import SplashCursor from "../efects/SplashCursor";
-import StarBorder from "../efects/StarBorder";
-import "../efects/botton.css";
-import "../efects/liquid-box-btn.css";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
@@ -82,9 +79,14 @@ const HeroSection = () => {
                   <p className="font-semibold mb-2 text-left lg:text-left">
                     <TextType
                       text={[
-                        "Soy Verónica Borges, fundadora de VDMM-Services ...",
-                        "especialista en servicios informáticos ...",
+                        "Soy Verónica Borges",
+                        " fundadora de VDMM-Services ...",
+                        "especialista en servicios informáticos",
                         "y estoy aquí para ayudarte.",
+                        " ¡Hablemos de cómo puedo mejorar tu experiencia tecnológica!",
+                        " Tu tranquilidad digital es mi prioridad.",
+                        " Juntos, haremos que la tecnología trabaje para ti.",
+                        " ¡Contáctame hoy mismo!",
                       ]}
                       typingSpeed={50}
                       pauseDuration={3000}

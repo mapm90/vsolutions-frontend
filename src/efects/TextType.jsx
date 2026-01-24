@@ -9,7 +9,6 @@ import {
   useCallback,
 } from "react";
 import { gsap } from "gsap";
-import "./TextType.css";
 
 const TextType = ({
   text,
@@ -42,7 +41,7 @@ const TextType = ({
 
   const textArray = useMemo(
     () => (Array.isArray(text) ? text : [text]),
-    [text]
+    [text],
   );
 
   const getRandomSpeed = useCallback(() => {
@@ -67,7 +66,7 @@ const TextType = ({
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     observer.observe(containerRef.current);
@@ -121,11 +120,11 @@ const TextType = ({
           timeout = setTimeout(
             () => {
               setDisplayedText(
-                (prev) => prev + processedText[currentCharIndex]
+                (prev) => prev + processedText[currentCharIndex],
               );
               setCurrentCharIndex((prev) => prev + 1);
             },
-            variableSpeed ? getRandomSpeed() : typingSpeed
+            variableSpeed ? getRandomSpeed() : typingSpeed,
           );
         } else if (textArray.length >= 1) {
           if (!loop && currentTextIndex === textArray.length - 1) return;
@@ -187,7 +186,7 @@ const TextType = ({
       >
         {cursorCharacter}
       </span>
-    )
+    ),
   );
 };
 

@@ -2,7 +2,7 @@ const BASE_URL = "https://vsolutions-backendd.vercel.app/api";
 
 export async function apiFetch<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
 ): Promise<T> {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     headers: {
