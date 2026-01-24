@@ -66,7 +66,7 @@ const Header = () => {
         <div
           className={cn(
             "absolute inset-0 bg-background/0 backdrop-blur-md glass border-b border-border/50 transition-opacity duration-300",
-            isCompact ? "opacity-90" : "opacity-100"
+            isCompact ? "opacity-90" : "opacity-100",
           )}
         />
 
@@ -94,7 +94,7 @@ const Header = () => {
                 "duration-[300ms,600ms] ease-out",
                 showText
                   ? "opacity-100 translate-x-0 scale-100 max-w-[220px] blur-0"
-                  : "opacity-0 -translate-x-3 scale-95 max-w-0 blur-[4px]"
+                  : "opacity-0 -translate-x-3 scale-95 max-w-0 blur-[4px]",
               )}
             >
               <span className="font-display font-bold text-xl text-foreground whitespace-nowrap">
@@ -116,7 +116,7 @@ const Header = () => {
                   "relative font-medium text-sm transition-colors hover:text-primary",
                   location.pathname === item.path
                     ? "text-primary"
-                    : "text-foreground/80"
+                    : "text-foreground/80",
                 )}
               >
                 {item.name}
@@ -127,7 +127,6 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-foreground hover:text-primary transition-colors ml-auto"
@@ -141,13 +140,12 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Menu */}
       <div
         className={cn(
           "fixed inset-0 z-40 md:hidden transition-all duration-300",
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            : "opacity-0 pointer-events-none",
         )}
       >
         <div
@@ -164,7 +162,7 @@ const Header = () => {
                 "font-medium text-lg py-3 px-4 rounded-xl transition-all",
                 location.pathname === item.path
                   ? "bg-primary/20 text-primary"
-                  : "text-foreground/80 hover:bg-secondary hover:text-foreground"
+                  : "text-foreground/80 hover:bg-secondary hover:text-foreground",
               )}
               style={{ animationDelay: `${index * 50}ms` }}
             >

@@ -9,6 +9,7 @@ import { useState } from "react";
 import SplashCursor from "../efects/SplashCursor";
 import StarBorder from "../efects/StarBorder";
 import "../efects/botton.css";
+import "../efects/liquid-box-btn.css";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
@@ -105,39 +106,21 @@ const HeroSection = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <StarBorder
-                  as="button"
-                  className="custom-class"
-                  color="magenta"
-                  speed="1s"
-                >
-                  <Button asChild size="lg" className="liquid-btn">
-                    <Link to="/contacto">
-                      <span className="shine"></span>
-                      Contacta Conmigo
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </StarBorder>
+                <Button asChild size="lg" className="liquid-box-btn">
+                  <Link to="/contacto">
+                    <span className="shine"></span>
+                    Contacta Conmigo
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
 
-                <StarBorder
-                  as="button"
-                  className="custom-class"
-                  color="magenta"
-                  speed="1.5s"
-                >
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="liquid-btn"
-                    size="lg"
-                  >
-                    <Link to="/servicios">
-                      <span className="shine"></span>
-                      Ver Servicios
-                    </Link>
-                  </Button>
-                </StarBorder>
+                <Button asChild className="liquid-box-btn" size="lg">
+                  <Link to="/servicios">
+                    <span className="shine"></span>
+                    Ver Servicios
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

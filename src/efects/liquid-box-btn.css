@@ -1,0 +1,122 @@
+.liquid-box-btn {
+  position: relative;
+  padding: 18px 28px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+
+  /* Variables del borde animado */
+  --border-angle: 0turn;
+  --main-bg: linear-gradient(135deg, red, blue);
+  --gradient-border: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    #08f,
+    #f03 99%,
+    transparent
+  );
+
+  border: 5px solid transparent;
+  border-radius: 50px;
+
+  background:
+    var(--main-bg) padding-box,
+    var(--gradient-border) border-box;
+
+  box-shadow:
+    0 0 20px rgba(79, 172, 254, 0.8),
+    0 0 40px rgba(0, 242, 254, 0.6);
+
+  overflow: hidden;
+  transition: transform 0.2s ease;
+
+  animation: bg-spin 3s linear infinite;
+}
+
+.liquid-box-btn:hover {
+  transform: scale(1.05);
+  animation-play-state: paused;
+}
+
+/* Ondas líquidas */
+.liquid-box-btn::before,
+.liquid-box-btn::after {
+  content: "";
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 300%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 20%,
+    transparent 70%
+  );
+  animation: wave 6s linear infinite;
+  border-radius: 40%;
+  z-index: 1;
+}
+
+.liquid-box-btn::after {
+  animation-duration: 8s;
+  opacity: 0.6;
+}
+
+/* Brillo */
+.liquid-box-btn .shine {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 60%
+  );
+  transform: skewX(-25deg);
+  animation: shineMove 4s infinite;
+  z-index: 2;
+}
+
+/* Texto encima de todo */
+.liquid-box-btn span {
+  position: relative;
+  z-index: 3;
+}
+
+/* Animaciones */
+@keyframes wave {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10%) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+@keyframes shineMove {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
