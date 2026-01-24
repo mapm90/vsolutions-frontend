@@ -10,6 +10,20 @@ import SplashCursor from "../efects/SplashCursor";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
+  function calculateAge(birthYear: number, birthMonth: number): number {
+    const today = new Date();
+    let age = today.getFullYear() - birthYear;
+
+    // Si aún no ha llegado el mes de cumpleaños, restamos 1
+    if (today.getMonth() < birthMonth) {
+      age--;
+    }
+
+    return age;
+  }
+
+  const edadprofesional = calculateAge(2016, 3);
+
   return (
     <section className="min-h-screen pt-0 lg:pt-0 relative overflow-hidden bg-background">
       <SplashCursor />
@@ -69,7 +83,7 @@ const HeroSection = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  +10 Años de Experiencia
+                  +{edadprofesional} Años de Experiencia
                 </motion.span>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                   Soluciones <span className="text-gradient">Tecnológicas</span>{" "}
