@@ -64,7 +64,7 @@ const HeroSection = () => {
           {/* Content Column */}
           <div
             className="
-              w-full lg:w-[60%] flex flex-col justify-center 
+              w-full lg:w-[60%] flex flex-col 
               px-6 lg:px-16 py-8 lg:py-16 
               mt-[320px] lg:mt-0 
               bg-cover bg-center bg-no-repeat
