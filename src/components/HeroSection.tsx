@@ -126,8 +126,14 @@ const HeroSection = () => {
                   color="magenta"
                   speed="1.5s"
                 >
-                  <Button asChild variant="outline" size="lg">
-                    <Link to="/servicios" className="text-black">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="liquid-btn"
+                    size="lg"
+                  >
+                    <Link to="/servicios">
+                      <span className="shine"></span>
                       Ver Servicios
                     </Link>
                   </Button>
