@@ -110,11 +110,18 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li className="flex items-center gap-3 text-muted-foreground text-sm">
                   <Mail className="w-4 h-4 text-primary" />
-                  vservicesac@gmail.com
+                  <a
+                    href="mailto:vservicesac@gmail.com"
+                    className="hover:underline"
+                  >
+                    vservicesac@gmail.com
+                  </a>
                 </li>
                 <li className="flex items-center gap-3 text-muted-foreground text-sm">
                   <Phone className="w-4 h-4 text-primary" />
-                  +34 674993764
+                  <a href="tel:+34674993764" className="hover:underline">
+                    +34 674 99 37 64
+                  </a>
                 </li>
                 <li className="flex items-center gap-3 text-muted-foreground text-sm">
                   <MapPin className="w-4 h-4 text-primary" />
