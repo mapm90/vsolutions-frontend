@@ -93,7 +93,7 @@ const HeroSection = () => {
                   <p className="font-semibold mb-2 text-left lg:text-left">
                     <TextType
                       text={[
-                        "Soy Verónica Borges",
+                        "Soy Verónica Borges,",
                         " fundadora de VDMM-Services ...",
                         "especialista en servicios informáticos",
                         "y estoy aquí para ayudarte.",
