@@ -15,11 +15,11 @@ import { Link } from "react-router-dom";
 
 const WaveFooter = () => {
   return (
-    <footer className="relative bg-zinc-900 min-h-[50vh]">
+    <footer className="relative bg-zinc-900 ">
       {/* Onda SVG suave y fluida */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none transform -translate-y-full">
         <svg
-          className="relative block w-full h-[80px] md:h-[120px]"
+          className="relative block w-full h-[80px] md:h-[100px]"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +32,9 @@ const WaveFooter = () => {
       </div>
 
       {/* Contenido del Footer */}
-      <div className="bg-[#eba5d6] pt-16 pb-8">
+      <div className="bg-[#eba5d6] pt-8 pb-4">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {/* Logo & Description */}
             <div className="lg:col-span-1">
               <Link to="/" className="flex items-center gap-3 mb-4">
@@ -146,7 +146,7 @@ const WaveFooter = () => {
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-border pt-8 text-center">
+          <div className="border-t border-border pt-4 text-center">
             <p className="text-muted-foreground text-sm">
               © {new Date().getFullYear()} vdmm-services.Todos los derechos
               reservados. Servicios informáticos profesionales en España.
