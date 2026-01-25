@@ -219,7 +219,7 @@ const Contacto = () => {
         <Header />
       </div>
       <motion.main
-        className="relative z-10 mt-12 md:mt-10 pb-12"
+        className="relative z-10 mt-12 md:mt-10 pb-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -245,8 +245,8 @@ const Contacto = () => {
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {/* Contact Form */}
-            <div className="card-gradient rounded-2xl p-6 md:p-8 border border-border/50">
-              <div className="flex items-center gap-3 mb-6">
+            <div className="card-gradient rounded-2xl p-6 md:p-2 border border-border/50">
+              <div className="flex items-center gap-3 mb-2">
                 <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
                   <MessageSquare className="w-6 h-6 text-primary" />
                 </div>
@@ -329,7 +329,7 @@ const Contacto = () => {
             {/* Contact Info */}
             <div className="space-y-6">
               <div className="card-gradient rounded-2xl p-6 md:p-8 border border-border/50">
-                <h3 className="font-display font-semibold text-xl text-foreground mb-6">
+                <h3 className="font-display font-semibold text-xl text-foreground mb-6 text-left">
                   Información de Contacto
                 </h3>
 
@@ -369,7 +369,7 @@ const Contacto = () => {
           </div>
         </motion.div>
       </motion.main>
-      <div className="relative z-20 mt-24 mb-24">
+      <div className="relative z-20 mt-1 mb-16">
         <ComentsCard />
       </div>
 
