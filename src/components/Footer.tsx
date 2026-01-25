@@ -148,8 +148,9 @@ const WaveFooter = () => {
           {/* Copyright */}
           <div className="border-t border-border pt-4 text-center">
             <p className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} vdmm-services.Todos los derechos
-              reservados. Servicios informáticos profesionales en España.
+              © {new Date().getFullYear()} vdmm-services. Casi todos los
+              derechos reservados. Servicios informáticos profesionales en
+              España.
             </p>
           </div>
         </div>
