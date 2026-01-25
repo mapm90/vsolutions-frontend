@@ -37,22 +37,21 @@ const HeroSection = () => {
         <div className="flex min-h-[calc(100vh-6rem)]">
           {/* Image Column - PC */}
           <div className="hidden lg:flex lg:w-[40%] relative">
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center fixed top-16 left-[10%] w-[30%]">
               <img
                 src={perfil}
-                alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
+                alt="Verónica Borges, fundadora de vdmm-services"
                 className="w-full h-full object-cover rounded-tr-[3rem] scale-x-[-1]"
               />
             </div>
           </div>
 
-          {/* Mobile Image */}
-          <div className="lg:hidden absolute top-0 left-0 right-0 h-[500px] flex items-center justify-center ">
-            <div className="w-full h-full from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-primary/30 relative">
+          <div className="lg:hidden absolute top-0 left-0 right-0 h-[500px] flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center relative">
               <img
                 src={perfil}
-                alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
-                className="w-full h-full object-cover "
+                alt="Verónica Borges, fundadora de vdmm-services"
+                className="w-full h-full object-cover object-top" // <- aquí
               />
               <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
             </div>
