@@ -37,7 +37,7 @@ const HeroSection = () => {
         <div className="flex min-h-[calc(100vh-6rem)]">
           {/* Image Column - PC */}
           <div className="hidden lg:flex lg:w-[40%] relative">
-            <div className="w-auto h-auto flex items-center justify-center fixed top-16 left-[1%] w-[45%]">
+            <div className="w-auto h-auto flex items-center justify-center fixed top-16 left-[1%] w-[40%]">
               <img
                 src={perfil}
                 alt="Verónica Borges, fundadora de vdmm-services"
