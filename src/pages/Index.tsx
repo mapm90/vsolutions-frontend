@@ -1,18 +1,19 @@
 import Header from "@/components/Header";
-import Footer1 from "@/components/Footer1";
+
 import HeroSection from "@/components/HeroSection";
-import { motion } from "framer-motion";
+
 import { Helmet } from "react-helmet-async";
 
+import Footer from "@/components/Footer";
+import fondo from "../media/pexels-tara-winstead-8386434.jpg";
 const Index = () => {
   return (
-    <motion.div
-      className="min-h-screen bg-background relative overflow-hidden"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
+    <div className="relative min-h-screen overflow-hidden">
+      {/* 🌄 Fondo fijo detrás de todo */}
+      <div
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-[-1] opacity-50"
+        style={{ backgroundImage: `url(${fondo})` }}
+      />
       {/* 🔹 Helmet para SEO */}
       <Helmet>
         <meta
@@ -82,7 +83,7 @@ const Index = () => {
       </Helmet>
 
       {/* 🌟 Fondo animado */}
-      <div className="fixed inset-0 pointer-events-none">
+      <div className="fixed inset-0 pointer-events-none z-[-1]">
         <div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"
           style={{ background: "hsl(var(--glow-primary))" }}
@@ -96,26 +97,19 @@ const Index = () => {
         />
         <div
           className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full opacity-10 blur-[80px] animate-pulse-glow"
-          style={{
-            background: "hsl(var(--glow-pink))",
-            animationDelay: "4s",
-          }}
+          style={{ background: "hsl(var(--glow-pink))", animationDelay: "4s" }}
         />
       </div>
+      <div className="relative z-10">
+        <Header />
 
-      <Header />
-
-      <motion.main
-        className="relative z-10 mt-[var(--header-height)] "
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-      >
         <HeroSection />
-      </motion.main>
 
-      <Footer1 />
-    </motion.div>
+        <div className="relative z-10 mt-16">
+          <Footer />
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -13,53 +13,26 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const WaveFooter = () => {
   return (
-    <footer className="relative mt-20">
-      {/* Wavy top SVG */}
-      <div className="absolute top-0 left-0 right-0 -translate-y-full overflow-hidden">
+    <footer className="relative bg-zinc-900 min-h-[50vh]">
+      {/* Onda SVG suave y fluida */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none transform -translate-y-full">
         <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-auto"
+          className="relative block w-full h-[80px] md:h-[120px]"
+          viewBox="0 0 1200 120"
           preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <defs>
-            <linearGradient
-              id="animatedGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#ff6ec7">
-                <animate
-                  attributeName="stop-color"
-                  values="#ff6ec7;#8e2de2;#ff6ec7"
-                  dur="5s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-              <stop offset="100%" stopColor="#8e2de2">
-                <animate
-                  attributeName="stop-color"
-                  values="#8e2de2;#ff6ec7;#8e2de2"
-                  dur="5s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-            </linearGradient>
-          </defs>
-
           <path
-            d="M0 120L60 105C120 90 240 60 360 52.5C480 45 600 60 720 67.5C840 75 960 75 1080 67.5C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-            fill="url(#animatedGradient)"
+            d="M0,0 C150,90 350,90 600,45 C850,0 1050,30 1200,90 L1200,120 L0,120 Z"
+            fill="#eba5d6"
           />
         </svg>
       </div>
 
-      <div className="bg-transparent pt-16 pb-8">
+      {/* Contenido del Footer */}
+      <div className="bg-[#eba5d6] pt-16 pb-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Logo & Description */}
@@ -185,4 +158,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default WaveFooter;

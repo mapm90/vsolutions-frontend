@@ -8,7 +8,7 @@ import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import SplashCursor from "../efects/SplashCursor";
-
+import fondo from "../media/pexels-tima-miroshnichenko-6612376.jpg";
 import {
   Mail,
   Phone,
@@ -108,6 +108,10 @@ const Contacto = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <div
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-30"
+        style={{ backgroundImage: `url(${fondo})` }}
+      />
       <SplashCursor />
       <Helmet>
         <meta
@@ -210,7 +214,10 @@ const Contacto = () => {
           }}
         />
       </div>
-      <Header />
+
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Header />
+      </div>
       <motion.main
         className="relative z-10 mt-12 md:mt-10 pb-12"
         initial={{ opacity: 0 }}
@@ -362,8 +369,13 @@ const Contacto = () => {
           </div>
         </motion.div>
       </motion.main>
-      <ComentsCard />
-      <Footer />
+      <div className="relative z-20 mt-24 mb-24">
+        <ComentsCard />
+      </div>
+
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
   );
 };

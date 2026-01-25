@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { apiFetch } from "@/pages/api/fetchapi";
 import { motion } from "framer-motion";
-
 import ErrorPage from "./ErrorPage";
 import { Helmet } from "react-helmet-async";
 import SplashCursor from "@/efects/SplashCursor";
+import fondo from "../media/pexels-olenkabohovyk-1772123.jpg";
 const categories = [
   "Todos",
   "Mantenimiento",
@@ -103,6 +103,10 @@ const Tips = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <div
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-30"
+        style={{ backgroundImage: `url(${fondo})` }}
+      />
       <SplashCursor />
       <div className="fixed inset-0 pointer-events-none">
         <div
@@ -287,7 +291,10 @@ const Tips = () => {
           )}
         </motion.div>
       </motion.main>
-      <Footer />
+
+      <div className="relative z-10 mt-24 ">
+        <Footer />
+      </div>
     </div>
   );
 };

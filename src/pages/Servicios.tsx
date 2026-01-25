@@ -4,6 +4,7 @@ import ServiceCard from "@/components/ServiceCard";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Helmet } from "react-helmet-async";
+import fondo from "../media/pexels-jeshoots-4316.jpg";
 
 import {
   Wifi,
@@ -158,7 +159,13 @@ const services = [
   },
 ];
 
-function ServiceItem({ service, index }: { service: typeof services[number]; index: number }) {
+function ServiceItem({
+  service,
+  index,
+}: {
+  service: (typeof services)[number];
+  index: number;
+}) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -180,6 +187,10 @@ function ServiceItem({ service, index }: { service: typeof services[number]; ind
 const Servicios = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <div
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-30"
+        style={{ backgroundImage: `url(${fondo})` }}
+      />
       {/* Animated background gradients */}
       <div className="fixed inset-0 pointer-events-none">
         <div
@@ -299,9 +310,13 @@ const Servicios = () => {
 
           {/* Services Grid con ScrollStack */}
           {/* Services Grid */}
-          <div className="container mx-auto px-4 max-w-6xl space-y-8">
+          <div className="container mx-auto px-4 max-w-6xl space-y-8 mb-16">
             {services.map((service, index) => (
-              <ServiceItem key={service.title} service={service} index={index} />
+              <ServiceItem
+                key={service.title}
+                service={service}
+                index={index}
+              />
             ))}
           </div>
         </motion.div>

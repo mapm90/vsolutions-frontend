@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import perfil from "../media/perfil.avif";
-import logo from "../media/logo1.avif";
+import perfil from "../media/perfil.png";
+
 import { motion } from "framer-motion";
 import TextType from "../efects/TextType";
 import { useState } from "react";
@@ -25,7 +25,7 @@ const HeroSection = () => {
   const edadprofesional = calculateAge(2016, 3);
 
   return (
-    <section className="min-h-screen pt-0 lg:pt-0 relative overflow-hidden bg-background">
+    <section className="min-h-screen pt-0 lg:pt-0 relative overflow-hidden mt-16">
       <SplashCursor />
 
       {/* Background Glow Effects */}
@@ -36,26 +36,23 @@ const HeroSection = () => {
       <div className="relative">
         <div className="flex min-h-[calc(100vh-6rem)]">
           {/* Image Column - PC */}
-          <div className="hidden lg:flex lg:w-[40%] relative items-end bg-gradient-to-br from-primary/10 via-accent/5 to-transparent rounded-tr-[3rem]">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
-            <div className="relative w-full h-full flex items-end justify-center">
-              <div className="w-full h-full bg-gradient-to-t from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-r-4 border-primary/30 rounded-tr-[3rem]">
-                <img
-                  src={perfil}
-                  alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
-                  className="w-full h-full object-cover rounded-tr-[3rem] animate-color-cycle"
-                />
-              </div>
+          <div className="hidden lg:flex lg:w-[40%] relative">
+            <div className="w-full h-full flex items-center justify-center fixed top-16 left-[10%] w-[30%]">
+              <img
+                src={perfil}
+                alt="Verónica Borges, fundadora de vdmm-services"
+                className="w-full h-full object-cover rounded-tr-[3rem] scale-x-[-1]"
+              />
             </div>
           </div>
 
           {/* Mobile Image */}
-          <div className="lg:hidden absolute top-0 left-0 right-0 h-[500px] flex items-center justify-center bg-gradient-to-b from-primary/10 to-transparent px-0 z-0">
-            <div className="w-full h-full bg-gradient-to-br from-secondary via-card to-card/50 flex items-center justify-center border-t-4 border-primary/30 relative">
+          <div className="lg:hidden absolute top-0 left-0 right-0 h-[500px] flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center relative">
               <img
                 src={perfil}
-                alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
-                className="w-full h-full object-cover animate-color-cycle"
+                alt="Verónica Borges, fundadora de vdmm-services"
+                className="w-full h-full object-cover object-top"
               />
               <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
             </div>
@@ -71,10 +68,6 @@ const HeroSection = () => {
               relative
             "
           >
-            <div
-              className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-20"
-              style={{ backgroundImage: `url(${logo})` }}
-            />
             <div className="max-w-2xl space-y-8 relative z-10">
               <div className="space-y-6">
                 <motion.span
@@ -141,64 +134,6 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-
-        {/* ------------------- SVG ONDA ------------------- */}
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="hidden lg:block absolute -bottom-5 left-0 w-full z-20 pointer-events-none"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient
-              id="animatedGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#ff6ec7">
-                <animate
-                  attributeName="stop-color"
-                  values="#ff6ec7;#8e2de2;#ff6ec7"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-              <stop offset="100%" stopColor="#8e2de2">
-                <animate
-                  attributeName="stop-color"
-                  values="#8e2de2;#ff6ec7;#8e2de2"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-            </linearGradient>
-
-            {/* Mask para difuminar borde superior */}
-            <linearGradient id="fadeMask" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="white" stopOpacity="0" />
-              <stop offset="20%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="1" />
-            </linearGradient>
-            <mask id="maskFade">
-              <rect
-                x="0"
-                y="0"
-                width="1440"
-                height="120"
-                fill="url(#fadeMask)"
-              />
-            </mask>
-          </defs>
-
-          <path
-            d="M0 120L60 105C120 90 240 60 360 52.5C480 45 600 60 720 67.5C840 75 960 75 1080 67.5C1200 60 1320 45 1380 37.5L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-            fill="url(#animatedGradient)"
-            mask="url(#maskFade)"
-          />
-        </svg>
       </div>
     </section>
   );
