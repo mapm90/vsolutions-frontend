@@ -2,7 +2,6 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import perfil from "../media/perfil.png";
-
 import { motion } from "framer-motion";
 import TextType from "../efects/TextType";
 import { useState } from "react";
@@ -37,7 +36,7 @@ const HeroSection = () => {
         <div className="flex min-h-[calc(100vh-6rem)]">
           {/* Image Column - PC */}
           <div className="hidden lg:flex lg:w-[40%] relative">
-            <div className=" h-auto flex items-center justify-center fixed top-16 -left-[4%] w-[50%]">
+            <div className=" h-auto flex items-center justify-center fixed top-16 left-[1%] w-[45%]">
               <img
                 src={perfil}
                 alt="Verónica Borges, fundadora de vdmm-services"
@@ -52,7 +51,7 @@ const HeroSection = () => {
               <img
                 src={perfil}
                 alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
-                className="w-full h-full object-cover "
+                className="w-full h-full object-contain "
               />
               <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
             </div>
@@ -88,11 +87,9 @@ const HeroSection = () => {
                       text={[
                         "Soy Verónica Borges,",
                         " fundadora de VDMM-Services ...",
-                        "especialista en servicios informáticos",
-                        "y estoy aquí para ayudarte.",
-                        " ¡Hablemos de cómo puedo mejorar tu experiencia tecnológica!",
+                        " especialista en servicios informáticos,",
+                        " y estoy aquí para ayudarte.",
                         " Tu tranquilidad digital es mi prioridad.",
-                        " Juntos, haremos que la tecnología trabaje para ti.",
                         " ¡Contáctame hoy mismo!",
                       ]}
                       typingSpeed={50}

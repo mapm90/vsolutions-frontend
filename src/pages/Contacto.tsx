@@ -109,7 +109,7 @@ const Contacto = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       <div
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-30"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-35"
         style={{ backgroundImage: `url(${fondo})` }}
       />
       <SplashCursor />
