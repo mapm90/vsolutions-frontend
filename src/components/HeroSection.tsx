@@ -53,6 +53,7 @@ const HeroSection = () => {
                 src={perfil}
                 alt="Verónica Borges, fundadora de vdmm-services, especialista en servicios informáticos"
                 className="w-full h-full object-contain "
+                loading="lazy"
               />
               <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
             </div>
@@ -80,7 +81,7 @@ const HeroSection = () => {
                 </motion.span>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                   Soluciones <span className="text-gradient">Tecnológicas</span>{" "}
-                  a tu Medidas
+                  a tu Medida
                 </h1>
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
                   <p className="font-semibold mb-2 text-left lg:text-left">
