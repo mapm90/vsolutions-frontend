@@ -5,7 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import { Helmet } from "react-helmet-async";
 
 import Footer from "@/components/Footer";
-import fondo from "../media/pexels-tara-winstead-8386434.jpg";
+import fondo from "../media/pexels-tara-winstead-8386434.avif";
 const Index = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
