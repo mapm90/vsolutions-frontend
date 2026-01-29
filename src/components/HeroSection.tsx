@@ -80,7 +80,7 @@ const HeroSection = () => {
                 </motion.span>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                   Soluciones <span className="text-gradient">Tecnológicas</span>{" "}
-                  a tu Medida
+                  a tu Medidas
                 </h1>
                 <div className="text-lg text-muted-foreground leading-relaxed text-justify">
                   <p className="font-semibold mb-2 text-left lg:text-left">
