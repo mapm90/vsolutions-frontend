@@ -41,6 +41,7 @@ const HeroSection = () => {
                 src={perfil}
                 alt="Verónica Borges, fundadora de vdmm-services"
                 className="w-full h-full object-cover rounded-tr-[3rem] scale-x-[-1]"
+                loading="lazy"
               />
             </div>
           </div>
