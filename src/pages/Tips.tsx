@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { apiFetch } from "@/pages/api/fetchapi";
-import { motion } from "framer-motion";
+import { LazyMotion, m, domAnimation } from "framer-motion";
 import ErrorPage from "./ErrorPage";
 import { Helmet } from "react-helmet-async";
 import SplashCursor from "@/efects/SplashCursor";
@@ -201,96 +201,98 @@ const Tips = () => {
         </script>
       </Helmet>
 
-      <motion.main
-        className="relative z-10 mt-12 md:mt-10 pb-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.div className="text-center mb-2 md:mb-3 pt-0">
-          {/* Hero Header */}
-          <motion.div
-            className="text-center mb-10 pt-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
-              Nuestros <span className="text-gradient">Tips</span>
-            </h1>
+      <LazyMotion features={domAnimation}>
+        <m.main
+          className="relative z-10 mt-12 md:mt-10 pb-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <m.div className="text-center mb-2 md:mb-3 pt-0">
+            {/* Hero Header */}
+            <m.div
+              className="text-center mb-10 pt-6"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
+                Nuestros <span className="text-gradient">Tips</span>
+              </h1>
 
-            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Trucos y consejos para mejorar tu experiencia con equipos y
-              software.
-            </p>
-          </motion.div>
-          {/* Search y categorías */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <Input
-                placeholder="Buscar tips..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <button
-                  aria-label={`filtrar tips por ${category}`}
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={cn(
-                    "px-4 py-2 rounded-lg text-sm font-medium transition-all",
-                    selectedCategory === category
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80",
-                  )}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Tips */}
-          {filteredTips.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {visibleTips.map((tip, index) => (
-                  <div
-                    key={tip._id}
-                    className="animate-slide-up"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <TipCard {...tip} />
-                  </div>
-                ))}
+              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                Trucos y consejos para mejorar tu experiencia con equipos y
+                software.
+              </p>
+            </m.div>
+            {/* Search y categorías */}
+            <div className="flex flex-col md:flex-row gap-4 mb-8">
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar tips..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
               </div>
 
-              {hasMore && (
-                <div className="text-center mt-12">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={() => setVisibleCount((prev) => prev + 6)}
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <button
+                    aria-label={`filtrar tips por ${category}`}
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={cn(
+                      "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                      selectedCategory === category
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80",
+                    )}
                   >
-                    Mostrar más tips
-                  </Button>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground text-lg">
-                No se encontraron tips.
-              </p>
+                    {category}
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
-        </motion.div>
-      </motion.main>
+
+            {/* Tips */}
+            {filteredTips.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {visibleTips.map((tip, index) => (
+                    <div
+                      key={tip._id}
+                      className="animate-slide-up"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <TipCard {...tip} />
+                    </div>
+                  ))}
+                </div>
+
+                {hasMore && (
+                  <div className="text-center mt-12">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => setVisibleCount((prev) => prev + 6)}
+                    >
+                      Mostrar más tips
+                    </Button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground text-lg">
+                  No se encontraron tips.
+                </p>
+              </div>
+            )}
+          </m.div>
+        </m.main>
+      </LazyMotion>
 
       <div className="relative z-10 mt-24 ">
         <Footer />

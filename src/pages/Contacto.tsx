@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { motion } from "framer-motion";
+import { LazyMotion, m, domAnimation } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import SplashCursor from "../efects/SplashCursor";
 import fondo from "../media/pexels-tima-miroshnichenko-6612376.jpg";
@@ -218,157 +218,159 @@ const Contacto = () => {
       <div className="fixed top-0 left-0 right-0 z-50">
         <Header />
       </div>
-      <motion.main
-        className="relative z-10 mt-12 md:mt-10 pb-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.div className="text-center mb-2 md:mb-3 pt-0">
-          {/* Hero Header */}
-          <motion.div
-            className="text-center mb-10 pt-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
-              <span className="text-gradient">Contacta</span> con Nosotros
-            </h1>
+      <LazyMotion features={domAnimation}>
+        <m.main
+          className="relative z-10 mt-12 md:mt-10 pb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <m.div className="text-center mb-2 md:mb-3 pt-0">
+            {/* Hero Header */}
+            <m.div
+              className="text-center mb-10 pt-6"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
+                <span className="text-gradient">Contacta</span> con Nosotros
+              </h1>
 
-            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-snug">
-              ¿Tienes alguna pregunta o necesitas nuestros servicios?
-              <br />
-              ¡Estamos aquí para ayudarte!
-            </p>
-          </motion.div>
+              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-snug">
+                ¿Tienes alguna pregunta o necesitas nuestros servicios?
+                <br />
+                ¡Estamos aquí para ayudarte!
+              </p>
+            </m.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Contact Form */}
-            <div className="card-gradient rounded-2xl p-6 md:p-2 border border-border/50">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
-                  <MessageSquare className="w-6 h-6 text-primary" />
+            <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+              {/* Contact Form */}
+              <div className="card-gradient rounded-2xl p-6 md:p-2 border border-border/50">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h2 className="font-display font-semibold text-xl text-foreground">
+                      Envíanos un mensaje
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      Te responderemos en menos de 24h
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="font-display font-semibold text-xl text-foreground">
-                    Envíanos un mensaje
-                  </h2>
-                  <p className="text-sm text-muted-foreground">
-                    Te responderemos en menos de 24h
-                  </p>
-                </div>
-              </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      placeholder="Tu nombre"
+                      value={formData.nombre}
+                      onChange={(e) =>
+                        setFormData({ ...formData, nombre: e.target.value })
+                      }
+                      required
+                    />
+                    <Input
+                      type="tel"
+                      placeholder="Teléfono"
+                      value={formData.telefono}
+                      onChange={(e) =>
+                        setFormData({ ...formData, telefono: e.target.value })
+                      }
+                    />
+                  </div>
                   <Input
-                    placeholder="Tu nombre"
-                    value={formData.nombre}
+                    type="email"
+                    placeholder="Correo electrónico"
+                    value={formData.email}
                     onChange={(e) =>
-                      setFormData({ ...formData, nombre: e.target.value })
+                      setFormData({ ...formData, email: e.target.value })
                     }
                     required
                   />
                   <Input
-                    type="tel"
-                    placeholder="Teléfono"
-                    value={formData.telefono}
+                    placeholder="Asunto"
+                    value={formData.asunto}
                     onChange={(e) =>
-                      setFormData({ ...formData, telefono: e.target.value })
+                      setFormData({ ...formData, asunto: e.target.value })
                     }
+                    required
                   />
-                </div>
-                <Input
-                  type="email"
-                  placeholder="Correo electrónico"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  required
-                />
-                <Input
-                  placeholder="Asunto"
-                  value={formData.asunto}
-                  onChange={(e) =>
-                    setFormData({ ...formData, asunto: e.target.value })
-                  }
-                  required
-                />
-                <Textarea
-                  placeholder="Tu mensaje..."
-                  value={formData.mensaje}
-                  onChange={(e) =>
-                    setFormData({ ...formData, mensaje: e.target.value })
-                  }
-                  rows={5}
-                  required
-                />
-                <Button
-                  type="submit"
-                  className="w-full"
-                  size="lg"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin mr-2" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 mr-2" />
-                      Enviar Mensaje
-                    </>
-                  )}
-                </Button>
-              </form>
-            </div>
+                  <Textarea
+                    placeholder="Tu mensaje..."
+                    value={formData.mensaje}
+                    onChange={(e) =>
+                      setFormData({ ...formData, mensaje: e.target.value })
+                    }
+                    rows={5}
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    size="lg"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin mr-2" />
+                        Enviando...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Enviar Mensaje
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </div>
 
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <div className="card-gradient rounded-2xl p-6 md:p-8 border border-border/50">
-                <h3 className="font-display font-semibold text-xl text-foreground mb-6 text-left">
-                  Información de Contacto
-                </h3>
+              {/* Contact Info */}
+              <div className="space-y-6">
+                <div className="card-gradient rounded-2xl p-6 md:p-8 border border-border/50">
+                  <h3 className="font-display font-semibold text-xl text-foreground mb-6 text-left">
+                    Información de Contacto
+                  </h3>
 
-                <div className="space-y-5">
-                  {contactInfo.map((item, index) => {
-                    const Wrapper = item.href ? "a" : "div";
+                  <div className="space-y-5">
+                    {contactInfo.map((item, index) => {
+                      const Wrapper = item.href ? "a" : "div";
 
-                    return (
-                      <Wrapper
-                        key={index}
-                        {...(item.href && {
-                          href: item.href,
-                          target: "_blank",
-                          rel: "noopener noreferrer",
-                          className: "block hover:opacity-80 transition",
-                        })}
-                      >
-                        <div className="flex items-start gap-4">
-                          <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0 text-primary">
-                            {item.icon}
+                      return (
+                        <Wrapper
+                          key={index}
+                          {...(item.href && {
+                            href: item.href,
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            className: "block hover:opacity-80 transition",
+                          })}
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0 text-primary">
+                              {item.icon}
+                            </div>
+                            <div className="text-left">
+                              <p className="text-sm text-muted-foreground">
+                                {item.label}
+                              </p>
+                              <p className="text-foreground font-medium">
+                                {item.value}
+                              </p>
+                            </div>
                           </div>
-                          <div className="text-left">
-                            <p className="text-sm text-muted-foreground">
-                              {item.label}
-                            </p>
-                            <p className="text-foreground font-medium">
-                              {item.value}
-                            </p>
-                          </div>
-                        </div>
-                      </Wrapper>
-                    );
-                  })}
+                        </Wrapper>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-      </motion.main>
+          </m.div>
+        </m.main>
+      </LazyMotion>
       <div className="relative z-20 mt-1 mb-16">
         <ComentsCard />
       </div>
