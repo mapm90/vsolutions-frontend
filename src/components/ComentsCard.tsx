@@ -108,7 +108,7 @@ const ComentsCard = () => {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -141,7 +141,8 @@ const ComentsCard = () => {
       setFormData({ nombre: "", comentario: "" });
       setOpenForm(false);
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : "Error al enviar comentario";
+      const errorMessage =
+        error instanceof Error ? error.message : "Error al enviar comentario";
       toast({
         title: "Error",
         description: errorMessage,
@@ -203,7 +204,7 @@ const ComentsCard = () => {
           {[...comentarios]
             .sort(
               (a, b) =>
-                new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
+                new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
             )
             .map((c) => (
               <li key={c._id} className="border p-2 rounded">
