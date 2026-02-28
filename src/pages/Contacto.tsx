@@ -239,7 +239,7 @@ const Contacto = () => {
             <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-snug">
               ¿Tienes alguna pregunta o necesitas nuestros servicios?
               <br />
-              ¡Estamos aquí para ayudarte!
+              ¡Estamos aquí para ayudartes!
             </p>
           </motion.div>
 
