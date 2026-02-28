@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import perfil from "../media/perfil.avif";
-import { LazyMotion, m, domAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import TextType from "../efects/TextType";
 import { useState } from "react";
 import SplashCursor from "../efects/SplashCursor";
@@ -71,16 +71,14 @@ const HeroSection = () => {
           >
             <div className="max-w-2xl space-y-8 relative z-10">
               <div className="space-y-6">
-                <LazyMotion features={domAnimation}>
-                  <m.span
-                    className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-primary mb-6"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.3 }}
-                  >
-                    +{edadprofesional} Años de Experiencia
-                  </m.span>
-                </LazyMotion>
+                <motion.span
+                  className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-primary mb-6"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.3 }}
+                >
+                  +{edadprofesional} Años de Experiencia
+                </motion.span>
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
                   Soluciones <span className="text-gradient">Tecnológicas</span>{" "}
                   a tu Medida
