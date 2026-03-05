@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { apiFetch } from "@/pages/api/fetchapi";
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -10,40 +11,30 @@ export default function ChatWidget() {
 
     const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
-
     setInput("");
 
     try {
       const data = await apiFetch("/chat", {
         method: "POST",
         body: JSON.stringify({
-          messages: [
-            {
-              role: "user",
-              content: input,
-            },
-          ],
+          messages: [{ role: "user", content: input }],
         }),
       });
 
       if (data.reply) {
-        const botMessage = { role: "bot", content: data.reply };
-        setMessages((prev) => [...prev, botMessage]);
-      } else {
-        console.error("No reply:", data);
+        setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
   return (
     <>
-      {/* Botón flotante */}
       <button onClick={() => setOpen(!open)} style={styles.floatingButton}>
         💬
       </button>
 
-      {/* Ventana de chat */}
       {open && (
         <div style={styles.chatBox}>
           <div style={styles.messages}>
