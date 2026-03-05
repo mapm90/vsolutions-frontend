@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 
 import HeroSection from "@/components/HeroSection";
+import ChatWidget from "@/components/ChatWidget";
 
 import { Helmet } from "react-helmet-async";
 
@@ -106,6 +107,7 @@ const Index = () => {
         <HeroSection />
 
         <div className="relative z-10 mt-16">
+          <ChatWidget />
           <Footer />
         </div>
       </div>
