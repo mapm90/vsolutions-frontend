@@ -38,12 +38,14 @@ export default function ChatWidget() {
 
       {open && (
         <div style={styles.chatBox}>
+          <div style={styles.header}>Chat</div>
+
           <div style={styles.messages}>
             {messages.map((msg, index) => (
               <div
                 key={index}
                 style={
-                  msg.role === "user" ? styles.userMessage : styles.botMessage
+                  msg.role === "user" ? styles.userBubble : styles.botBubble
                 }
               >
                 {msg.content}
@@ -56,10 +58,12 @@ export default function ChatWidget() {
               style={styles.input}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Escribe tu mensaje..."
+              placeholder="Escribe un mensaje..."
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
-            <button onClick={sendMessage}>Enviar</button>
+            <button style={styles.sendButton} onClick={sendMessage}>
+              Enviar
+            </button>
           </div>
         </div>
       )}
@@ -72,57 +76,88 @@ const styles = {
     position: "fixed",
     bottom: "20px",
     right: "20px",
-    width: "60px",
-    height: "60px",
+    width: "56px",
+    height: "56px",
     borderRadius: "50%",
-    backgroundColor: "#007bff",
+    backgroundColor: "#25D366",
     color: "white",
     border: "none",
     fontSize: "24px",
     cursor: "pointer",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
     zIndex: 1000,
   },
+
   chatBox: {
     position: "fixed",
     bottom: "90px",
     right: "20px",
-    width: "300px",
-    height: "400px",
-    backgroundColor: "white",
-    borderRadius: "10px",
-    boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+    width: "320px",
+    height: "420px",
+    backgroundColor: "#f7f7f7",
+    borderRadius: "16px",
+    boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
     zIndex: 1000,
   },
+
+  header: {
+    padding: "12px",
+    backgroundColor: "#25D366",
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+
   messages: {
     flex: 1,
-    padding: "10px",
+    padding: "12px",
     overflowY: "auto",
   },
-  userMessage: {
-    textAlign: "right",
-    marginBottom: "8px",
+
+  userBubble: {
+    alignSelf: "flex-end",
     backgroundColor: "#DCF8C6",
-    padding: "6px",
-    borderRadius: "8px",
-  },
-  botMessage: {
-    textAlign: "left",
+    padding: "8px 12px",
+    borderRadius: "14px 14px 0 14px",
     marginBottom: "8px",
-    backgroundColor: "#f1f1f1",
-    padding: "6px",
-    borderRadius: "8px",
+    maxWidth: "80%",
   },
+
+  botBubble: {
+    alignSelf: "flex-start",
+    backgroundColor: "white",
+    padding: "8px 12px",
+    borderRadius: "14px 14px 14px 0",
+    marginBottom: "8px",
+    maxWidth: "80%",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.12)",
+  },
+
   inputContainer: {
     display: "flex",
-    borderTop: "1px solid #ccc",
+    padding: "8px",
+    backgroundColor: "white",
+    borderTop: "1px solid #ddd",
   },
+
   input: {
     flex: 1,
     padding: "8px",
-    border: "none",
+    borderRadius: "20px",
+    border: "1px solid #ddd",
     outline: "none",
+  },
+
+  sendButton: {
+    marginLeft: "8px",
+    backgroundColor: "#25D366",
+    color: "white",
+    border: "none",
+    borderRadius: "20px",
+    padding: "0 14px",
+    cursor: "pointer",
   },
 };
