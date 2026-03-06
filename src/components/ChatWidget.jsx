@@ -21,6 +21,7 @@ export default function ChatWidget() {
         }),
       });
 
+      console.log("ERROR OPENROUTER:", data.debug.error);
       if (data.reply) {
         setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
       }
