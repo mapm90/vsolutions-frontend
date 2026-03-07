@@ -21,17 +21,19 @@ export default function ChatWidget() {
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
     const userMessage = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInput("");
     setLoading(true);
     try {
+      const apiMessages = updatedMessages.map((m) => ({
+        role: m.role === "bot" ? "assistant" : m.role,
+        content: m.content,
+      }));
       const data = await apiFetch("/chat", {
         method: "POST",
-        body: JSON.stringify({
-          messages: [{ role: "user", content: input }],
-        }),
+        body: JSON.stringify({ messages: apiMessages }),
       });
-      console.log("ERROR OPENROUTER:", data.debug?.error);
       if (data.reply) {
         setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
       }
