@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { apiFetch } from "@/pages/api/fetchapi";
 
-// Lee las variables CSS del index.css en tiempo de ejecución
 const cssVar = (name) =>
   getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
@@ -17,7 +16,6 @@ export default function ChatWidget() {
   const [gradient, setGradient] = useState("");
   const messagesEndRef = useRef(null);
 
-  // Leer el gradiente una vez que el DOM esté listo
   useEffect(() => {
     setGradient(getGradient());
   }, []);
@@ -192,6 +190,7 @@ export default function ChatWidget() {
                   height: "7px",
                   borderRadius: "50%",
                   background: "#86efac",
+                  animation: "statusPulse 2s ease-in-out infinite",
                 }}
               />
               <span
@@ -215,6 +214,7 @@ export default function ChatWidget() {
             gap: "10px",
           }}
         >
+          {/* ── Estado vacío con robot animado ── */}
           {messages.length === 0 && (
             <div
               style={{
@@ -223,33 +223,81 @@ export default function ChatWidget() {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "100%",
-                gap: "10px",
+                gap: "16px",
                 textAlign: "center",
               }}
             >
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "50%",
-                  background: gradient,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "22px",
-                }}
-              >
-                🤖
+              {/* Contenedor del robot con glow de fondo */}
+              <div style={{ position: "relative" }}>
+                {/* Anillo de glow exterior pulsante */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "-8px",
+                    borderRadius: "50%",
+                    background: gradient,
+                    opacity: 0.15,
+                    animation: "robotGlowRing 2.5s ease-in-out infinite",
+                  }}
+                />
+
+                {/* Anillo medio */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "-4px",
+                    borderRadius: "50%",
+                    background: gradient,
+                    opacity: 0.25,
+                    animation: "robotGlowRing 2.5s ease-in-out infinite 0.3s",
+                  }}
+                />
+
+                {/* Círculo principal con robot flotando */}
+                <div
+                  style={{
+                    width: "72px",
+                    height: "72px",
+                    borderRadius: "50%",
+                    background: gradient,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "32px",
+                    position: "relative",
+                    animation: "robotFloat 3s ease-in-out infinite",
+                    boxShadow: `0 8px 32px hsl(${cssVar("--glow-primary")} / 0.4)`,
+                  }}
+                >
+                  🤖
+                </div>
               </div>
-              <p
-                style={{
-                  color: `hsl(${cssVar("--muted-foreground")})`,
-                  fontSize: "13px",
-                  margin: 0,
-                }}
-              >
-                ¿En qué puedo ayudarte hoy?
-              </p>
+
+              {/* Texto con animación de entrada */}
+              <div style={{ animation: "fadeInUp 0.6s ease-out forwards" }}>
+                <p
+                  style={{
+                    color: `hsl(${cssVar("--foreground")})`,
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    margin: "0 0 4px 0",
+                  }}
+                >
+                  ¡Hola! Soy tu asistente AI
+                </p>
+                <p
+                  style={{
+                    color: `hsl(${cssVar("--muted-foreground")})`,
+                    fontSize: "12px",
+                    margin: 0,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  ¿En qué puedo ayudarte hoy?
+                </p>
+              </div>
+
+              {/* Sugerencias rápidas */}
             </div>
           )}
 
@@ -261,6 +309,7 @@ export default function ChatWidget() {
                 flexDirection: msg.role === "user" ? "row-reverse" : "row",
                 alignItems: "flex-end",
                 gap: "8px",
+                animation: "fadeInUp 0.3s ease-out forwards",
               }}
             >
               {msg.role === "bot" && (
@@ -428,9 +477,29 @@ export default function ChatWidget() {
       </div>
 
       <style>{`
+        @keyframes robotFloat {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-10px); }
+        }
+
+        @keyframes robotGlowRing {
+          0%, 100% { transform: scale(1);    opacity: 0.15; }
+          50%       { transform: scale(1.15); opacity: 0.3;  }
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0);    }
+        }
+
         @keyframes chatBounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
+          0%, 100% { transform: translateY(0);   }
+          50%       { transform: translateY(-5px); }
+        }
+
+        @keyframes statusPulse {
+          0%, 100% { opacity: 1;   transform: scale(1);    }
+          50%       { opacity: 0.6; transform: scale(1.3); }
         }
       `}</style>
     </>,
