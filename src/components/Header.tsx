@@ -155,6 +155,7 @@ const Header = () => {
           onClick={() => setIsMobileMenuOpen(false)}
         />
         <nav className="absolute top-20 left-4 right-4 glass rounded-2xl p-6 flex flex-col gap-4">
+          <ThemeToggle />
           {navItems.map((item, index) => (
             <Link
               key={item.path}
