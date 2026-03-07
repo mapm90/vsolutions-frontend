@@ -161,7 +161,7 @@ export default function ChatWidget() {
               fontSize: "18px",
             }}
           >
-            🤖
+            ✨
           </div>
           <div>
             <div
@@ -172,7 +172,7 @@ export default function ChatWidget() {
                 lineHeight: 1.2,
               }}
             >
-              Asistente Virtual
+              Asistente AI
             </div>
             <div
               style={{
@@ -235,7 +235,7 @@ export default function ChatWidget() {
                   fontSize: "22px",
                 }}
               >
-                💬
+                🤖
               </div>
               <p style={{ color: "#94a3b8", fontSize: "13px", margin: 0 }}>
                 ¿En qué puedo ayudarte hoy?
