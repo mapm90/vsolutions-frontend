@@ -9,6 +9,7 @@ import Tips from "./pages/Tips";
 import Contacto from "./pages/Contacto";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./efects/ScrollToTop";
+import ChatWidget from "./components/ChatWidget";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <ChatWidget />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/servicios" element={<Servicios />} />

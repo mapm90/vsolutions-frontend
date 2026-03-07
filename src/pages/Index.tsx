@@ -107,7 +107,6 @@ const Index = () => {
         <HeroSection />
 
         <div className="relative z-10 mt-16">
-          <ChatWidget />
           <Footer />
         </div>
       </div>
