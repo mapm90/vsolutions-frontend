@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import logo from "../media/logo1.avif";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 // easing cúbico (movimiento orgánico)
 const easeInOutCubic = (t: number) =>
@@ -108,6 +109,7 @@ const Header = () => {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8 ml-auto">
+            <ThemeToggle />
             {navItems.map((item) => (
               <Link
                 key={item.path}
