@@ -2,17 +2,25 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { apiFetch } from "@/pages/api/fetchapi";
 
-const BRAND = {
-  gradient: "linear-gradient(135deg, #34d399, #0d9488)",
-  userBubble: "linear-gradient(135deg, #10b981, #0d9488)",
-};
+// Lee las variables CSS del index.css en tiempo de ejecución
+const cssVar = (name) =>
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+const getGradient = () =>
+  `linear-gradient(135deg, hsl(${cssVar("--glow-primary")}), hsl(${cssVar("--glow-accent")}))`;
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [gradient, setGradient] = useState("");
   const messagesEndRef = useRef(null);
+
+  // Leer el gradiente una vez que el DOM esté listo
+  useEffect(() => {
+    setGradient(getGradient());
+  }, []);
 
   useEffect(() => {
     if (open) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -50,7 +58,7 @@ export default function ChatWidget() {
 
   return createPortal(
     <>
-      {/* Botón flotante */}
+      {/* ── Botón flotante ── */}
       <button
         onClick={() => setOpen(!open)}
         style={{
@@ -61,22 +69,18 @@ export default function ChatWidget() {
           width: "56px",
           height: "56px",
           borderRadius: "50%",
-          background: BRAND.gradient,
+          background: gradient,
           color: "white",
           border: "none",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "0 8px 24px rgba(13,148,136,0.4)",
+          boxShadow: `0 8px 24px hsl(${cssVar("--glow-primary")} / 0.4)`,
           transition: "transform 0.2s ease, box-shadow 0.2s ease",
         }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "scale(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "scale(1)";
-        }}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         aria-label="Abrir chat"
       >
         {open ? (
@@ -112,7 +116,7 @@ export default function ChatWidget() {
         )}
       </button>
 
-      {/* Panel del chat */}
+      {/* ── Panel del chat ── */}
       <div
         style={{
           position: "fixed",
@@ -121,14 +125,14 @@ export default function ChatWidget() {
           zIndex: 99998,
           width: "min(380px, calc(100vw - 40px))",
           height: "480px",
-          background: "#ffffff",
+          background: `hsl(${cssVar("--background")})`,
           borderRadius: "20px",
           boxShadow:
             "0 20px 60px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08)",
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
-          border: "1px solid rgba(0,0,0,0.06)",
+          border: `1px solid hsl(${cssVar("--border")})`,
           transition: "opacity 0.25s ease, transform 0.25s ease",
           opacity: open ? 1 : 0,
           transform: open
@@ -141,7 +145,7 @@ export default function ChatWidget() {
         {/* Header */}
         <div
           style={{
-            background: BRAND.gradient,
+            background: gradient,
             padding: "14px 16px",
             display: "flex",
             alignItems: "center",
@@ -205,7 +209,7 @@ export default function ChatWidget() {
             flex: 1,
             overflowY: "auto",
             padding: "16px",
-            background: "#f8fafc",
+            background: `hsl(${cssVar("--muted")})`,
             display: "flex",
             flexDirection: "column",
             gap: "10px",
@@ -228,7 +232,7 @@ export default function ChatWidget() {
                   width: "48px",
                   height: "48px",
                   borderRadius: "50%",
-                  background: "linear-gradient(135deg, #d1fae5, #ccfbf1)",
+                  background: gradient,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -237,7 +241,13 @@ export default function ChatWidget() {
               >
                 🤖
               </div>
-              <p style={{ color: "#94a3b8", fontSize: "13px", margin: 0 }}>
+              <p
+                style={{
+                  color: `hsl(${cssVar("--muted-foreground")})`,
+                  fontSize: "13px",
+                  margin: 0,
+                }}
+              >
                 ¿En qué puedo ayudarte hoy?
               </p>
             </div>
@@ -259,7 +269,7 @@ export default function ChatWidget() {
                     width: "24px",
                     height: "24px",
                     borderRadius: "50%",
-                    background: BRAND.gradient,
+                    background: gradient,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -283,13 +293,19 @@ export default function ChatWidget() {
                   fontSize: "13px",
                   lineHeight: 1.5,
                   background:
-                    msg.role === "user" ? BRAND.userBubble : "#ffffff",
-                  color: msg.role === "user" ? "white" : "#1e293b",
+                    msg.role === "user" ? gradient : `hsl(${cssVar("--card")})`,
+                  color:
+                    msg.role === "user"
+                      ? "white"
+                      : `hsl(${cssVar("--foreground")})`,
                   boxShadow:
                     msg.role === "user"
-                      ? "0 2px 8px rgba(13,148,136,0.25)"
+                      ? `0 2px 8px hsl(${cssVar("--glow-primary")} / 0.25)`
                       : "0 1px 4px rgba(0,0,0,0.08)",
-                  border: msg.role === "bot" ? "1px solid #e2e8f0" : "none",
+                  border:
+                    msg.role === "bot"
+                      ? `1px solid hsl(${cssVar("--border")})`
+                      : "none",
                 }}
               >
                 {msg.content}
@@ -306,7 +322,7 @@ export default function ChatWidget() {
                   width: "24px",
                   height: "24px",
                   borderRadius: "50%",
-                  background: BRAND.gradient,
+                  background: gradient,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -319,8 +335,8 @@ export default function ChatWidget() {
               </div>
               <div
                 style={{
-                  background: "#ffffff",
-                  border: "1px solid #e2e8f0",
+                  background: `hsl(${cssVar("--card")})`,
+                  border: `1px solid hsl(${cssVar("--border")})`,
                   borderRadius: "18px 18px 18px 4px",
                   padding: "12px 16px",
                   display: "flex",
@@ -335,7 +351,7 @@ export default function ChatWidget() {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#94a3b8",
+                      background: `hsl(${cssVar("--muted-foreground")})`,
                       animation: `chatBounce 1s ${delay}ms infinite`,
                     }}
                   />
@@ -350,8 +366,8 @@ export default function ChatWidget() {
         <div
           style={{
             padding: "12px",
-            background: "#ffffff",
-            borderTop: "1px solid #f1f5f9",
+            background: `hsl(${cssVar("--background")})`,
+            borderTop: `1px solid hsl(${cssVar("--border")})`,
             flexShrink: 0,
           }}
         >
@@ -360,10 +376,10 @@ export default function ChatWidget() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              background: "#f8fafc",
+              background: `hsl(${cssVar("--muted")})`,
               borderRadius: "14px",
               padding: "8px 8px 8px 14px",
-              border: "1px solid #e2e8f0",
+              border: `1px solid hsl(${cssVar("--border")})`,
             }}
           >
             <input
@@ -373,7 +389,7 @@ export default function ChatWidget() {
                 background: "transparent",
                 outline: "none",
                 fontSize: "13px",
-                color: "#1e293b",
+                color: `hsl(${cssVar("--foreground")})`,
                 minWidth: 0,
               }}
               value={input}
@@ -390,7 +406,9 @@ export default function ChatWidget() {
                 height: "32px",
                 borderRadius: "10px",
                 background:
-                  loading || !input.trim() ? "#e2e8f0" : BRAND.gradient,
+                  loading || !input.trim()
+                    ? `hsl(${cssVar("--muted")})`
+                    : gradient,
                 border: "none",
                 cursor: loading || !input.trim() ? "not-allowed" : "pointer",
                 display: "flex",
