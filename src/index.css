@@ -10,7 +10,7 @@
 @layer base {
   :root {
     --header-height: 64px;
-
+    --footer-bg: #eba5d6; /* rosa en light mode */
     /* Core colors */
     --background: 300 20% 98%;
     --foreground: 280 30% 15%;
@@ -81,6 +81,7 @@
   .dark {
     --background: 280 25% 8%;
     --foreground: 300 20% 96%;
+    --footer-bg: #421136; /* un rosa más oscuro/profundo en dark mode */
 
     --card: 280 20% 12%;
     --card-foreground: 300 20% 96%;

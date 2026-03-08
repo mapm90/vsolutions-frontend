@@ -13,10 +13,10 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const WaveFooter = () => {
+const Footer = () => {
   return (
-    <footer className="relative bg-zinc-900 ">
-      {/* Onda SVG suave y fluida */}
+    <footer className="relative bg-background">
+      {/* Onda SVG */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none transform -translate-y-full">
         <svg
           className="relative block w-full h-[80px] md:h-[100px]"
@@ -24,15 +24,43 @@ const WaveFooter = () => {
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
+          <defs>
+            {/* Filtro de blur aplicado SOLO al path del borde */}
+            <filter
+              id="wave-glow"
+              x="-10%"
+              y="-100%"
+              width="120%"
+              height="300%"
+            >
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          {/* Relleno sólido de la onda — sin efecto */}
           <path
             d="M0,0 C150,90 350,90 600,45 C850,0 1050,30 1200,90 L1200,120 L0,120 Z"
-            fill="#eba5d6"
+            fill="var(--footer-bg)"
+          />
+
+          {/* Solo el trazo del filo superior con glow */}
+          <path
+            d="M0,0 C150,90 350,90 600,45 C850,0 1050,30 1200,90"
+            fill="none"
+            stroke="var(--footer-bg)"
+            strokeWidth="6"
+            filter="url(#wave-glow)"
+            opacity="0.9"
           />
         </svg>
       </div>
 
       {/* Contenido del Footer */}
-      <div className="bg-[#eba5d6] pt-8 pb-4">
+      <div
+        style={{ backgroundColor: "var(--footer-bg)" }}
+        className="pt-8 pb-4"
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {/* Logo & Description */}
@@ -108,7 +136,7 @@ const WaveFooter = () => {
               <h4 className="font-display font-semibold text-foreground mb-4">
                 Síguenos
               </h4>
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-wrap">
                 {[
                   {
                     icon: Facebook,
@@ -116,7 +144,7 @@ const WaveFooter = () => {
                   },
                   {
                     icon: Instagram,
-                    href: "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu ",
+                    href: "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu",
                   },
                   {
                     icon: Youtube,
@@ -126,11 +154,10 @@ const WaveFooter = () => {
                     icon: MessageCircle,
                     href: "https://wa.me/34674993764?text=Hola%2C%20quiero%20información",
                   },
-
                   { icon: Twitter, href: "https://x.com/Vservicesac" },
                   {
                     icon: Linkedin,
-                    href: "https://www.linkedin.com/in/vservices-ac-677a55399?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ",
+                    href: "https://www.linkedin.com/in/vservices-ac-677a55399?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
                   },
                 ].map(({ icon: Icon, href }, index) => (
                   <a
@@ -159,4 +186,4 @@ const WaveFooter = () => {
   );
 };
 
-export default WaveFooter;
+export default Footer;
