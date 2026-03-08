@@ -174,7 +174,7 @@ export default function ChatWidget() {
                 lineHeight: 1.2,
               }}
             >
-              Asistente AI
+              Asistencia en línea
             </div>
             <div
               style={{
@@ -196,7 +196,7 @@ export default function ChatWidget() {
               <span
                 style={{ color: "rgba(255,255,255,0.85)", fontSize: "11px" }}
               >
-                En línea
+                en línea
               </span>
             </div>
           </div>
@@ -283,7 +283,7 @@ export default function ChatWidget() {
                     margin: "0 0 4px 0",
                   }}
                 >
-                  ¡Hola! Soy tu asistente AI
+                  ¡Hola! Soy Carmen
                 </p>
                 <p
                   style={{
@@ -328,7 +328,7 @@ export default function ChatWidget() {
                     flexShrink: 0,
                   }}
                 >
-                  AI
+                  C
                 </div>
               )}
               <div
@@ -380,7 +380,7 @@ export default function ChatWidget() {
                   fontWeight: 700,
                 }}
               >
-                AI
+                C
               </div>
               <div
                 style={{
