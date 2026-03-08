@@ -283,7 +283,7 @@ export default function ChatWidget() {
                     margin: "0 0 4px 0",
                   }}
                 >
-                  ¡Hola! Soy Carmen
+                  ¡Hola! Soy Carmen.
                 </p>
                 <p
                   style={{
