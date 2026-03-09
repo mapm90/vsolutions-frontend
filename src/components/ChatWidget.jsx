@@ -341,6 +341,7 @@ export default function ChatWidget() {
                       : "18px 18px 18px 4px",
                   fontSize: "13px",
                   lineHeight: 1.5,
+                  textAlign: "justify",
                   background:
                     msg.role === "user" ? gradient : `hsl(${cssVar("--card")})`,
                   color:
