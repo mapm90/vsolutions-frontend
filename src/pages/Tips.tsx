@@ -13,13 +13,6 @@ import ErrorPage from "./ErrorPage";
 import { Helmet } from "react-helmet-async";
 import SplashCursor from "@/efects/SplashCursor";
 import fondo from "../media/pexels-olenkabohovyk-1772123.jpg";
-const categories = [
-  "Todos",
-  "Mantenimiento",
-  "Hardware",
-  "Software",
-  "Seguridad",
-];
 
 interface Tip {
   _id: string;
@@ -32,9 +25,16 @@ interface Tip {
 }
 
 const fetcher = () => apiFetch<{ data: Tip[] }>("/tipss");
+const fetcherCategories = () => apiFetch<{ data: string[] }>("/categories");
 
 const Tips = () => {
   const { data, error } = useSWR("/tipss", fetcher);
+  const { data: categoriesData } = useSWR("/categories", fetcherCategories);
+
+  const categories = useMemo(
+    () => categoriesData?.data || ["Todos"],
+    [categoriesData],
+  );
 
   const tips = useMemo(() => data?.data || [], [data]);
 
@@ -225,8 +225,10 @@ const Tips = () => {
             </p>
           </motion.div>
           {/* Search y categorías */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <div className="relative flex-1 max-w-md">
+          {/* Search y categorías */}
+          <div className="flex flex-col gap-4 mb-8">
+            {/* Buscador en su propia fila */}
+            <div className="relative w-full max-w-md mx-auto md:mx-0">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <Input
                 placeholder="Buscar tips..."
@@ -236,14 +238,15 @@ const Tips = () => {
               />
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            {/* Categorías en su propia fila */}
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start">
               {categories.map((category) => (
                 <button
                   aria-label={`filtrar tips por ${category}`}
                   key={category}
                   onClick={() => setSelectedCategory(category)}
                   className={cn(
-                    "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                    "px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap",
                     selectedCategory === category
                       ? "bg-primary text-primary-foreground"
                       : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80",
