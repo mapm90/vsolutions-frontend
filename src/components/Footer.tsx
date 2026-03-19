@@ -25,7 +25,6 @@ const Footer = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            {/* Filtro de blur aplicado SOLO al path del borde */}
             <filter
               id="wave-glow"
               x="-10%"
@@ -38,13 +37,11 @@ const Footer = () => {
             </filter>
           </defs>
 
-          {/* Relleno sólido de la onda — sin efecto */}
           <path
             d="M0,0 C150,90 350,90 600,45 C850,0 1050,30 1200,90 L1200,120 L0,120 Z"
             fill="var(--footer-bg)"
           />
 
-          {/* Solo el trazo del filo superior con glow */}
           <path
             d="M0,0 C150,90 350,90 600,45 C850,0 1050,30 1200,90"
             fill="none"
@@ -58,7 +55,7 @@ const Footer = () => {
 
       {/* Contenido del Footer */}
       <div
-        style={{ backgroundColor: "var(--footer-bg)" }}
+        style={{ backgroundColor: "var(--footer-bg)", color: "white" }}
         className="pt-8 pb-4"
       >
         <div className="container mx-auto px-4">
@@ -67,18 +64,18 @@ const Footer = () => {
             <div className="lg:col-span-1">
               <Link to="/" className="flex items-center gap-3 mb-4">
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <Monitor className="w-5 h-5 text-primary" />
+                  <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
+                    <Monitor className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded bg-accent flex items-center justify-center">
-                    <Cpu className="w-2 h-2 text-accent-foreground" />
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded bg-white/30 flex items-center justify-center">
+                    <Cpu className="w-2 h-2 text-white" />
                   </div>
                 </div>
-                <span className="font-display font-bold text-lg text-foreground">
+                <span className="font-display font-bold text-lg text-white">
                   vdmm-services
                 </span>
               </Link>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-white/70 text-sm leading-relaxed">
                 Tu aliado en tecnología. Servicios informáticos profesionales
                 para hogares, autónomos y empresas en España.
               </p>
@@ -86,7 +83,7 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-display font-semibold text-foreground mb-4">
+              <h4 className="font-display font-semibold text-white mb-4">
                 Enlaces Rápidos
               </h4>
               <ul className="space-y-2">
@@ -94,7 +91,7 @@ const Footer = () => {
                   <li key={item}>
                     <Link
                       to={item === "Inicio" ? "/" : `/${item.toLowerCase()}`}
-                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                      className="text-white/70 hover:text-white transition-colors text-sm"
                     >
                       {item}
                     </Link>
@@ -105,27 +102,30 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div>
-              <h4 className="font-display font-semibold text-foreground mb-4">
+              <h4 className="font-display font-semibold text-white mb-4">
                 Contacto
               </h4>
               <ul className="space-y-3">
-                <li className="flex items-center gap-3 text-muted-foreground text-sm">
-                  <Mail className="w-4 h-4 text-primary" />
+                <li className="flex items-center gap-3 text-white/70 text-sm">
+                  <Mail className="w-4 h-4 text-white" />
                   <a
                     href="mailto:vservicesac@gmail.com"
-                    className="hover:underline"
+                    className="hover:text-white hover:underline transition-colors"
                   >
                     vservicesac@gmail.com
                   </a>
                 </li>
-                <li className="flex items-center gap-3 text-muted-foreground text-sm">
-                  <Phone className="w-4 h-4 text-primary" />
-                  <a href="tel:+34674993764" className="hover:underline">
+                <li className="flex items-center gap-3 text-white/70 text-sm">
+                  <Phone className="w-4 h-4 text-white" />
+                  <a
+                    href="tel:+34674993764"
+                    className="hover:text-white hover:underline transition-colors"
+                  >
                     +34 674 99 37 64
                   </a>
                 </li>
-                <li className="flex items-center gap-3 text-muted-foreground text-sm">
-                  <MapPin className="w-4 h-4 text-primary" />
+                <li className="flex items-center gap-3 text-white/70 text-sm">
+                  <MapPin className="w-4 h-4 text-white" />
                   Servicio disponible en España
                 </li>
               </ul>
@@ -133,7 +133,7 @@ const Footer = () => {
 
             {/* Social */}
             <div>
-              <h4 className="font-display font-semibold text-foreground mb-4">
+              <h4 className="font-display font-semibold text-white mb-4">
                 Síguenos
               </h4>
               <div className="flex gap-3 flex-wrap">
@@ -163,7 +163,7 @@ const Footer = () => {
                   <a
                     key={index}
                     href={href}
-                    className="w-10 h-10 rounded-lg bg-secondary hover:bg-primary/20 flex items-center justify-center text-muted-foreground hover:text-primary transition-all hover-glow"
+                    className="w-10 h-10 rounded-lg bg-white/15 hover:bg-white/30 flex items-center justify-center text-white/80 hover:text-white transition-all"
                   >
                     <Icon className="w-5 h-5" />
                   </a>
@@ -173,8 +173,8 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-border pt-4 text-center">
-            <p className="text-muted-foreground text-sm">
+          <div className="border-t border-white/20 pt-4 text-center">
+            <p className="text-white/60 text-sm">
               © {new Date().getFullYear()} vdmm-services. Casi todos los
               derechos reservados. Servicios informáticos profesionales en
               España.

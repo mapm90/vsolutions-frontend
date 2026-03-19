@@ -10,43 +10,49 @@
 @layer base {
   :root {
     --header-height: 64px;
-    --footer-bg: #eba5d6; /* rosa en light mode */
+    --footer-bg: #4a7db5; /* azul medio en light mode */
+
     /* Core colors */
-    --background: 300 20% 98%;
-    --foreground: 280 30% 15%;
+    --background: 216 20% 97%;
+    --foreground: 220 40% 10%;
 
-    --card: 300 25% 96%;
-    --card-foreground: 280 30% 15%;
+    --card: 216 25% 94%;
+    --card-foreground: 220 40% 10%;
 
-    --popover: 300 25% 96%;
-    --popover-foreground: 280 30% 15%;
+    --popover: 216 25% 94%;
+    --popover-foreground: 220 40% 10%;
 
-    --primary: 320 75% 55%;
+    --primary: 221 75% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 280 20% 92%;
-    --secondary-foreground: 280 30% 25%;
+    --secondary: 216 20% 90%;
+    --secondary-foreground: 220 30% 20%;
 
-    --muted: 280 15% 90%;
-    --muted-foreground: 280 15% 45%;
+    --muted: 216 15% 88%;
+    --muted-foreground: 216 15% 45%;
 
-    --accent: 270 60% 60%;
+    --accent: 199 88% 48%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --border: 280 20% 85%;
-    --input: 280 15% 90%;
-    --ring: 320 75% 55%;
+    --border: 216 20% 82%;
+    --input: 216 15% 88%;
+    --ring: 221 75% 48%;
 
     --radius: 1rem;
 
     /* Glass + glow */
-    --glass-bg: hsl(300 25% 98% / 0.8);
-    --glass-border: hsl(320 75% 55% / 0.25);
+    --glass-bg: hsl(216 25% 98% / 0.8);
+    --glass-border: hsl(221 75% 48% / 0.2);
 
-    --glow-primary: 320 75% 55%;
-    --glow-accent: 270 60% 60%;
-    --glow-pink: 330 100% 60%;
+    --glow-primary: 221 75% 48%;
+    --glow-accent: 199 88% 48%;
+    --glow-cyan: 195 100% 50%;
+
+    /* Earth tones (accent neutral) */
+    --earth-sand: #c5b89a;
+    --earth-mid: #8c6d50;
+    --earth-dark: #5c4030;
 
     /* Gradients */
     --gradient-primary: linear-gradient(
@@ -61,16 +67,16 @@
       filter: saturate(1) brightness(1) contrast(1) hue-rotate(0deg);
     }
     25% {
-      filter: saturate(1.2) brightness(1.1) contrast(1.1) hue-rotate(45deg);
+      filter: saturate(1.15) brightness(1.05) contrast(1.05) hue-rotate(15deg);
     }
     50% {
-      filter: saturate(1.1) brightness(1.05) contrast(0.95) hue-rotate(90deg);
+      filter: saturate(1.1) brightness(1.02) contrast(0.97) hue-rotate(30deg);
     }
     75% {
-      filter: saturate(0.9) brightness(1) contrast(1.05) hue-rotate(135deg);
+      filter: saturate(0.95) brightness(1) contrast(1.05) hue-rotate(15deg);
     }
     100% {
-      filter: saturate(1) brightness(1) contrast(1) hue-rotate(360deg);
+      filter: saturate(1) brightness(1) contrast(1) hue-rotate(0deg);
     }
   }
 
@@ -79,35 +85,40 @@
   }
 
   .dark {
-    --background: 280 25% 8%;
-    --foreground: 300 20% 96%;
-    --footer-bg: #421136; /* un rosa más oscuro/profundo en dark mode */
+    --background: 222 30% 7%;
+    --foreground: 210 20% 92%;
+    --footer-bg: #0c2340; /* azul muy oscuro en dark mode */
 
-    --card: 280 20% 12%;
-    --card-foreground: 300 20% 96%;
+    --card: 222 25% 11%;
+    --card-foreground: 210 20% 92%;
 
-    --popover: 280 20% 12%;
-    --popover-foreground: 300 20% 96%;
+    --popover: 222 25% 11%;
+    --popover-foreground: 210 20% 92%;
 
-    --primary: 320 75% 65%;
-    --primary-foreground: 280 25% 8%;
+    --primary: 221 75% 58%;
+    --primary-foreground: 222 30% 7%;
 
-    --secondary: 280 20% 18%;
-    --secondary-foreground: 300 20% 85%;
+    --secondary: 222 20% 17%;
+    --secondary-foreground: 210 20% 80%;
 
-    --muted: 280 15% 15%;
-    --muted-foreground: 280 15% 60%;
+    --muted: 222 15% 14%;
+    --muted-foreground: 216 15% 55%;
 
-    --accent: 270 60% 65%;
-    --accent-foreground: 280 25% 8%;
+    --accent: 199 88% 52%;
+    --accent-foreground: 222 30% 7%;
 
     --destructive: 0 84% 60%;
-    --border: 280 20% 20%;
-    --input: 280 15% 18%;
-    --ring: 320 75% 65%;
+    --border: 222 20% 18%;
+    --input: 222 15% 16%;
+    --ring: 221 75% 58%;
 
-    --glass-bg: hsl(280 25% 10% / 0.8);
-    --glass-border: hsl(320 75% 55% / 0.2);
+    --glass-bg: hsl(222 30% 9% / 0.85);
+    --glass-border: hsl(221 75% 58% / 0.18);
+
+    /* Earth tones dark mode (slightly desaturated) */
+    --earth-sand: #a8966e;
+    --earth-mid: #6b4e37;
+    --earth-dark: #3d2a1e;
   }
 
   * {
@@ -211,9 +222,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(320 75% 55%);
+  background: hsl(221 75% 48%);
   border-radius: 4px;
 }
+
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(221 75% 58%);
+}
+
 .text-type {
   display: inline-block;
   white-space: pre-wrap;
@@ -287,6 +303,7 @@
     transform: translateY(0) rotate(360deg);
   }
 }
+
 @keyframes shineMove {
   0% {
     left: -75%;
@@ -295,6 +312,7 @@
     left: 125%;
   }
 }
+
 .light-pillar-fallback {
   width: 100%;
   height: 100%;
@@ -316,6 +334,7 @@
   top: 0;
   left: 0;
 }
+
 .liquid-box-btn {
   position: relative;
   padding: 18px 28px;
@@ -326,14 +345,13 @@
   font-weight: bold;
   letter-spacing: 1px;
 
-  /* Variables del borde animado */
   --border-angle: 0turn;
-  --main-bg: linear-gradient(135deg, rgb(255, 16, 164), blue);
+  --main-bg: linear-gradient(135deg, hsl(221 75% 48%), hsl(199 88% 48%));
   --gradient-border: conic-gradient(
     from var(--border-angle),
     transparent 25%,
-    #08f,
-    rgb(255, 0, 221) 99%,
+    hsl(199 88% 60%),
+    hsl(221 75% 70%) 99%,
     transparent
   );
 
@@ -345,8 +363,8 @@
     var(--gradient-border) border-box;
 
   box-shadow:
-    0 0 20px rgba(79, 172, 254, 0.8),
-    0 0 40px rgba(0, 242, 254, 0.6);
+    0 0 20px hsl(221 75% 48% / 0.6),
+    0 0 40px hsl(199 88% 48% / 0.4);
 
   overflow: hidden;
   transition: transform 0.2s ease;
@@ -359,7 +377,6 @@
   animation-play-state: paused;
 }
 
-/* Ondas líquidas */
 .liquid-box-btn::before,
 .liquid-box-btn::after {
   content: "";
@@ -369,7 +386,7 @@
   height: 300%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.2) 20%,
     transparent 70%
   );
   animation: wave 6s linear infinite;
@@ -382,7 +399,6 @@
   opacity: 0.6;
 }
 
-/* Brillo */
 .liquid-box-btn .shine {
   position: absolute;
   top: 0;
@@ -399,13 +415,10 @@
   z-index: 2;
 }
 
-/* Texto encima de todo */
 .liquid-box-btn span {
   position: relative;
   z-index: 3;
 }
-
-/* Animaciones */
 
 @keyframes bg-spin {
   to {
@@ -418,6 +431,7 @@
   inherits: true;
   initial-value: 0turn;
 }
+
 .noise-overlay {
   position: absolute;
   left: 0;
@@ -426,6 +440,7 @@
   height: 100vh;
   pointer-events: none;
 }
+
 .star-border-container {
   display: inline-block;
   position: relative;
