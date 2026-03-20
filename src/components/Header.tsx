@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import logo from "../media/logo1.avif";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-// easing cúbico (movimiento orgánico)
 const easeInOutCubic = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
@@ -24,14 +23,12 @@ const Header = () => {
     { name: "Contacto", path: "/contacto" },
   ];
 
-  // Calcula desplazamiento máximo del logo
   useEffect(() => {
     const handleResize = () => {
       const headerWidth = window.innerWidth;
       const logoWidth = 48;
       setMaxLeftPx(-(headerWidth / 2 - logoWidth / 2 - 16));
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -40,25 +37,24 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY > lastScrollY && currentScrollY > 5)
         setIsCompact(true);
-
       if (currentScrollY < lastScrollY && scrollY <= 60) setIsCompact(false);
-
       setLastScrollY(currentScrollY);
       setScrollY(currentScrollY);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, scrollY]);
 
-  // Interpolación orgánica del logo
+  // Cierra el menú al navegar
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const rawProgress = Math.min(scrollY / 140, 1);
   const easedProgress = easeInOutCubic(rawProgress);
   const logoTranslateX = maxLeftPx * easedProgress;
-
   const showText = !isCompact || scrollY === 0;
 
   return (
@@ -90,7 +86,6 @@ const Header = () => {
             <div
               className={cn(
                 "flex flex-col ml-2 overflow-hidden",
-                // Transiciona explícitamente el blur
                 "transition-[opacity,transform,max-width,filter]",
                 "duration-[300ms,600ms] ease-out",
                 showText
@@ -129,9 +124,11 @@ const Header = () => {
             ))}
           </nav>
 
+          {/* Botón hamburguesa */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors ml-auto"
+            className="md:hidden p-2 text-foreground hover:text-primary transition-colors ml-auto relative z-10"
+            aria-label="Abrir menú"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -140,40 +137,44 @@ const Header = () => {
             )}
           </button>
         </div>
-      </header>
 
-      <div
-        className={cn(
-          "fixed inset-0 z-40 md:hidden transition-all duration-300",
-          isMobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none",
-        )}
-      >
+        {/* ── Menú móvil — cuelga del header, ocupa solo lo que necesita ── */}
         <div
-          className="absolute inset-0 bg-background/95 backdrop-blur-lg"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-        <nav className="absolute top-20 left-4 right-4 glass rounded-2xl p-6 flex flex-col gap-4">
-          <ThemeToggle />
-          {navItems.map((item, index) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={cn(
-                "font-medium text-lg py-3 px-4 rounded-xl transition-all",
-                location.pathname === item.path
-                  ? "bg-primary/20 text-primary"
-                  : "text-foreground/80 hover:bg-secondary hover:text-foreground",
-              )}
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-      </div>
+          className={cn(
+            "md:hidden absolute left-0 right-0 top-full",
+            "transition-all duration-300 ease-in-out overflow-hidden",
+            isMobileMenuOpen
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-2 pointer-events-none",
+          )}
+          style={{
+            maxHeight: isMobileMenuOpen ? "400px" : "0px",
+            transition:
+              "max-height 0.3s ease-in-out, opacity 0.3s ease, transform 0.3s ease",
+          }}
+        >
+          <nav className="mx-4 mt-1 mb-3 glass rounded-2xl p-4 flex flex-col gap-1 border border-border/50">
+            <div className="pb-2 mb-1 border-b border-border/30">
+              <ThemeToggle />
+            </div>
+            {navItems.map((item, index) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "font-medium text-base py-2.5 px-4 rounded-xl transition-all",
+                  location.pathname === item.path
+                    ? "bg-primary/20 text-primary"
+                    : "text-foreground/80 hover:bg-secondary hover:text-foreground",
+                )}
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
     </>
   );
 };
