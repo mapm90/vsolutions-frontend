@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef, ReactElement } from "react";
-import noice from "../media/noise.svg";
 import ElectricBorder from "../efects/ElectricBorder";
-
 import {
   motion,
   AnimatePresence,
@@ -14,15 +12,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { apiFetch } from "@/pages/api/fetchapi";
-import { Star } from "lucide-react";
+import { Star, Terminal, ChevronRight, Send, X } from "lucide-react";
 
+/* ── Types ───────────────────────────────────────────── */
 interface Testimonial {
   name: string;
-  avatar?: string;
   text: string;
   rating: number;
 }
-
 interface ServiceCardProps {
   title: string;
   shortDescription: string;
@@ -32,16 +29,85 @@ interface ServiceCardProps {
   index?: number;
   backgroundImage?: string;
 }
-
 interface TestimonialResponse {
   success: boolean;
-  data: Array<{
-    nombre: string;
-    comentario: string;
-    aprobado: boolean;
-  }>;
+  data: Array<{ nombre: string; comentario: string; aprobado: boolean }>;
 }
 
+/* ── Typewriter hook ─────────────────────────────────── */
+function useTypewriter(text: string, speed = 18, active = true) {
+  const [out, setOut] = useState("");
+  useEffect(() => {
+    if (!active) {
+      setOut(text);
+      return;
+    }
+    setOut("");
+    let i = 0;
+    const id = setInterval(() => {
+      setOut(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(id);
+    }, speed);
+    return () => clearInterval(id);
+  }, [text, speed, active]);
+  return out;
+}
+
+/* ── HUD corner ornament ─────────────────────────────── */
+const HUDCorner = ({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) => {
+  const base: React.CSSProperties = {
+    position: "absolute",
+    width: 14,
+    height: 14,
+    pointerEvents: "none",
+    zIndex: 10,
+    borderColor: "var(--hud-corner)",
+  };
+  const sides: Record<string, React.CSSProperties> = {
+    tl: { top: 0, left: 0, borderTop: "2px solid", borderLeft: "2px solid" },
+    tr: { top: 0, right: 0, borderTop: "2px solid", borderRight: "2px solid" },
+    bl: {
+      bottom: 0,
+      left: 0,
+      borderBottom: "2px solid",
+      borderLeft: "2px solid",
+    },
+    br: {
+      bottom: 0,
+      right: 0,
+      borderBottom: "2px solid",
+      borderRight: "2px solid",
+    },
+  };
+  return <div style={{ ...base, ...sides[pos] }} />;
+};
+
+/* ── Scanlines ───────────────────────────────────────── */
+const Scanlines = () => (
+  <div
+    style={{
+      position: "absolute",
+      inset: 0,
+      pointerEvents: "none",
+      zIndex: 6,
+      backgroundImage:
+        "repeating-linear-gradient(0deg, transparent, transparent 2px, var(--hud-scan) 2px, var(--hud-scan) 4px)",
+    }}
+  />
+);
+
+/* ── Blinking cursor ─────────────────────────────────── */
+const Cursor = () => (
+  <motion.span
+    animate={{ opacity: [1, 0] }}
+    transition={{ duration: 0.5, repeat: Infinity }}
+  >
+    ▌
+  </motion.span>
+);
+
+/* ══ ServiceCard ════════════════════════════════════════ */
 const ServiceCard = ({
   title,
   shortDescription,
@@ -49,9 +115,10 @@ const ServiceCard = ({
   icon,
   features,
   index = 0,
-  backgroundImage,
 }: ServiceCardProps) => {
   const [openForm, setOpenForm] = useState(false);
+  const [booted, setBooted] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("INICIALIZANDO...");
   const [formData, setFormData] = useState({
     nombre: "",
     telefono: "",
@@ -60,28 +127,46 @@ const ServiceCard = ({
     servicio: title,
   });
   const [loading, setLoading] = useState(false);
-  const [currentTestimonial, setCurrentTestimonial] =
-    useState<Testimonial | null>(null);
+  const [testimonial, setTestimonial] = useState<Testimonial | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Mouse tracking for spotlight effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const spotlightX = useSpring(mouseX, { stiffness: 500, damping: 50 });
   const spotlightY = useSpring(mouseY, { stiffness: 500, damping: 50 });
 
+  const typedTitle = useTypewriter(title.toUpperCase(), 40, booted);
+  const typedDesc = useTypewriter(shortDescription, 12, booted);
+
+  /* Boot sequence */
+  useEffect(() => {
+    const msgs = [
+      "CARGANDO MÓDULOS...",
+      "VERIFICANDO CONEXIÓN...",
+      "SISTEMA LISTO",
+    ];
+    let i = 0;
+    const id = setInterval(() => {
+      setStatusMsg(msgs[i]);
+      i++;
+      if (i >= msgs.length) {
+        clearInterval(id);
+        setBooted(true);
+      }
+    }, 600);
+    return () => clearInterval(id);
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
+    const r = cardRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - r.left);
+    mouseY.set(e.clientY - r.top);
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  ) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,8 +177,8 @@ const ServiceCard = ({
       !formData.descripcion
     ) {
       toast({
-        title: "Error",
-        description: "Por favor completa todos los campos",
+        title: "ERROR",
+        description: "Campos incompletos",
         variant: "destructive",
       });
       return;
@@ -105,8 +190,8 @@ const ServiceCard = ({
         body: JSON.stringify(formData),
       });
       toast({
-        title: "Éxito",
-        description: `Gracias por contactarnos, ${formData.nombre}. Te responderemos pronto.`,
+        title: "TRANSMISIÓN OK",
+        description: `Solicitud recibida: ${formData.nombre}`,
       });
       setFormData({
         nombre: "",
@@ -116,12 +201,11 @@ const ServiceCard = ({
         servicio: title,
       });
       setOpenForm(false);
-    } catch (error: unknown) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Error al enviar solicitud";
+    } catch (err: unknown) {
       toast({
-        title: "Error",
-        description: errorMessage,
+        title: "ERROR",
+        description:
+          err instanceof Error ? err.message : "Error de transmisión",
         variant: "destructive",
       });
     } finally {
@@ -129,408 +213,551 @@ const ServiceCard = ({
     }
   };
 
-  // Fetch testimonial aleatorio cada 10 segundos
-  const fetchRandomTestimonial = async () => {
+  const fetchTestimonial = async () => {
     try {
       const res = await apiFetch("/comentario");
       if ((res as TestimonialResponse).success) {
-        const approved = (res as TestimonialResponse).data.filter(
-          (c) => c.aprobado,
-        );
-        if (approved.length === 0) return;
-        const random = approved[Math.floor(Math.random() * approved.length)];
-        const rating = Math.floor(Math.random() * 2) + 4; // 4 o 5 estrellas
-        setCurrentTestimonial({
-          name: random.nombre,
-          text: random.comentario,
-          rating,
+        const ok = (res as TestimonialResponse).data.filter((c) => c.aprobado);
+        if (!ok.length) return;
+        const r = ok[Math.floor(Math.random() * ok.length)];
+        setTestimonial({
+          name: r.nombre,
+          text: r.comentario,
+          rating: Math.floor(Math.random() * 2) + 4,
         });
       }
-    } catch (err) {
-      console.error("Error fetching testimonial:", err);
+    } catch {
+      /* silent */
     }
   };
 
   useEffect(() => {
-    fetchRandomTestimonial();
-    const interval = setInterval(fetchRandomTestimonial, 10000); // cada 15s
-    return () => clearInterval(interval);
+    fetchTestimonial();
+    const id = setInterval(fetchTestimonial, 10000);
+    return () => clearInterval(id);
   }, []);
+
+  /* Clip paths — solo para la card, NO para el botón */
+  const clipCard =
+    "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))";
+  const clipForm =
+    "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)";
+  const clipIcon =
+    "polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))";
 
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 60, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{
-        duration: 0.1,
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      }}
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.18, ease: "easeOut" }}
       onMouseMove={handleMouseMove}
       className="group relative"
+      style={{ fontFamily: "monospace" }}
     >
-      {/* Outer glow */}
-      <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-glow-primary via-glow-accent to-glow-pink opacity-0 group-hover:opacity-30 blur-xl transition-all duration-700" />
+      {/* Outer ambient glow */}
+      <motion.div
+        className="absolute -inset-2 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, var(--hud-outer-glow), transparent 70%)",
+          clipPath: clipCard,
+        }}
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: index * 0.7,
+        }}
+      />
 
-      {/* Animated border */}
-      <div className="absolute -inset-[1px] rounded-3xl overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background:
-              "linear-gradient(90deg, hsl(var(--glow-primary)), hsl(var(--glow-accent)), hsl(var(--glow-pink)), hsl(var(--glow-cyan)), hsl(var(--glow-primary)))",
-            backgroundSize: "300% 100%",
-            animation: "gradient-shift 4s linear infinite",
-          }}
-        />
-      </div>
+      {/* ── Card shell ── */}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          background: "var(--hud-bg)",
+          border: "1px solid var(--hud-border)",
+          clipPath: clipCard,
+          boxShadow: "var(--hud-shadow)",
+        }}
+      >
+        <HUDCorner pos="tl" />
+        <HUDCorner pos="tr" />
+        <HUDCorner pos="bl" />
+        <HUDCorner pos="br" />
+        <Scanlines />
 
-      {/* Main card container */}
-      <div className="relative glass rounded-3xl overflow-hidden p-8 md:p-10 transition-all duration-500 group-hover:shadow-glow-lg">
-        {/* Spotlight effect */}
+        {/* Spotlight on hover */}
         <motion.div
-          className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
             background: useTransform(
               [spotlightX, spotlightY],
               ([x, y]) =>
-                `radial-gradient(600px circle at ${x}px ${y}px, 
-          rgba(255, 0, 221, 1), 
-          rgba(0, 255, 200, 0.18) 60%, 
-          transparent 100%)`,
+                `radial-gradient(320px circle at ${x}px ${y}px, var(--hud-cyan-glow), transparent 65%)`,
             ),
-            mixBlendMode: "screen", // hace que se mezcle con la imagen de fondo
+            zIndex: 5,
           }}
         />
 
-        {/* Background image */}
-        {backgroundImage && (
-          <>
-            {/* Imagen de fondo: siempre detrás */}
+        {/* Travelling scan line */}
+        <motion.div
+          className="absolute left-0 right-0 h-px pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, var(--hud-scan-line), transparent)",
+            zIndex: 7,
+            opacity: 0.5,
+          }}
+          animate={{ top: ["0%", "100%"] }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "linear",
+            delay: index * 1.8,
+          }}
+        />
+
+        {/* ── Header bar ── */}
+        <div
+          className="relative flex items-center justify-between px-4 py-2 border-b"
+          style={{
+            borderColor: "var(--hud-border-dim)",
+            background: "var(--hud-header-bg)",
+            zIndex: 8,
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <Terminal
+              className="w-3 h-3"
+              style={{ color: "var(--hud-cyan)" }}
+            />
+            <span
+              className="text-[10px] tracking-[0.2em] uppercase font-bold"
+              style={{ color: "var(--hud-cyan)" }}
+            >
+              SYS.MODULE_{String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+          <motion.span
+            className="text-[10px] tracking-widest"
+            style={{ color: "var(--hud-cyan-dim)" }}
+            animate={{ opacity: booted ? 1 : [1, 0.3, 1] }}
+            transition={{ duration: 1.2, repeat: booted ? 0 : Infinity }}
+          >
+            {booted ? "● ONLINE" : statusMsg}
+          </motion.span>
+        </div>
+
+        {/* ── Content ── */}
+        <div className="relative p-6 md:p-8" style={{ zIndex: 8 }}>
+          {/* Icon + title */}
+          <div className="flex items-start gap-4 mb-6">
             <motion.div
-              className="absolute inset-0 -z-10 rounded-3xl"
-              initial={{ scale: 1.1 }}
-              whileHover={{ scale: 1.2 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                filter: "blur(8px) brightness(0.8) saturate(1.4)",
-              }}
-            />
-
-            {/* Degradado animado encima de la imagen */}
-            <div
-              className="absolute inset-0 rounded-3xl"
-              style={{
-                background:
-                  "linear-gradient(135deg, hsl(var(--glow-primary)/0.3), hsl(var(--glow-accent)/0.2), hsl(var(--background)/0.9))",
-                backgroundSize: "200% 200%",
-                animation: "gradient-shift 10s ease infinite",
-              }}
-            />
-
-            {/* Blur semi-transparente */}
-            <div className="absolute inset-0 bg-background/70 backdrop-blur-sm rounded-3xl" />
-
-            {/* Textura de ruido */}
-            <div
-              className="absolute inset-0 opacity-[0.03] rounded-3xl"
-              style={{
-                backgroundImage: noice,
-                backgroundRepeat: "repeat",
-              }}
-            />
-          </>
-        )}
-
-        {/* Content */}
-        <div className="relative z-10">
-          <div className="flex items-start gap-6 mb-6">
-            <motion.div
-              className="relative flex-shrink-0"
-              animate={{ y: [0, -8, 0] }}
+              className="flex-shrink-0"
+              animate={{ y: [0, -5, 0] }}
               transition={{
-                duration: 4,
+                duration: 3.5,
                 repeat: Infinity,
                 ease: "easeInOut",
+                delay: index * 0.4,
               }}
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-glow-primary to-glow-accent opacity-50 blur-xl animate-pulse-glow" />
-              <div className="relative w-16 h-16 rounded-2xl glass flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-colors duration-300">
-                <div className="text-primary icon-glow scale-125">{icon}</div>
+              <div
+                className="relative w-14 h-14 flex items-center justify-center overflow-hidden"
+                style={{
+                  border: "1px solid var(--hud-border)",
+                  background: "var(--hud-bg-deep)",
+                  clipPath: clipIcon,
+                }}
+              >
+                <motion.div
+                  className="absolute inset-1"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+                  style={{
+                    border: "1px dashed var(--hud-border-dim)",
+                    clipPath: clipIcon,
+                  }}
+                />
+                <div
+                  style={{
+                    color: "var(--hud-cyan)",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  {icon}
+                </div>
               </div>
             </motion.div>
 
-            <div className="flex-1 text-left md:text-center">
-              <motion.h3
-                className="font-display font-bold text-2xl md:text-3xl text-foreground mb-2"
-                initial={{ opacity: 0, x: 0 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 + 0.2 }}
+            <div className="flex-1 min-w-0 pt-1">
+              <div className="flex items-center gap-1.5 mb-1">
+                <span
+                  style={{
+                    color: "var(--hud-accent)",
+                    fontSize: 11,
+                    fontWeight: 700,
+                  }}
+                >
+                  &gt;&gt;
+                </span>
+                <h3
+                  className="text-lg md:text-xl font-bold tracking-wider"
+                  style={{ color: "var(--hud-text)" }}
+                >
+                  {typedTitle}
+                  {booted && typedTitle.length < title.length && <Cursor />}
+                </h3>
+              </div>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "var(--hud-text-faint)" }}
               >
-                {title}
-              </motion.h3>
-              <motion.p
-                className="text-muted-foreground text-sm md:text-base"
-                initial={{ opacity: 0, x: 0 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 + 0.3 }}
-              >
-                {shortDescription}
-              </motion.p>
+                {typedDesc}
+                {booted && typedDesc.length < shortDescription.length && (
+                  <Cursor />
+                )}
+              </p>
             </div>
           </div>
 
+          {/* Full description */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.4 }}
-            className="mb-6 text-left max-w-full"
+            className="mb-6 p-3 text-xs leading-relaxed"
+            style={{
+              borderLeft: "2px solid var(--hud-border)",
+              color: "var(--hud-text-muted)",
+              background: "var(--hud-feature-bg)",
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.15 + 0.8 }}
           >
-            <p className="text-foreground/90 leading-relaxed">
-              {fullDescription}
-            </p>
+            <span style={{ color: "var(--hud-cyan-dim)" }}>// </span>
+            {fullDescription}
           </motion.div>
 
-          <motion.ul
-            className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.08,
-                  delayChildren: index * 0.1 + 0.5,
-                },
-              },
-            }}
-          >
-            {features.map((feature, i) => (
-              <motion.li
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, x: -20 },
-                  visible: { opacity: 1, x: 0 },
-                }}
-                className="flex items-center gap-3 text-foreground/80"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span
-                    className="inline-block w-4 h-4 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent shadow-[0_0_8px_rgba(0,255,200,0.6),0_0_12px_rgba(255,100,255,0.4)] animate-bounce"
-                    style={{
-                      animationDuration: "1s",
-                      animationTimingFunction: "ease-in-out",
-                      animationIterationCount: "infinite",
-                    }}
-                  />
-                  <span className="text-sm font-medium text-foreground">
-                    {feature}
-                  </span>
-                </div>
-              </motion.li>
-            ))}
-          </motion.ul>
-
-          {/* Testimonial dinámico con efecto de revelación */}
-          <AnimatePresence mode="wait">
-            {currentTestimonial && (
+          {/* Features */}
+          <div className="mb-6 space-y-1.5">
+            {features.map((feat, i) => (
               <motion.div
-                key={currentTestimonial.name + currentTestimonial.text}
-                initial={{ opacity: 0, rotateY: -90, scale: 0.8 }}
-                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-                exit={{ opacity: 0, rotateY: 90, scale: 0.8 }}
-                transition={{ duration: 0.7, type: "spring" }}
-                className="mb-8"
-                style={{ perspective: 1000 }}
+                key={i}
+                className="flex items-center gap-2 text-xs py-1.5 px-2"
+                style={{
+                  color: "var(--hud-text-muted)",
+                  background: "var(--hud-feature-bg)",
+                }}
+                initial={{ opacity: 0, x: -18 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 + 0.6 + i * 0.07 }}
+                whileHover={{
+                  x: 4,
+                  backgroundColor: "var(--hud-feature-hover)",
+                  color: "var(--hud-text)",
+                  transition: { duration: 0.12 },
+                }}
               >
-                <div className="glass-intense rounded-2xl p-5 border border-primary/20">
-                  <div className="flex items-start gap-4">
-                    <motion.div
-                      className="relative w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden"
-                      whileHover={{ scale: 1.1 }}
-                      style={{
-                        background: `linear-gradient(135deg, hsl(var(--glow-primary)), hsl(var(--glow-accent)))`,
-                      }}
-                    >
-                      <motion.div
-                        className="absolute inset-0"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 8,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
+                <ChevronRight
+                  className="w-3 h-3 flex-shrink-0"
+                  style={{ color: "var(--hud-accent)" }}
+                />
+                <span>{feat}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="flex items-center gap-2 mb-4">
+            <div
+              className="h-px flex-1"
+              style={{ background: "var(--hud-border-dim)" }}
+            />
+            <span
+              className="text-[9px] tracking-[0.2em] font-bold"
+              style={{ color: "var(--hud-text-faint)" }}
+            >
+              OPINIONES.USR
+            </span>
+            <div
+              className="h-px flex-1"
+              style={{ background: "var(--hud-border-dim)" }}
+            />
+          </div>
+
+          {/* Testimonial */}
+          <AnimatePresence mode="wait">
+            {testimonial && (
+              <motion.div
+                key={testimonial.name + testimonial.text}
+                initial={{ opacity: 0, filter: "blur(4px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, filter: "blur(4px)" }}
+                transition={{ duration: 0.4 }}
+                className="mb-6 p-3 text-xs"
+                style={{
+                  border: "1px solid var(--hud-testi-border)",
+                  background: "var(--hud-testi-bg)",
+                  clipPath:
+                    "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
+                }}
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div
+                    className="w-7 h-7 flex items-center justify-center text-[11px] font-bold flex-shrink-0"
+                    style={{
+                      background: "var(--hud-bg-deep)",
+                      border: "1px solid var(--hud-border)",
+                      color: "var(--hud-cyan)",
+                      clipPath: clipIcon,
+                    }}
+                  >
+                    {testimonial.name.charAt(0).toUpperCase()}
+                  </div>
+                  <span
+                    className="font-bold tracking-wider text-[11px]"
+                    style={{ color: "var(--hud-cyan)" }}
+                  >
+                    {testimonial.name.toUpperCase()}
+                  </span>
+                  <div className="flex gap-0.5 ml-auto">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-2.5 h-2.5"
                         style={{
-                          background: `conic-gradient(from 0deg, hsl(var(--glow-primary)), hsl(var(--glow-accent)), hsl(var(--glow-pink)), hsl(var(--glow-primary)))`,
+                          color:
+                            i < testimonial.rating
+                              ? "#F59E0B"
+                              : "var(--hud-border-dim)",
+                          fill:
+                            i < testimonial.rating ? "#F59E0B" : "transparent",
                         }}
                       />
-                      <span className="relative z-10 text-primary-foreground font-bold text-xl">
-                        {currentTestimonial.name.charAt(0).toUpperCase()}
-                      </span>
-                    </motion.div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="font-semibold text-foreground">
-                          {currentTestimonial.name}
-                        </span>
-                        <div className="flex gap-1">
-                          {[...Array(5)].map((_, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0, scale: 0 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: i * 0.1 }}
-                            >
-                              <Star
-                                className={`w-4 h-4 ${
-                                  i < currentTestimonial.rating
-                                    ? "text-yellow-400 fill-yellow-400"
-                                    : "text-muted-foreground/30"
-                                }`}
-                              />
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground text-left text-sm italic leading-relaxed">
-                        "{currentTestimonial.text}"
-                      </p>
-                    </div>
+                    ))}
                   </div>
                 </div>
+                <p style={{ color: "var(--hud-text-muted)", lineHeight: 1.6 }}>
+                  <span style={{ color: "var(--hud-cyan-dim)" }}>"</span>
+                  {testimonial.text}
+                  <span style={{ color: "var(--hud-cyan-dim)" }}>"</span>
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.8 }}
-          >
+          {/* ── CTA con ElectricBorder ──────────────────────
+              CLAVE: la card tiene overflow:hidden + clipPath,
+              lo que cortaba el canvas del ElectricBorder.
+              Solución: sacar el botón FUERA del contenedor
+              overflow:hidden metiéndolo en un wrapper con
+              overflow:visible y padding para que el canvas
+              tenga espacio para dibujarse.
+          ─────────────────────────────────────────────── */}
+          <div style={{ position: "relative", zIndex: 20, paddingTop: 8 }}>
             <ElectricBorder
-              color="rgb(15, 74, 201)"
-              speed={1}
-              chaos={0.3}
-              thickness={3}
-              style={{
-                borderRadius: 16,
-                display: "inline-block",
-                padding: 5,
-              }}
+              color="#38BDF8"
+              speed={1.2}
+              chaos={0.25}
+              borderRadius={6}
+              style={{ width: "100%" }}
             >
-              <Button
+              <motion.button
                 onClick={() => setOpenForm(!openForm)}
-                className="btn-premium text-primary-foreground font-bold px-10 py-7 text-lg rounded-2xl w-auto"
+                className="w-full relative overflow-hidden text-xs font-bold tracking-[0.18em] uppercase flex items-center justify-center gap-3 py-4 px-6"
+                style={{
+                  background: openForm
+                    ? "var(--hud-btn-open-bg)"
+                    : "linear-gradient(90deg, var(--hud-btn-from), var(--hud-btn-to))",
+                  color: openForm ? "var(--hud-btn-open-txt)" : "white",
+                  cursor: "pointer",
+                  border: "none",
+                  borderRadius: 6,
+                  transition: "background 0.3s ease, color 0.3s ease",
+                }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 1 }}
               >
-                <motion.span
-                  className="flex items-center gap-3"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {openForm ? "Cerrar formulario" : "Solicitar servicio"}
+                {/* Shine sweep — solo cuando cerrado */}
+                {!openForm && (
                   <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  ></motion.div>
-                </motion.span>
-              </Button>
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:
+                        "linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.15) 50%, transparent 65%)",
+                    }}
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{
+                      duration: 2.2,
+                      repeat: Infinity,
+                      repeatDelay: 3,
+                    }}
+                  />
+                )}
+                {openForm ? (
+                  <>
+                    <X className="w-3.5 h-3.5" />
+                    <span>CERRAR FORMULARIO</span>
+                  </>
+                ) : (
+                  <>
+                    <Terminal className="w-3.5 h-3.5" />
+                    <span>INICIAR SOLICITUD</span>
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.1, repeat: Infinity }}
+                    >
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </motion.span>
+                  </>
+                )}
+              </motion.button>
             </ElectricBorder>
-          </motion.div>
+          </div>
 
+          {/* Form */}
           <AnimatePresence>
             {openForm && (
               <motion.form
-                initial={{ opacity: 0, height: 0, y: -20 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -20 }}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
                 onSubmit={handleSubmit}
-                className="mt-6 overflow-hidden"
+                className="mt-3 overflow-hidden"
               >
-                <div className="glass rounded-2xl p-6 space-y-4 border border-primary/10">
-                  <motion.h4
-                    className="text-lg font-semibold text-foreground mb-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 }}
+                <div
+                  className="p-5 space-y-3"
+                  style={{
+                    border: "1px solid var(--hud-border-dim)",
+                    background: "var(--hud-form-bg)",
+                    clipPath: clipForm,
+                  }}
+                >
+                  <div
+                    className="flex items-center gap-2 pb-2 border-b"
+                    style={{ borderColor: "var(--hud-border-dim)" }}
                   >
-                    Solicitar presupuesto
-                  </motion.h4>
+                    <Terminal
+                      className="w-3 h-3"
+                      style={{ color: "var(--hud-cyan)" }}
+                    />
+                    <span
+                      className="text-[10px] tracking-[0.2em] uppercase font-bold"
+                      style={{ color: "var(--hud-cyan)" }}
+                    >
+                      FORMULARIO DE SOLICITUD
+                    </span>
+                  </div>
+
                   {[
                     {
                       name: "nombre",
-                      placeholder: "Nombre completo",
+                      placeholder: "nombre_completo",
                       type: "text",
                     },
-                    {
-                      name: "telefono",
-                      placeholder: "Teléfono",
-                      type: "tel",
-                    },
+                    { name: "telefono", placeholder: "telefono", type: "tel" },
                     {
                       name: "correo",
-                      placeholder: "Correo electrónico",
+                      placeholder: "correo@electronico.com",
                       type: "email",
                     },
                   ].map((field, i) => (
                     <motion.div
                       key={field.name}
-                      initial={{ opacity: 0, x: -20 }}
+                      className="flex items-center gap-2"
+                      initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.15 + i * 0.08 }}
+                      transition={{ delay: 0.07 + i * 0.07 }}
                     >
+                      <span
+                        className="text-[10px] flex-shrink-0 font-bold"
+                        style={{ color: "var(--hud-cyan-dim)" }}
+                      >
+                        $
+                      </span>
                       <Input
                         name={field.name}
                         placeholder={field.placeholder}
                         type={field.type}
                         value={formData[field.name as keyof typeof formData]}
                         onChange={handleChange}
-                        className="input-glass"
+                        className="text-xs border-0 border-b rounded-none bg-transparent px-0 focus-visible:ring-0"
+                        style={{
+                          borderBottom: "1px solid var(--hud-input-border)",
+                          color: "var(--hud-input-text)",
+                          fontFamily: "monospace",
+                          caretColor: "var(--hud-cyan)",
+                        }}
                       />
                     </motion.div>
                   ))}
+
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
+                    className="flex items-start gap-2"
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.3 }}
                   >
+                    <span
+                      className="text-[10px] mt-2 flex-shrink-0 font-bold"
+                      style={{ color: "var(--hud-cyan-dim)" }}
+                    >
+                      $
+                    </span>
                     <Textarea
                       name="descripcion"
-                      placeholder="Descripción de la solicitud"
+                      placeholder="descripcion_del_problema..."
                       value={formData.descripcion}
                       onChange={handleChange}
-                      className="input-glass min-h-[100px]"
+                      className="text-xs border-0 border-b rounded-none bg-transparent px-0 min-h-[70px] focus-visible:ring-0 resize-none"
+                      style={{
+                        borderBottom: "1px solid var(--hud-input-border)",
+                        color: "var(--hud-input-text)",
+                        fontFamily: "monospace",
+                        caretColor: "var(--hud-cyan)",
+                      }}
                     />
                   </motion.div>
+
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
+                    transition={{ delay: 0.4 }}
                   >
                     <Button
                       type="submit"
                       disabled={loading}
-                      className="btn-premium w-full text-primary-foreground font-semibold py-6 rounded-xl"
+                      className="w-full py-4 text-xs tracking-[0.15em] uppercase font-bold border-0 rounded-none"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, var(--hud-btn-from), var(--hud-btn-to))",
+                        color: "white",
+                      }}
                     >
                       {loading ? (
                         <span className="flex items-center gap-2">
                           <motion.span
                             animate={{ rotate: 360 }}
                             transition={{
-                              duration: 1,
+                              duration: 0.8,
                               repeat: Infinity,
                               ease: "linear",
                             }}
-                            className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
+                            className="inline-block w-3 h-3 border border-white/40 border-t-white rounded-full"
                           />
-                          Enviando...
+                          TRANSMITIENDO...
                         </span>
                       ) : (
-                        "Enviar solicitud"
+                        <span className="flex items-center gap-2">
+                          <Send className="w-3 h-3" />
+                          ENVIAR SOLICITUD
+                        </span>
                       )}
                     </Button>
                   </motion.div>

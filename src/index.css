@@ -10,56 +10,137 @@
 @layer base {
   :root {
     --header-height: 64px;
-    --footer-bg: #4a7db5; /* azul medio en light mode */
+    --footer-bg: #4a7db5;
 
     /* Core colors */
     --background: 216 20% 97%;
     --foreground: 220 40% 10%;
-
     --card: 216 25% 94%;
     --card-foreground: 220 40% 10%;
-
     --popover: 216 25% 94%;
     --popover-foreground: 220 40% 10%;
-
     --primary: 221 75% 48%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 216 20% 90%;
     --secondary-foreground: 220 30% 20%;
-
     --muted: 216 15% 88%;
     --muted-foreground: 216 15% 45%;
-
     --accent: 199 88% 48%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 84% 60%;
     --border: 216 20% 82%;
     --input: 216 15% 88%;
     --ring: 221 75% 48%;
-
     --radius: 1rem;
 
-    /* Glass + glow */
-    --glass-bg: hsl(216 25% 98% / 0.8);
+    --glass-bg: hsl(216 25% 98% / 0.85);
     --glass-border: hsl(221 75% 48% / 0.2);
-
     --glow-primary: 221 75% 48%;
     --glow-accent: 199 88% 48%;
     --glow-cyan: 195 100% 50%;
-
-    /* Earth tones (accent neutral) */
     --earth-sand: #c5b89a;
     --earth-mid: #8c6d50;
     --earth-dark: #5c4030;
-
-    /* Gradients */
     --gradient-primary: linear-gradient(
       135deg,
       hsl(var(--glow-primary)),
       hsl(var(--glow-accent))
     );
+
+    /* ══ HUD / Terminal — LIGHT ══════════════════════════
+       Fondo azul-pizarra oscuro: mismo carácter que dark,
+       tono ligeramente más cálido/azulado que el negro puro.
+       Acento cyan #38BDF8, igual que dark mode.
+    ════════════════════════════════════════════════════ */
+    --hud-bg: #0e1726;
+    --hud-bg-deep: #080e1a;
+    --hud-surface: #14203a;
+    --hud-border: rgba(56, 189, 248, 0.3);
+    --hud-border-dim: rgba(56, 189, 248, 0.14);
+    --hud-cyan: #38bdf8;
+    --hud-cyan-dim: rgba(56, 189, 248, 0.55);
+    --hud-cyan-glow: rgba(56, 189, 248, 0.1);
+    --hud-text: #e2eef8;
+    --hud-text-muted: #8aaec8;
+    --hud-text-faint: #4a6a85;
+    --hud-scan: rgba(56, 189, 248, 0.022);
+    --hud-corner: rgba(56, 189, 248, 0.7);
+    --hud-header-bg: rgba(56, 189, 248, 0.05);
+    --hud-feature-bg: rgba(56, 189, 248, 0.05);
+    --hud-feature-hover: rgba(56, 189, 248, 0.11);
+    --hud-testi-bg: rgba(56, 189, 248, 0.05);
+    --hud-testi-border: rgba(56, 189, 248, 0.18);
+    --hud-form-bg: #080e1a;
+    --hud-input-border: rgba(56, 189, 248, 0.22);
+    --hud-input-text: #c8ddf0;
+    --hud-btn-from: #1d4ed8;
+    --hud-btn-to: #0ea5e9;
+    --hud-btn-open-bg: #0e1726;
+    --hud-btn-open-txt: #38bdf8;
+    --hud-outer-glow: rgba(56, 189, 248, 0.14);
+    --hud-scan-line: rgba(56, 189, 248, 0.5);
+    --hud-shadow:
+      0 0 50px rgba(56, 189, 248, 0.08), inset 0 0 40px rgba(56, 189, 248, 0.02);
+    --hud-accent: #38bdf8;
+  }
+
+  .dark {
+    --background: 222 30% 7%;
+    --foreground: 210 20% 92%;
+    --footer-bg: #0c2340;
+    --card: 222 25% 11%;
+    --card-foreground: 210 20% 92%;
+    --popover: 222 25% 11%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 221 75% 58%;
+    --primary-foreground: 222 30% 7%;
+    --secondary: 222 20% 17%;
+    --secondary-foreground: 210 20% 80%;
+    --muted: 222 15% 14%;
+    --muted-foreground: 216 15% 55%;
+    --accent: 199 88% 52%;
+    --accent-foreground: 222 30% 7%;
+    --destructive: 0 84% 60%;
+    --border: 222 20% 18%;
+    --input: 222 15% 16%;
+    --ring: 221 75% 58%;
+    --glass-bg: hsl(222 30% 9% / 0.85);
+    --glass-border: hsl(221 75% 58% / 0.18);
+    --earth-sand: #a8966e;
+    --earth-mid: #6b4e37;
+    --earth-dark: #3d2a1e;
+
+    /* ══ HUD / Terminal — DARK ══════════════════════════ */
+    --hud-bg: #0b0f1a;
+    --hud-bg-deep: #070a12;
+    --hud-surface: #111827;
+    --hud-border: rgba(56, 189, 248, 0.25);
+    --hud-border-dim: rgba(56, 189, 248, 0.12);
+    --hud-cyan: #38bdf8;
+    --hud-cyan-dim: rgba(56, 189, 248, 0.48);
+    --hud-cyan-glow: rgba(56, 189, 248, 0.07);
+    --hud-text: #e2e8f0;
+    --hud-text-muted: #94a3b8;
+    --hud-text-faint: #475569;
+    --hud-scan: rgba(56, 189, 248, 0.018);
+    --hud-corner: rgba(56, 189, 248, 0.65);
+    --hud-header-bg: rgba(56, 189, 248, 0.04);
+    --hud-feature-bg: rgba(56, 189, 248, 0.05);
+    --hud-feature-hover: rgba(56, 189, 248, 0.1);
+    --hud-testi-bg: rgba(56, 189, 248, 0.04);
+    --hud-testi-border: rgba(56, 189, 248, 0.14);
+    --hud-form-bg: #070a12;
+    --hud-input-border: rgba(56, 189, 248, 0.18);
+    --hud-input-text: #cbd5e1;
+    --hud-btn-from: #1d4ed8;
+    --hud-btn-to: #0ea5e9;
+    --hud-btn-open-bg: #0b0f1a;
+    --hud-btn-open-txt: #38bdf8;
+    --hud-outer-glow: rgba(56, 189, 248, 0.18);
+    --hud-scan-line: rgba(56, 189, 248, 0.45);
+    --hud-shadow:
+      0 0 50px rgba(56, 189, 248, 0.07), inset 0 0 40px rgba(56, 189, 248, 0.02);
+    --hud-accent: #38bdf8;
   }
 
   @keyframes colorCycle {
@@ -79,57 +160,17 @@
       filter: saturate(1) brightness(1) contrast(1) hue-rotate(0deg);
     }
   }
-
   .animate-color-cycle {
     animation: colorCycle 20s linear infinite;
-  }
-
-  .dark {
-    --background: 222 30% 7%;
-    --foreground: 210 20% 92%;
-    --footer-bg: #0c2340; /* azul muy oscuro en dark mode */
-
-    --card: 222 25% 11%;
-    --card-foreground: 210 20% 92%;
-
-    --popover: 222 25% 11%;
-    --popover-foreground: 210 20% 92%;
-
-    --primary: 221 75% 58%;
-    --primary-foreground: 222 30% 7%;
-
-    --secondary: 222 20% 17%;
-    --secondary-foreground: 210 20% 80%;
-
-    --muted: 222 15% 14%;
-    --muted-foreground: 216 15% 55%;
-
-    --accent: 199 88% 52%;
-    --accent-foreground: 222 30% 7%;
-
-    --destructive: 0 84% 60%;
-    --border: 222 20% 18%;
-    --input: 222 15% 16%;
-    --ring: 221 75% 58%;
-
-    --glass-bg: hsl(222 30% 9% / 0.85);
-    --glass-border: hsl(221 75% 58% / 0.18);
-
-    /* Earth tones dark mode (slightly desaturated) */
-    --earth-sand: #a8966e;
-    --earth-mid: #6b4e37;
-    --earth-dark: #3d2a1e;
   }
 
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground antialiased;
     font-family: "Inter", sans-serif;
   }
-
   h1,
   h2,
   h3,
@@ -149,12 +190,10 @@
     background: var(--gradient-primary);
     transition: all 0.3s ease;
   }
-
   .btn-premium:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 30px hsl(var(--glow-primary) / 0.4);
   }
-
   .input-glass {
     @apply glass rounded-xl px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-primary/50;
   }
@@ -169,20 +208,16 @@
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
   }
-
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-primary);
   }
-
   .glow {
     box-shadow: 0 0 40px hsl(var(--glow-primary) / 0.3);
   }
-
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-
   .animate-gradient {
     background-size: 300% 300%;
     animation: gradientMove 14s ease infinite;
@@ -201,7 +236,6 @@
     transform: translateY(-10px);
   }
 }
-
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
@@ -220,31 +254,33 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-thumb {
   background: hsl(221 75% 48%);
   border-radius: 4px;
 }
-
 .dark ::-webkit-scrollbar-thumb {
   background: hsl(221 75% 58%);
 }
 
+/* =========================
+   TYPEWRITER
+========================= */
 .text-type {
   display: inline-block;
   white-space: pre-wrap;
 }
-
 .text-type__cursor {
   margin-left: 0.25rem;
   display: inline-block;
   opacity: 1;
 }
-
 .text-type__cursor--hidden {
   display: none;
 }
 
+/* =========================
+   STAR BORDER
+========================= */
 .border-gradient-bottom {
   position: absolute;
   width: 300%;
@@ -256,7 +292,6 @@
   animation: star-movement-bottom linear infinite alternate;
   z-index: 0;
 }
-
 .border-gradient-top {
   position: absolute;
   opacity: 0.7;
@@ -268,7 +303,6 @@
   animation: star-movement-top linear infinite alternate;
   z-index: 0;
 }
-
 .inner-content {
   position: relative;
   border: 0;
@@ -280,7 +314,6 @@
   border-radius: 20px;
   z-index: 1;
 }
-
 @keyframes star-movement-top {
   0% {
     transform: translate(0%, 0%);
@@ -291,7 +324,20 @@
     opacity: 0;
   }
 }
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
 
+/* =========================
+   WAVE / SHINE
+========================= */
 @keyframes wave {
   0% {
     transform: translateY(0) rotate(0deg);
@@ -303,7 +349,6 @@
     transform: translateY(0) rotate(360deg);
   }
 }
-
 @keyframes shineMove {
   0% {
     left: -75%;
@@ -313,6 +358,9 @@
   }
 }
 
+/* =========================
+   LIGHT PILLAR
+========================= */
 .light-pillar-fallback {
   width: 100%;
   height: 100%;
@@ -326,7 +374,6 @@
   color: #888;
   font-size: 14px;
 }
-
 .light-pillar-container {
   width: 100%;
   height: 100%;
@@ -335,6 +382,9 @@
   left: 0;
 }
 
+/* =========================
+   LIQUID BOX BUTTON
+========================= */
 .liquid-box-btn {
   position: relative;
   padding: 18px 28px;
@@ -357,26 +407,20 @@
 
   border: 5px solid transparent;
   border-radius: 50px;
-
   background:
     var(--main-bg) padding-box,
     var(--gradient-border) border-box;
-
   box-shadow:
     0 0 20px hsl(221 75% 48% / 0.6),
     0 0 40px hsl(199 88% 48% / 0.4);
-
   overflow: hidden;
   transition: transform 0.2s ease;
-
   animation: bg-spin 3s linear infinite;
 }
-
 .liquid-box-btn:hover {
   transform: scale(1.05);
   animation-play-state: paused;
 }
-
 .liquid-box-btn::before,
 .liquid-box-btn::after {
   content: "";
@@ -393,12 +437,10 @@
   border-radius: 40%;
   z-index: 1;
 }
-
 .liquid-box-btn::after {
   animation-duration: 8s;
   opacity: 0.6;
 }
-
 .liquid-box-btn .shine {
   position: absolute;
   top: 0;
@@ -414,7 +456,6 @@
   animation: shineMove 4s infinite;
   z-index: 2;
 }
-
 .liquid-box-btn span {
   position: relative;
   z-index: 3;
@@ -425,13 +466,15 @@
     --border-angle: 1turn;
   }
 }
-
 @property --border-angle {
   syntax: "<angle>";
   inherits: true;
   initial-value: 0turn;
 }
 
+/* =========================
+   NOISE / STAR BORDER
+========================= */
 .noise-overlay {
   position: absolute;
   left: 0;
@@ -440,21 +483,9 @@
   height: 100vh;
   pointer-events: none;
 }
-
 .star-border-container {
   display: inline-block;
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-}
-
-@keyframes star-movement-bottom {
-  0% {
-    transform: translate(0%, 0%);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-100%, 0%);
-    opacity: 0;
-  }
 }
