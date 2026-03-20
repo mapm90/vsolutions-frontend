@@ -18,11 +18,6 @@ import {
   Smartphone,
 } from "lucide-react";
 
-import syelow from "../media/syelow.avif";
-import sblue from "../media/sblue.avif";
-import sgreen from "../media/sgreen.avif";
-import sorange from "../media/sorange.avif";
-
 const services = [
   {
     title: "Instalación y mantenimiento de Software",
@@ -37,7 +32,6 @@ const services = [
       "Actualizaciones",
       "Optimización del sistema",
     ],
-    backgroundImage: sblue,
   },
   {
     title: "Reparación de Equipos",
@@ -52,7 +46,6 @@ const services = [
       "Cambio de componentes",
       "Limpieza interna",
     ],
-    backgroundImage: sgreen,
   },
   {
     title: "Móviles y tablets",
@@ -67,7 +60,6 @@ const services = [
       "Solución de software",
       "Recuperación de datos",
     ],
-    backgroundImage: syelow,
   },
   {
     title: "Mantenimiento Preventivo",
@@ -82,7 +74,6 @@ const services = [
       "Optimización",
       "Backup de datos",
     ],
-    backgroundImage: sorange,
   },
   {
     title: "Seguridad Informática",
@@ -97,7 +88,6 @@ const services = [
       "Firewall",
       "Copias de seguridad",
     ],
-    backgroundImage: sblue,
   },
   {
     title: "Redes y Conectividad",
@@ -112,7 +102,6 @@ const services = [
       "Extensores de señal",
       "Configuración VPN",
     ],
-    backgroundImage: sgreen,
   },
   {
     title: "Ensamblaje y Actualización",
@@ -127,7 +116,6 @@ const services = [
       "Optimización",
       "Compatibilidad garantizada",
     ],
-    backgroundImage: sorange,
   },
   {
     title: "Sitios web y aplicaciones",
@@ -141,7 +129,6 @@ const services = [
       "Optimización SEO",
       "E-commerce",
     ],
-    backgroundImage: sblue,
   },
   {
     title: "Asesorías y consultorías",
@@ -155,7 +142,6 @@ const services = [
       "Recomendaciones",
       "Optimización de costos",
     ],
-    backgroundImage: sgreen,
   },
 ];
 
@@ -166,16 +152,12 @@ function ServiceItem({
   service: (typeof services)[number];
   index: number;
 }) {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <motion.div
-      key={service.title}
       ref={ref}
-      initial={{ opacity: 0, y: 1 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5 }}
     >
@@ -187,12 +169,14 @@ function ServiceItem({
 const Servicios = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Fondo general de página */}
       <div
         className="fixed inset-0 bg-cover bg-center bg-no-repeat z-0 opacity-25"
         style={{ backgroundImage: `url(${fondo})` }}
       />
+
       {/* Animated background gradients */}
-      <div className="fixed inset-0 pointer-events-none">
+      <div className="fixed inset-0 pointer-events-none z-0">
         <div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"
           style={{ background: "hsl(var(--glow-primary))" }}
@@ -204,13 +188,10 @@ const Servicios = () => {
             animationDelay: "2s",
           }}
         />
-        <div
-          className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full opacity-10 blur-[80px] animate-pulse-glow"
-          style={{ background: "hsl(var(--glow-pink))", animationDelay: "4s" }}
-        />
       </div>
 
       <Header />
+
       <Helmet>
         <meta
           name="google-site-verification"
@@ -225,8 +206,6 @@ const Servicios = () => {
           rel="canonical"
           href="https://vdmm-services.vercel.app/servicios"
         />
-
-        {/* OpenGraph */}
         <meta
           property="og:title"
           content="Servicios Informáticos | vdmm-services"
@@ -241,8 +220,6 @@ const Servicios = () => {
           content="https://vdmm-services.vercel.app/servicios"
         />
         <meta property="og:image" content="/favicon.ico" />
-
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
@@ -253,8 +230,6 @@ const Servicios = () => {
           content="Descubre los servicios informáticos profesionales de vdmm-services: reparación de equipos, mantenimiento, redes, seguridad y más."
         />
         <meta name="twitter:image" content="/favicon.ico" />
-
-        {/* Schema JSON-LD */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -262,7 +237,7 @@ const Servicios = () => {
             name: "vdmm-services",
             url: "https://vdmm-services.vercel.app/servicios",
             description:
-              "Servicios informáticos profesionales de vdmm-services: reparación de equipos, mantenimiento, redes, seguridad y más.",
+              "Servicios informáticos profesionales de vdmm-services.",
             telephone: "+34674993764",
             email: "vservicesac@gmail.com",
             areaServed: "ES",
@@ -274,12 +249,9 @@ const Servicios = () => {
             openingHours: ["Mo-Sa 09:00-18:00"],
             sameAs: [
               "https://www.facebook.com/profile.php?id=61584523994754",
-              "https://www.instagram.com/vservicesac?utm_source=qr&igsh=NGp3cXdmeG9veTlu ",
+              "https://www.instagram.com/vservicesac",
             ],
-            founder: {
-              "@type": "Person",
-              name: "Verónica Borges",
-            },
+            founder: { "@type": "Person", name: "Verónica Borges" },
           })}
         </script>
       </Helmet>
@@ -290,36 +262,29 @@ const Servicios = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <motion.div className="text-center mb-2 md:mb-3 pt-0">
-          {/* Hero Header */}
-          <motion.div
-            className="text-center mb-10 pt-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
-              Nuestros <span className="text-gradient">Servicios</span>
-            </h1>
-            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Soluciones informáticas profesionales adaptadas a tus necesidades.
-              <br />
-              Haz clic en cualquier servicio para solicitarlo
-            </p>
-          </motion.div>
-
-          {/* Services Grid con ScrollStack */}
-          {/* Services Grid */}
-          <div className="container mx-auto px-4 max-w-6xl space-y-8 mb-16">
-            {services.map((service, index) => (
-              <ServiceItem
-                key={service.title}
-                service={service}
-                index={index}
-              />
-            ))}
-          </div>
+        {/* Hero Header */}
+        <motion.div
+          className="text-center mb-10 pt-6"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6">
+            Nuestros <span className="text-gradient">Servicios</span>
+          </h1>
+          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            Soluciones informáticas profesionales adaptadas a tus necesidades.
+            <br />
+            Haz clic en cualquier servicio para solicitarlo
+          </p>
         </motion.div>
+
+        {/* Services Grid */}
+        <div className="container mx-auto px-4 max-w-6xl space-y-8 mb-16">
+          {services.map((service, index) => (
+            <ServiceItem key={service.title} service={service} index={index} />
+          ))}
+        </div>
       </motion.main>
 
       <Footer />

@@ -27,7 +27,6 @@ interface ServiceCardProps {
   icon: ReactElement;
   features: string[];
   index?: number;
-  backgroundImage?: string;
 }
 interface TestimonialResponse {
   success: boolean;
@@ -138,7 +137,6 @@ const ServiceCard = ({
   const typedTitle = useTypewriter(title.toUpperCase(), 40, booted);
   const typedDesc = useTypewriter(shortDescription, 12, booted);
 
-  /* Boot sequence */
   useEffect(() => {
     const msgs = [
       "CARGANDO MÓDULOS...",
@@ -237,7 +235,6 @@ const ServiceCard = ({
     return () => clearInterval(id);
   }, []);
 
-  /* Clip paths — solo para la card, NO para el botón */
   const clipCard =
     "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))";
   const clipForm =
@@ -321,7 +318,7 @@ const ServiceCard = ({
 
         {/* ── Header bar ── */}
         <div
-          className="relative flex items-center justify-between px-4 py-2 border-b"
+          className="relative flex items-center justify-between px-5 py-2.5 border-b"
           style={{
             borderColor: "var(--hud-border-dim)",
             background: "var(--hud-header-bg)",
@@ -330,18 +327,19 @@ const ServiceCard = ({
         >
           <div className="flex items-center gap-2">
             <Terminal
-              className="w-3 h-3"
+              className="w-3.5 h-3.5"
               style={{ color: "var(--hud-cyan)" }}
             />
+            {/* era text-[10px] → ahora text-xs (12px) */}
             <span
-              className="text-[10px] tracking-[0.2em] uppercase font-bold"
+              className="text-xs tracking-[0.2em] uppercase font-bold"
               style={{ color: "var(--hud-cyan)" }}
             >
               SYS.MODULE_{String(index + 1).padStart(2, "0")}
             </span>
           </div>
           <motion.span
-            className="text-[10px] tracking-widest"
+            className="text-xs tracking-widest"
             style={{ color: "var(--hud-cyan-dim)" }}
             animate={{ opacity: booted ? 1 : [1, 0.3, 1] }}
             transition={{ duration: 1.2, repeat: booted ? 0 : Infinity }}
@@ -365,7 +363,7 @@ const ServiceCard = ({
               }}
             >
               <div
-                className="relative w-14 h-14 flex items-center justify-center overflow-hidden"
+                className="relative w-16 h-16 flex items-center justify-center overflow-hidden"
                 style={{
                   border: "1px solid var(--hud-border)",
                   background: "var(--hud-bg-deep)",
@@ -381,11 +379,13 @@ const ServiceCard = ({
                     clipPath: clipIcon,
                   }}
                 />
+                {/* icono un poco más grande */}
                 <div
                   style={{
                     color: "var(--hud-cyan)",
                     position: "relative",
                     zIndex: 1,
+                    transform: "scale(1.2)",
                   }}
                 >
                   {icon}
@@ -398,22 +398,24 @@ const ServiceCard = ({
                 <span
                   style={{
                     color: "var(--hud-accent)",
-                    fontSize: 11,
+                    fontSize: 13,
                     fontWeight: 700,
                   }}
                 >
                   &gt;&gt;
                 </span>
+                {/* título: era text-lg md:text-xl → text-xl md:text-2xl */}
                 <h3
-                  className="text-lg md:text-xl font-bold tracking-wider"
+                  className="text-xl md:text-2xl font-bold tracking-wider"
                   style={{ color: "var(--hud-text)" }}
                 >
                   {typedTitle}
                   {booted && typedTitle.length < title.length && <Cursor />}
                 </h3>
               </div>
+              {/* short desc: era text-xs → text-sm */}
               <p
-                className="text-xs leading-relaxed"
+                className="text-sm leading-relaxed"
                 style={{ color: "var(--hud-text-faint)" }}
               >
                 {typedDesc}
@@ -424,9 +426,9 @@ const ServiceCard = ({
             </div>
           </div>
 
-          {/* Full description */}
+          {/* Full description: era text-xs → text-sm */}
           <motion.div
-            className="mb-6 p-3 text-xs leading-relaxed"
+            className="mb-6 p-4 text-sm leading-relaxed"
             style={{
               borderLeft: "2px solid var(--hud-border)",
               color: "var(--hud-text-muted)",
@@ -440,12 +442,12 @@ const ServiceCard = ({
             {fullDescription}
           </motion.div>
 
-          {/* Features */}
+          {/* Features: era text-xs → text-sm */}
           <div className="mb-6 space-y-1.5">
             {features.map((feat, i) => (
               <motion.div
                 key={i}
-                className="flex items-center gap-2 text-xs py-1.5 px-2"
+                className="flex items-center gap-2 text-sm py-2 px-3"
                 style={{
                   color: "var(--hud-text-muted)",
                   background: "var(--hud-feature-bg)",
@@ -461,7 +463,7 @@ const ServiceCard = ({
                 }}
               >
                 <ChevronRight
-                  className="w-3 h-3 flex-shrink-0"
+                  className="w-3.5 h-3.5 flex-shrink-0"
                   style={{ color: "var(--hud-accent)" }}
                 />
                 <span>{feat}</span>
@@ -475,11 +477,12 @@ const ServiceCard = ({
               className="h-px flex-1"
               style={{ background: "var(--hud-border-dim)" }}
             />
+            {/* era text-[9px] → text-[11px] */}
             <span
-              className="text-[9px] tracking-[0.2em] font-bold"
+              className="text-[11px] tracking-[0.2em] font-bold"
               style={{ color: "var(--hud-text-faint)" }}
             >
-              OPINIONES.USR
+              DATOS.USR
             </span>
             <div
               className="h-px flex-1"
@@ -496,7 +499,7 @@ const ServiceCard = ({
                 animate={{ opacity: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, filter: "blur(4px)" }}
                 transition={{ duration: 0.4 }}
-                className="mb-6 p-3 text-xs"
+                className="mb-6 p-4 text-sm"
                 style={{
                   border: "1px solid var(--hud-testi-border)",
                   background: "var(--hud-testi-bg)",
@@ -504,9 +507,9 @@ const ServiceCard = ({
                     "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
                 }}
               >
-                <div className="flex items-center gap-2 mb-1.5">
+                <div className="flex items-center gap-2 mb-2">
                   <div
-                    className="w-7 h-7 flex items-center justify-center text-[11px] font-bold flex-shrink-0"
+                    className="w-8 h-8 flex items-center justify-center text-xs font-bold flex-shrink-0"
                     style={{
                       background: "var(--hud-bg-deep)",
                       border: "1px solid var(--hud-border)",
@@ -516,8 +519,9 @@ const ServiceCard = ({
                   >
                     {testimonial.name.charAt(0).toUpperCase()}
                   </div>
+                  {/* nombre: era text-[11px] → text-sm */}
                   <span
-                    className="font-bold tracking-wider text-[11px]"
+                    className="font-bold tracking-wider text-sm"
                     style={{ color: "var(--hud-cyan)" }}
                   >
                     {testimonial.name.toUpperCase()}
@@ -526,7 +530,7 @@ const ServiceCard = ({
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-2.5 h-2.5"
+                        className="w-3 h-3"
                         style={{
                           color:
                             i < testimonial.rating
@@ -539,7 +543,11 @@ const ServiceCard = ({
                     ))}
                   </div>
                 </div>
-                <p style={{ color: "var(--hud-text-muted)", lineHeight: 1.6 }}>
+                {/* texto testimonio: era text-xs implícito → text-sm */}
+                <p
+                  className="text-sm"
+                  style={{ color: "var(--hud-text-muted)", lineHeight: 1.6 }}
+                >
                   <span style={{ color: "var(--hud-cyan-dim)" }}>"</span>
                   {testimonial.text}
                   <span style={{ color: "var(--hud-cyan-dim)" }}>"</span>
@@ -548,14 +556,7 @@ const ServiceCard = ({
             )}
           </AnimatePresence>
 
-          {/* ── CTA con ElectricBorder ──────────────────────
-              CLAVE: la card tiene overflow:hidden + clipPath,
-              lo que cortaba el canvas del ElectricBorder.
-              Solución: sacar el botón FUERA del contenedor
-              overflow:hidden metiéndolo en un wrapper con
-              overflow:visible y padding para que el canvas
-              tenga espacio para dibujarse.
-          ─────────────────────────────────────────────── */}
+          {/* ── CTA con ElectricBorder ── */}
           <div style={{ position: "relative", zIndex: 20, paddingTop: 8 }}>
             <ElectricBorder
               color="#38BDF8"
@@ -566,8 +567,9 @@ const ServiceCard = ({
             >
               <motion.button
                 onClick={() => setOpenForm(!openForm)}
-                className="w-full relative overflow-hidden text-xs font-bold tracking-[0.18em] uppercase flex items-center justify-center gap-3 py-4 px-6"
+                className="w-full relative overflow-hidden font-bold tracking-[0.18em] uppercase flex items-center justify-center gap-3 py-4 px-6"
                 style={{
+                  fontSize: 13 /* era text-xs (12px) → 13px */,
                   background: openForm
                     ? "var(--hud-btn-open-bg)"
                     : "linear-gradient(90deg, var(--hud-btn-from), var(--hud-btn-to))",
@@ -583,7 +585,6 @@ const ServiceCard = ({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 1 }}
               >
-                {/* Shine sweep — solo cuando cerrado */}
                 {!openForm && (
                   <motion.div
                     className="absolute inset-0 pointer-events-none"
@@ -601,18 +602,18 @@ const ServiceCard = ({
                 )}
                 {openForm ? (
                   <>
-                    <X className="w-3.5 h-3.5" />
+                    <X className="w-4 h-4" />
                     <span>CERRAR FORMULARIO</span>
                   </>
                 ) : (
                   <>
-                    <Terminal className="w-3.5 h-3.5" />
+                    <Terminal className="w-4 h-4" />
                     <span>INICIAR SOLICITUD</span>
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.1, repeat: Infinity }}
                     >
-                      <ChevronRight className="w-3.5 h-3.5" />
+                      <ChevronRight className="w-4 h-4" />
                     </motion.span>
                   </>
                 )}
@@ -632,7 +633,7 @@ const ServiceCard = ({
                 className="mt-3 overflow-hidden"
               >
                 <div
-                  className="p-5 space-y-3"
+                  className="p-5 space-y-4"
                   style={{
                     border: "1px solid var(--hud-border-dim)",
                     background: "var(--hud-form-bg)",
@@ -644,11 +645,12 @@ const ServiceCard = ({
                     style={{ borderColor: "var(--hud-border-dim)" }}
                   >
                     <Terminal
-                      className="w-3 h-3"
+                      className="w-3.5 h-3.5"
                       style={{ color: "var(--hud-cyan)" }}
                     />
+                    {/* era text-[10px] → text-xs */}
                     <span
-                      className="text-[10px] tracking-[0.2em] uppercase font-bold"
+                      className="text-xs tracking-[0.2em] uppercase font-bold"
                       style={{ color: "var(--hud-cyan)" }}
                     >
                       FORMULARIO DE SOLICITUD
@@ -675,8 +677,9 @@ const ServiceCard = ({
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.07 + i * 0.07 }}
                     >
+                      {/* era text-[10px] → text-xs */}
                       <span
-                        className="text-[10px] flex-shrink-0 font-bold"
+                        className="text-xs flex-shrink-0 font-bold"
                         style={{ color: "var(--hud-cyan-dim)" }}
                       >
                         $
@@ -687,7 +690,7 @@ const ServiceCard = ({
                         type={field.type}
                         value={formData[field.name as keyof typeof formData]}
                         onChange={handleChange}
-                        className="text-xs border-0 border-b rounded-none bg-transparent px-0 focus-visible:ring-0"
+                        className="text-sm border-0 border-b rounded-none bg-transparent px-0 focus-visible:ring-0"
                         style={{
                           borderBottom: "1px solid var(--hud-input-border)",
                           color: "var(--hud-input-text)",
@@ -705,7 +708,7 @@ const ServiceCard = ({
                     transition={{ delay: 0.3 }}
                   >
                     <span
-                      className="text-[10px] mt-2 flex-shrink-0 font-bold"
+                      className="text-xs mt-2 flex-shrink-0 font-bold"
                       style={{ color: "var(--hud-cyan-dim)" }}
                     >
                       $
@@ -715,7 +718,7 @@ const ServiceCard = ({
                       placeholder="descripcion_del_problema..."
                       value={formData.descripcion}
                       onChange={handleChange}
-                      className="text-xs border-0 border-b rounded-none bg-transparent px-0 min-h-[70px] focus-visible:ring-0 resize-none"
+                      className="text-sm border-0 border-b rounded-none bg-transparent px-0 min-h-[80px] focus-visible:ring-0 resize-none"
                       style={{
                         borderBottom: "1px solid var(--hud-input-border)",
                         color: "var(--hud-input-text)",
@@ -733,7 +736,7 @@ const ServiceCard = ({
                     <Button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-4 text-xs tracking-[0.15em] uppercase font-bold border-0 rounded-none"
+                      className="w-full py-4 text-sm tracking-[0.15em] uppercase font-bold border-0 rounded-none"
                       style={{
                         background:
                           "linear-gradient(90deg, var(--hud-btn-from), var(--hud-btn-to))",
@@ -749,13 +752,13 @@ const ServiceCard = ({
                               repeat: Infinity,
                               ease: "linear",
                             }}
-                            className="inline-block w-3 h-3 border border-white/40 border-t-white rounded-full"
+                            className="inline-block w-3.5 h-3.5 border border-white/40 border-t-white rounded-full"
                           />
                           TRANSMITIENDO...
                         </span>
                       ) : (
                         <span className="flex items-center gap-2">
-                          <Send className="w-3 h-3" />
+                          <Send className="w-4 h-4" />
                           ENVIAR SOLICITUD
                         </span>
                       )}
