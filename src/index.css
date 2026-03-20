@@ -48,40 +48,40 @@
     );
 
     /* ══ HUD / Terminal — LIGHT ══════════════════════════
-       Fondo azul-pizarra oscuro: mismo carácter que dark,
-       tono ligeramente más cálido/azulado que el negro puro.
-       Acento cyan #38BDF8, igual que dark mode.
+       Fondo blanco-azulado muy claro, texto oscuro,
+       acentos azul eléctrico. Estilo HUD pero integrado
+       en un entorno claro.
     ════════════════════════════════════════════════════ */
-    --hud-bg: #0e1726;
-    --hud-bg-deep: #080e1a;
-    --hud-surface: #14203a;
-    --hud-border: rgba(56, 189, 248, 0.3);
-    --hud-border-dim: rgba(56, 189, 248, 0.14);
-    --hud-cyan: #38bdf8;
-    --hud-cyan-dim: rgba(56, 189, 248, 0.55);
-    --hud-cyan-glow: rgba(56, 189, 248, 0.1);
-    --hud-text: #e2eef8;
-    --hud-text-muted: #8aaec8;
-    --hud-text-faint: #4a6a85;
-    --hud-scan: rgba(56, 189, 248, 0.022);
-    --hud-corner: rgba(56, 189, 248, 0.7);
-    --hud-header-bg: rgba(56, 189, 248, 0.05);
-    --hud-feature-bg: rgba(56, 189, 248, 0.05);
-    --hud-feature-hover: rgba(56, 189, 248, 0.11);
-    --hud-testi-bg: rgba(56, 189, 248, 0.05);
-    --hud-testi-border: rgba(56, 189, 248, 0.18);
-    --hud-form-bg: #080e1a;
-    --hud-input-border: rgba(56, 189, 248, 0.22);
-    --hud-input-text: #c8ddf0;
-    --hud-btn-from: #1d4ed8;
+    --hud-bg: #f0f4fa;
+    --hud-bg-deep: #e2eaf4;
+    --hud-surface: #ffffff;
+    --hud-border: rgba(37, 99, 235, 0.3);
+    --hud-border-dim: rgba(37, 99, 235, 0.15);
+    --hud-cyan: #1d4ed8;
+    --hud-cyan-dim: rgba(29, 78, 216, 0.55);
+    --hud-cyan-glow: rgba(37, 99, 235, 0.08);
+    --hud-text: #0f172a;
+    --hud-text-muted: #1e3a5f;
+    --hud-text-faint: #4a6a90;
+    --hud-scan: rgba(37, 99, 235, 0.025);
+    --hud-corner: rgba(37, 99, 235, 0.6);
+    --hud-header-bg: rgba(37, 99, 235, 0.06);
+    --hud-feature-bg: rgba(37, 99, 235, 0.04);
+    --hud-feature-hover: rgba(37, 99, 235, 0.1);
+    --hud-testi-bg: rgba(37, 99, 235, 0.04);
+    --hud-testi-border: rgba(37, 99, 235, 0.2);
+    --hud-form-bg: #e8eef8;
+    --hud-input-border: rgba(37, 99, 235, 0.25);
+    --hud-input-text: #0f172a;
+    --hud-btn-from: #2563eb;
     --hud-btn-to: #0ea5e9;
-    --hud-btn-open-bg: #0e1726;
-    --hud-btn-open-txt: #38bdf8;
-    --hud-outer-glow: rgba(56, 189, 248, 0.14);
-    --hud-scan-line: rgba(56, 189, 248, 0.5);
+    --hud-btn-open-bg: #f0f4fa;
+    --hud-btn-open-txt: #1d4ed8;
+    --hud-outer-glow: rgba(37, 99, 235, 0.1);
+    --hud-scan-line: rgba(37, 99, 235, 0.4);
     --hud-shadow:
-      0 0 50px rgba(56, 189, 248, 0.08), inset 0 0 40px rgba(56, 189, 248, 0.02);
-    --hud-accent: #38bdf8;
+      0 4px 24px rgba(37, 99, 235, 0.1), 0 1px 4px rgba(15, 23, 42, 0.06);
+    --hud-accent: #0ea5e9;
   }
 
   .dark {
@@ -394,7 +394,6 @@
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1px;
-
   --border-angle: 0turn;
   --main-bg: linear-gradient(135deg, hsl(221 75% 48%), hsl(199 88% 48%));
   --gradient-border: conic-gradient(
@@ -404,7 +403,6 @@
     hsl(221 75% 70%) 99%,
     transparent
   );
-
   border: 5px solid transparent;
   border-radius: 50px;
   background:
