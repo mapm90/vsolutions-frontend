@@ -482,7 +482,7 @@ const ServiceCard = ({
               className="text-[11px] tracking-[0.2em] font-bold"
               style={{ color: "var(--hud-text-faint)" }}
             >
-              DATOS.USR
+              OPINIONES.USR
             </span>
             <div
               className="h-px flex-1"
