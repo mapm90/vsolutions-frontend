@@ -335,7 +335,7 @@ const ServiceCard = ({
               className="text-xs tracking-[0.2em] uppercase font-bold"
               style={{ color: "var(--hud-cyan)" }}
             >
-              SYS.MODULE_{String(index + 1).padStart(2, "0")}
+              SERV_{String(index + 1).padStart(3, "0")}
             </span>
           </div>
           <motion.span
