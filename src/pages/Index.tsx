@@ -5,14 +5,21 @@ import Footer from "@/components/Footer";
 import fondo from "../media/pexels-tara-winstead-8386434.avif";
 import {
   motion,
-  useScroll,
   useTransform,
   useSpring,
   cubicBezier,
+  useScroll,
+  useMotionValueEvent,
 } from "framer-motion";
-
+import { useRef } from "react";
 const Index = () => {
   const { scrollY } = useScroll();
+  const heroRef = useRef<HTMLDivElement>(null);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (!heroRef.current) return;
+    const y = Math.min(latest * 0.25, 150); // 0.25x velocidad, máximo 150px
+    heroRef.current.style.transform = `translateY(-${y}px)`;
+  });
 
   // Hero: se mueve hacia arriba LENTAMENTE (0.25x del scroll)
   // El footer sube a 1x → sensación de que el footer "acelera" sobre el hero
@@ -120,11 +127,15 @@ const Index = () => {
       ══════════════════════════════════════════════════════ */}
       <div
         className="fixed inset-x-0 top-0"
-        style={{ zIndex: 10, height: "115vh" }}
+        style={{ zIndex: 10, height: "100vh", overflow: "visible" }}
       >
-        <motion.div style={{ y: heroY }} className="w-full h-full">
+        <div
+          ref={heroRef}
+          className="w-full h-full"
+          style={{ willChange: "transform" }}
+        >
           <HeroSection />
-        </motion.div>
+        </div>
       </div>
 
       {/* ══════════════════════════════════════════════════════
