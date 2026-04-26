@@ -3,14 +3,22 @@ import HeroSection from "@/components/HeroSection";
 import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
 import fondo from "../media/pexels-tara-winstead-8386434.avif";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  cubicBezier,
+} from "framer-motion";
 
 const Index = () => {
   const { scrollY } = useScroll();
 
   // Hero: se mueve hacia arriba LENTAMENTE (0.25x del scroll)
   // El footer sube a 1x → sensación de que el footer "acelera" sobre el hero
-  const heroY = useTransform(scrollY, [0, 600], [0, -150]);
+  const heroY = useTransform(scrollY, [0, 600], [0, -150], {
+    ease: cubicBezier(0.25, 0.1, 0.25, 1),
+  });
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   return (
