@@ -51,10 +51,7 @@ const Header = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
-
-  const rawProgress = Math.min(scrollY / 140, 1);
-  const easedProgress = easeInOutCubic(rawProgress);
-  const logoTranslateX = maxLeftPx * easedProgress;
+  const logoTranslateX = isCompact ? maxLeftPx : 0;
   const showText = !isCompact || scrollY === 0;
 
   return (
@@ -70,9 +67,10 @@ const Header = () => {
         <div className="relative w-full h-16 flex items-center justify-between px-4">
           {/* Logo */}
           <div
-            className="absolute left-1/2 top-1/2 flex items-center transition-transform duration-500 ease-out"
+            className="absolute left-1/2 top-1/2 flex items-center"
             style={{
               transform: `translate(-50%, -50%) translateX(${logoTranslateX}px)`,
+              transition: "transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1)",
             }}
           >
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center glow border border-primary/50">
