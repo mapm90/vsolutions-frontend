@@ -23,18 +23,28 @@ const Header = () => {
     { name: "Contacto", path: "/contacto" },
   ];
 
- useEffect(() => {
+// 1. Calcular maxLeftPx según el ancho de pantalla
+useEffect(() => {
+  const handleResize = () => {
+    const headerWidth = window.innerWidth;
+    const logoWidth = 48;
+    setMaxLeftPx(-(headerWidth / 2 - logoWidth / 2 - 16));
+  };
+  handleResize();
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
+// 2. Lógica del scroll (solo este, borrar el duplicado)
+useEffect(() => {
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY === 0) {
-      // Si está en el top, siempre expandido
       setIsCompact(false);
     } else if (currentScrollY > lastScrollY && currentScrollY > 5) {
-      // Scrolleando hacia abajo → compacto
       setIsCompact(true);
     } else if (currentScrollY < lastScrollY && currentScrollY <= 60) {
-      // Scrolleando hacia arriba cerca del top → expandido
       setIsCompact(false);
     }
 
@@ -46,18 +56,10 @@ const Header = () => {
   return () => window.removeEventListener("scroll", handleScroll);
 }, [lastScrollY]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY && currentScrollY > 5)
-        setIsCompact(true);
-      if (currentScrollY < lastScrollY && scrollY <= 60) setIsCompact(false);
-      setLastScrollY(currentScrollY);
-      setScrollY(currentScrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, scrollY]);
+// 3. Cierra menú al navegar (ya lo tienes bien)
+useEffect(() => {
+  setIsMobileMenuOpen(false);
+}, [location.pathname]);
 
   // Cierra el menú al navegar
   useEffect(() => {

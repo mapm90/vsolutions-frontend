@@ -128,7 +128,7 @@ const Index = () => {
           scroll. Este div empuja el Footer hacia abajo.
           100vh = el Footer aparece justo al terminar el viewport.
       ══════════════════════════════════════════════════════ */}
-      <div style={{ height: "140vh" }} />
+      <div style={{ height: "175vh" }} />
 
       {/* ══════════════════════════════════════════════════════
           CAPA 20 · FOOTER — flujo normal, sube encima del Hero
