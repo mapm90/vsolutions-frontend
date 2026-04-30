@@ -80,10 +80,9 @@ const HeroSection = () => {
                 <TextType
                   text={[
                     "Soy Verónica Borges,",
-                    " fundadora de VDMM-Services ...",
-                    " especialista en servicios informáticos,",
-                    " y estoy aquí para ayudarte.",
-                    " Tu tranquilidad digital es mi prioridad.",
+                    " fundadora de VDMM-Services",
+                    " especialista informática,",
+                    " y estoy aquí para ayudarte",
                     " ¡Contáctame hoy mismo!",
                   ]}
                   typingSpeed={50}
