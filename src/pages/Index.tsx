@@ -12,7 +12,7 @@ const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (!heroRef.current) return;
-    const y = Math.min(latest * 0.25, 150); // 0.25x velocidad, máximo 150px
+    const y = Math.min(latest * 0.25, 400); // 0.25x velocidad, máximo 150px
     heroRef.current.style.transform = `translateY(-${y}px)`;
   });
 
@@ -128,7 +128,7 @@ const Index = () => {
           scroll. Este div empuja el Footer hacia abajo.
           100vh = el Footer aparece justo al terminar el viewport.
       ══════════════════════════════════════════════════════ */}
-      <div style={{ height: "175vh" }} />
+      <div className="h-[220vh] lg:h-[170vh]" />
 
       {/* ══════════════════════════════════════════════════════
           CAPA 20 · FOOTER — flujo normal, sube encima del Hero
