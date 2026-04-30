@@ -26,14 +26,21 @@ const HeroSection = () => {
     // La section ocupa exactamente el viewport
     <section className="w-full h-screen relative">
       {!isMobile && <Suspense fallback={null}></Suspense>}
-
       {/* Glows internos del hero */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
-
       {/* ── IMAGEN PERFIL — PC ── */}
       {/* Ocupa el 40% izquierdo, altura completa desde top del header */}
       <div className="hidden lg:block absolute top-16 left-0 w-[40%]">
+        {/* ── BADGE EXPERIENCIA — solo PC, flota sobre la foto ── */}
+        <motion.span
+          className="hidden lg:inline-block absolute top-24 right-[-3%] z-20 px-4 py-2 rounded-full glass text-sm font-medium text-primary"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.3 }}
+        >
+          +{edadprofesional} Años de Experiencia
+        </motion.span>
         <img
           src={perfil}
           alt="Verónica Borges, fundadora de vdmm-services"
@@ -41,7 +48,6 @@ const HeroSection = () => {
           loading="lazy"
         />
       </div>
-
       {/* ── IMAGEN PERFIL — Móvil ── */}
       <div className="lg:hidden absolute top-16 left-0 right-0 h-[55%]">
         <img
@@ -52,13 +58,11 @@ const HeroSection = () => {
         />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
       </div>
-
-      {/* ── CONTENIDO TEXTO — columna derecha ── */}
-      <div className="absolute top-0 right-0 w-full lg:w-[60%] h-full flex flex-col justify-center px-6 lg:px-16 py-8 lg:py-16 mt-16 lg:mt-0">
+      <div className="absolute top-16 right-0 w-full lg:w-[60%] h-[calc(100%-4rem)] flex flex-col justify-center px-6 lg:px-16 py-8 lg:py-16 pt-8 lg:pt-0">
         <div className="max-w-2xl space-y-8">
-          <div className="space-y-6">
+          <div className="space-y-6 lg:pt-16">
             <motion.span
-              className="inline-block px-4 py-2 rounded-full glass text-sm font-medium text-primary mb-6"
+              className="lg:hidden inline-block px-4 py-2 rounded-full glass text-sm font-medium text-primary mb-6"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.3 }}
@@ -66,7 +70,7 @@ const HeroSection = () => {
               +{edadprofesional} Años de Experiencia
             </motion.span>
 
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground lg:mt-24">
               Soluciones <span className="text-gradient">Tecnológicas</span> a
               tu Medida
             </h1>

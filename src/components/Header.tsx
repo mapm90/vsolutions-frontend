@@ -23,16 +23,28 @@ const Header = () => {
     { name: "Contacto", path: "/contacto" },
   ];
 
-  useEffect(() => {
-    const handleResize = () => {
-      const headerWidth = window.innerWidth;
-      const logoWidth = 48;
-      setMaxLeftPx(-(headerWidth / 2 - logoWidth / 2 - 16));
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+ useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY === 0) {
+      // Si está en el top, siempre expandido
+      setIsCompact(false);
+    } else if (currentScrollY > lastScrollY && currentScrollY > 5) {
+      // Scrolleando hacia abajo → compacto
+      setIsCompact(true);
+    } else if (currentScrollY < lastScrollY && currentScrollY <= 60) {
+      // Scrolleando hacia arriba cerca del top → expandido
+      setIsCompact(false);
+    }
+
+    setLastScrollY(currentScrollY);
+    setScrollY(currentScrollY);
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [lastScrollY]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,7 +64,7 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
   const logoTranslateX = isCompact ? maxLeftPx : 0;
-  const showText = !isCompact || scrollY === 0;
+  const showText = !isCompact;
 
   return (
     <>
