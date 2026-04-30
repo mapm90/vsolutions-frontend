@@ -5,10 +5,13 @@ import perfil from "../media/perfil.avif";
 import { motion } from "framer-motion";
 import TextType from "../efects/TextType";
 import { useState } from "react";
-import SplashCursor from "../efects/SplashCursor";
+import { Suspense } from "react";
 
 const HeroSection = () => {
   const [showSecond, setShowSecond] = useState(false);
+  const isMobile =
+    typeof window !== "undefined" &&
+    window.matchMedia("(pointer: coarse)").matches;
 
   function calculateAge(birthYear: number, birthMonth: number): number {
     const today = new Date();
@@ -22,7 +25,7 @@ const HeroSection = () => {
   return (
     // La section ocupa exactamente el viewport
     <section className="w-full h-screen relative">
-      <SplashCursor />
+      {!isMobile && <Suspense fallback={null}></Suspense>}
 
       {/* Glows internos del hero */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />

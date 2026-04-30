@@ -3,15 +3,10 @@ import HeroSection from "@/components/HeroSection";
 import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
 import fondo from "../media/pexels-tara-winstead-8386434.avif";
-import {
-  motion,
-  useTransform,
-  useSpring,
-  cubicBezier,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 import { useRef } from "react";
+import { lazy } from "react";
+const SplashCursor = lazy(() => import("../efects/SplashCursor"));
 const Index = () => {
   const { scrollY } = useScroll();
   const heroRef = useRef<HTMLDivElement>(null);
@@ -21,35 +16,23 @@ const Index = () => {
     heroRef.current.style.transform = `translateY(-${y}px)`;
   });
 
-  // Hero: se mueve hacia arriba LENTAMENTE (0.25x del scroll)
-  // El footer sube a 1x → sensación de que el footer "acelera" sobre el hero
-  const heroY = useTransform(scrollY, [0, 600], [0, -150], {
-    ease: cubicBezier(0.25, 0.1, 0.25, 1),
-  });
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-
   return (
-    <div className="relative overflow-x-hidden">
+    <div
+      className="relative overflow-x-hidden"
+      style={{
+        backgroundImage: `url(${fondo})`,
+        backgroundAttachment: "fixed",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* ══ CAPA -1 · FONDO FOTO + GLOWS (fixed, inmóvil) ══ */}
-      <div
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat opacity-50"
-        style={{ backgroundImage: `url(${fondo})`, zIndex: -1 }}
-      />
+      <SplashCursor />
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -1 }}>
         <div
-          className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] animate-pulse-glow"
+          className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-15 blur-[60px]"
           style={{ background: "hsl(var(--glow-primary))" }}
-        />
-        <div
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full opacity-15 blur-[100px] animate-pulse-glow"
-          style={{
-            background: "hsl(var(--glow-accent))",
-            animationDelay: "2s",
-          }}
-        />
-        <div
-          className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full opacity-10 blur-[80px] animate-pulse-glow"
-          style={{ background: "hsl(var(--glow-pink))", animationDelay: "4s" }}
         />
       </div>
 
