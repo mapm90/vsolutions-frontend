@@ -82,15 +82,31 @@ const HeroSection = () => {
               tu Medida
             </h1>
 
-            <div className="text-lg text-white/95 leading-relaxed text-justify font-mono bg-black/10 backdrop-blur-sm rounded-xl p-4 landscape:text-sm landscape:p-2">
+            <div
+              className="leading-relaxed text-justify font-mono rounded-xl p-4 landscape:text-sm landscape:p-2 backdrop-blur-md"
+              style={{
+                fontSize: "clamp(1.2rem, 2.5vw, 1.5rem)",
+                fontFamily: "'Rajdhani', sans-serif",
+                background:
+                  "linear-gradient(135deg, hsl(221 75% 15% / 0.4), hsl(199 88% 10% / 0.35))",
+                border: "1px solid hsl(221 75% 58% / 0.4)",
+                color: "hsl(0, 0%, 100%)",
+
+                borderLeft: "3px solid hsl(199 88% 60%)",
+                borderTop: "1px solid hsl(221 75% 58% / 0.4)",
+                borderRight: "1px solid hsl(221 75% 58% / 0.4)",
+                borderBottom: "1px solid hsl(221 75% 58% / 0.4)",
+              }}
+            >
+              {" "}
               <p className="font-semibold mb-2 text-left">
                 <TextType
                   text={[
                     "Soy Verónica Borges,",
                     " CEO de VDMM-Services",
-                    " especialista informática,",
+                    " especialista informática",
                     " y estoy aquí para ayudarte",
-                    " ¡Contáctame hoy mismo!",
+                    " ¡CONTÁCTAME HOY MISMO!",
                   ]}
                   typingSpeed={50}
                   pauseDuration={3000}
