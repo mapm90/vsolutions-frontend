@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import { Helmet } from "react-helmet-async";
 import Footer from "@/components/Footer";
-import fondo from "../media/pexels-tara-winstead-8386434.avif";
+import fondo from "../media/Image_jz7tyojz7tyojz7t.png";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import { useRef } from "react";
 import { lazy } from "react";
@@ -28,6 +28,8 @@ const Index = () => {
       }}
     >
       {/* ══ CAPA -1 · FONDO FOTO + GLOWS (fixed, inmóvil) ══ */}
+      <div className="fixed inset-0 bg-background/60 backdrop-blur-sm z-0 pointer-events-none" />
+
       <SplashCursor />
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -1 }}>
         <div
