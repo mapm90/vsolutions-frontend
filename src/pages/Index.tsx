@@ -28,7 +28,7 @@ const Index = () => {
       }}
     >
       {/* ══ CAPA -1 · FONDO FOTO + GLOWS (fixed, inmóvil) ══ */}
-      <div className="fixed inset-0 bg-background/60 backdrop-blur-sm z-0 pointer-events-none" />
+      <div className="fixed inset-0 bg-background/40 z-0 pointer-events-none" />
 
       <SplashCursor />
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -1 }}>
