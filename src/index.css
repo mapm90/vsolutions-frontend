@@ -52,8 +52,8 @@
        acentos azul eléctrico. Estilo HUD pero integrado
        en un entorno claro.
     ════════════════════════════════════════════════════ */
-    --hud-bg: #f0f4fa;
-    --hud-bg-deep: #e2eaf4;
+    --hud-bg: rgba(240, 244, 250, 0.2);
+    --hud-bg-deep: rgba(192, 216, 245, 0.2);
     --hud-surface: #ffffff;
     --hud-border: rgba(37, 99, 235, 0.3);
     --hud-border-dim: rgba(37, 99, 235, 0.15);
@@ -111,8 +111,8 @@
     --earth-dark: #3d2a1e;
 
     /* ══ HUD / Terminal — DARK ══════════════════════════ */
-    --hud-bg: #0b0f1a;
-    --hud-bg-deep: #070a12;
+    --hud-bg: rgba(30, 41, 71, 0.2);
+    --hud-bg-deep: rgba(7, 10, 18, 0.2);
     --hud-surface: #111827;
     --hud-border: rgba(56, 189, 248, 0.25);
     --hud-border-dim: rgba(56, 189, 248, 0.12);
