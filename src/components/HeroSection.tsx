@@ -88,14 +88,14 @@ const HeroSection = () => {
                 fontSize: "clamp(1.2rem, 2.5vw, 1.5rem)",
                 fontFamily: "'Rajdhani', sans-serif",
                 background:
-                  "linear-gradient(135deg, hsl(221 75% 15% / 0.4), hsl(199 88% 10% / 0.35))",
-                border: "1px solid hsl(221 75% 58% / 0.4)",
-                color: "hsl(0, 0%, 100%)",
-
-                borderLeft: "3px solid hsl(199 88% 60%)",
-                borderTop: "1px solid hsl(221 75% 58% / 0.4)",
-                borderRight: "1px solid hsl(221 75% 58% / 0.4)",
-                borderBottom: "1px solid hsl(221 75% 58% / 0.4)",
+                  "linear-gradient(135deg, var(--hud-bg), var(--hud-bg-deep))",
+                borderLeft: "3px solid var(--hud-cyan)",
+                borderTop: "1px solid var(--hud-border)",
+                borderRight: "1px solid var(--hud-border)",
+                borderBottom: "1px solid var(--hud-border)",
+                color: "var(--hud-text)",
+                boxShadow:
+                  "0 0 20px var(--hud-outer-glow), inset 0 0 20px var(--hud-cyan-glow)",
               }}
             >
               {" "}
