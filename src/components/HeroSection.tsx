@@ -78,7 +78,7 @@ const HeroSection = () => {
                 lineHeight: "1.1",
               }}
             >
-              Soluciones <span className="text-gradient">Tecnológicas</span> a
+              Solucioness <span className="text-gradient">Tecnológicas</span> a
               tu Medida
             </h1>
 
